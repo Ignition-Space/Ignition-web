@@ -1,0 +1,14 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "max dev",
+    "build": "max build",
+    "setup": "max setup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

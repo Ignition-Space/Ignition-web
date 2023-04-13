@@ -1,0 +1,42 @@
+# node package download
+**/node_modules
+
+# macos
+.DS_Store
+
+# production
+**/dist
+
+# ssr production
+**/dist-ssr
+**/.next
+**/.umi
+**/.umi-production
+**/.dumi
+
+# local env
+*.local
+
+
+# pnpm package npmrc
+pnpm-lock.yaml
+.pnpm-debug.log
+
+# config
+**/moyu.config.js
+
+# eslint
+.eslintcache
+.vscode/settings.json
+
+
+**/.turbo
+
+**/*.env
+
+**/.env.local
+**/.umirc.local.ts
+**/config/config.local.ts
+**/src/.umi
+**/src/.umi-production
+**/src/.umi-test
