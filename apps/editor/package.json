@@ -1,0 +1,21 @@
+{
+  "name": "editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "max dev",
+    "build": "max build",
+    "setup": "max setup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@codemirror/lang-javascript": "^6.1.5",
+    "@codemirror/view": "^6.9.3",
+    "@uiw/codemirror-theme-github": "^4.19.11",
+    "@uiw/react-codemirror": "^4.19.16",
+    "react-json-view": "^1.21.3"
+  }
+}
