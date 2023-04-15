@@ -1,0 +1,16 @@
+{
+  "name": "@lgnition-lowcode/materials",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.ts",
+  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  }
+}
