@@ -16,6 +16,7 @@
     "@ant-design/pro-components": "^2.4.4",
     "@craftjs/core": "0.2.0-beta.8",
     "@emotion/css": "^11.10.6",
+    "@lgnition-lowcode/core": "workspace:^",
     "@umijs/max": "^4.0.64",
     "antd": "^5.4.0",
     "react": "^18.2.0",
