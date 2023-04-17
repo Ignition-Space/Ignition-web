@@ -19,6 +19,7 @@
     "@rekajs/types": "^0.1.4",
     "@uiw/codemirror-theme-github": "^4.19.11",
     "@uiw/react-codemirror": "^4.19.16",
+    "form-render": "^2.1.11",
     "react-json-view": "^1.21.3"
   }
 }
