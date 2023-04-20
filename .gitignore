@@ -6,6 +6,7 @@
 
 # production
 **/dist
+.idea
 
 # ssr production
 **/dist-ssr

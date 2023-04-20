@@ -11,7 +11,7 @@ export function withMaterialNode<T = any>(WrapComponent: React.FunctionComponent
     }
 }
 
-export function createReactMaterial<T>(component: MaterialComponent, options: UserComponentConfig<T>) {
+export function createReactMaterial<T>(component: MaterialComponent, options: Partial<UserComponentConfig<T>>) {
     component.craft = options
     return component as MaterialComponent
 }

@@ -12,5 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "re-resizable": "^6.9.9"
   }
 }
