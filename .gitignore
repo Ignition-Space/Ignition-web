@@ -9,6 +9,7 @@
 .idea
 
 # ssr production
+**/.env.local
 **/dist-ssr
 **/.next
 **/.umi
@@ -20,11 +21,8 @@
 
 
 # pnpm package npmrc
-pnpm-lock.yaml
 .pnpm-debug.log
-
-# config
-**/moyu.config.js
+pnpm-lock.yaml
 
 # eslint
 .eslintcache
@@ -34,10 +32,3 @@ pnpm-lock.yaml
 **/.turbo
 
 **/*.env
-
-**/.env.local
-**/.umirc.local.ts
-**/config/config.local.ts
-**/src/.umi
-**/src/.umi-production
-**/src/.umi-test
