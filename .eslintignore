@@ -1,0 +1,12 @@
+# Ignore all files in the node_modules directory
+node_modules/
+
+# Ignore all files with .test.js or .spec.js extension
+**/*.test.js
+**/*.spec.js
+
+# Don't ignore files or directories that match this pattern
+!package.json
+
+**/*/node_modules
+**/*/dist

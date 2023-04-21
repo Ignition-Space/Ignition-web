@@ -1,6 +1,3 @@
 module.exports = {
-    extends: [
-        "plugin:prettier/recommended",
-        "prettier"
-    ]
+  extends: [require.resolve('@umijs/fabric/dist/eslint')],
 }
