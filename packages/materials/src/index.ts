@@ -1,1 +1,2 @@
-export * as materials from './components'
+export * from './components/container'
+export * from './components/text'
