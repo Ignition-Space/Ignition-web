@@ -1,4 +1,4 @@
-import {AxiosRequestConfig} from "axios";
+import type { AxiosRequestConfig } from 'axios'
 
 export type SemverVersion = `${number}.${number}.${number}`
 
@@ -10,21 +10,21 @@ export interface SchemaModelConfig {
     version: SemverVersion;
 
     // 当前依赖包
-    library: Array<{
+    library: {
         name: string;
         urls: string[];
         globalVar?: number;
-    }>
+    }[]
     i18n?: {
         zh: Record<string, string>,
         eu: Record<string, string>
     };
-    dataSource: Array<{
+    dataSource: {
         key: string;
         name: string;
         request: AxiosRequestConfig,
-    }>;
+    }[];
     htmlBody: any
 }
 
-export  const  a = 1
+export const a = 1
