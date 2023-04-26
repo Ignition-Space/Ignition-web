@@ -1,12 +1,16 @@
 {
   "name": "@lgnition-lowcode/materials",
   "version": "1.0.0",
-  "description": "",
-  "source": "src/index.ts",
-  "main": "index.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "vite build"
+    "start": "vite build --watch",
+    "build": "tsc && vite build"
   },
   "keywords": [],
   "author": "",
