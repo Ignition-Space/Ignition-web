@@ -16,14 +16,15 @@
     "@ant-design/pro-components": "^2.4.4",
     "@craftjs/core": "0.2.0-beta.8",
     "@emotion/css": "^11.10.6",
+    "@lgnition-lowcode/core": "workspace:^",
+    "@lgnition-lowcode/materials": "workspace:^",
     "@umijs/max": "^4.0.64",
     "antd": "^5.4.0",
+    "copy-to-clipboard": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite": "^4.2.1",
-    "zustand": "^4.3.7",
-    "@lgnition-lowcode/core": "workspace:^",
-    "@lgnition-lowcode/materials": "workspace:^"
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",

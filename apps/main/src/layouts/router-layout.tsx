@@ -1,11 +1,11 @@
-import { GithubFilled, InfoCircleFilled, LeftOutlined, QuestionCircleFilled, RightOutlined } from '@ant-design/icons';
 import type { ProSettings } from '@ant-design/pro-components';
-import { PageContainer, ProLayout, SettingDrawer, ProCard } from '@ant-design/pro-components';
+import { ProLayout, SettingDrawer,  } from '@ant-design/pro-components';
 import { useState } from 'react';
 import defaultProps from './data'
-import { Button, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import { Outlet } from '@umijs/max';
 import { Header } from './header'
+import { css } from '@emotion/css';
 
 export const RouterLayout = () => {
 
@@ -26,14 +26,14 @@ export const RouterLayout = () => {
       }}
     >
       <ProLayout
-      token={{
-        pageContainer: {
-          paddingBlockPageContainerContent: 0,
-          paddingInlinePageContainerContent: 0
-        }
-      }}
-      logo={null}
-      title="LGNITION"
+        token={{
+          pageContainer: {
+            paddingBlockPageContainerContent: 0,
+            paddingInlinePageContainerContent: 0
+          }
+        }}
+        logo={null}
+        title="HuOS"
         disableMobile
         siderWidth={250}
         {...defaultProps}
@@ -50,10 +50,21 @@ export const RouterLayout = () => {
             {dom}
           </div>
         )}
-       >
-        <Header/>
-        <Outlet/>
-       </ProLayout>
+      >
+        <div className={css({
+          display: 'grid',
+          gridTemplateRows: '55px 1fr',
+          height: '100vh'
+        })} >
+          <Header />
+          <Layout className={css({
+            paddingBlock: token.paddingSM,
+            paddingInline: token.paddingLG,
+          })} >
+            <Outlet />
+          </Layout>
+        </div>
+      </ProLayout>
       <SettingDrawer
         pathname={pathname}
         enableDarkTheme
