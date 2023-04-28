@@ -7,7 +7,7 @@ export default () => {
 
   console.log(location, 'location')
 
-  if (location.pathname === '/') {
+  if (location.pathname === '/home') {
     return <Outlet/>
   }
 

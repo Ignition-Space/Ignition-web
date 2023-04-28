@@ -1,22 +1,27 @@
 import type { ProSettings } from '@ant-design/pro-components';
 import { ProLayout, SettingDrawer,  } from '@ant-design/pro-components';
-import { useState } from 'react';
+import * as React from 'react';
 import defaultProps from './data'
 import { Layout, theme } from 'antd';
-import { Outlet } from '@umijs/max';
+import { Outlet, useLocation } from '@umijs/max';
 import { Header } from './header'
 import { css } from '@emotion/css';
 
 export const RouterLayout = () => {
 
 
-  const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
+  const [settings, setSetting] = React.useState<Partial<ProSettings> | undefined>({
     layout: 'side',
   });
 
-  const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
+  const location = useLocation()
+  const [pathname, setPathname] = React.useState('/');
 
   const { token } = theme.useToken()
+
+  React.useEffect(() => {
+    setPathname(location.pathname)
+  }, [location.pathname])
 
   return (
     <div
