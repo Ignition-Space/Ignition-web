@@ -16,6 +16,7 @@ export const FrameRender: React.FC<FrameRenderProps> = ({ children, ...props }) 
   React.useEffect(() => {
     const heads = document.head.children;
     const iframeDocumentHead = iframeRef?.contentDocument?.head
+    console.log(heads, 'heads')
     for (let i = 0; i < heads.length; i++) {
       const child = heads[i];
       iframeDocumentHead?.appendChild(child.cloneNode(true));
