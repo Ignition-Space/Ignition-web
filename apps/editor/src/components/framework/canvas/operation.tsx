@@ -1,35 +1,53 @@
 import * as React from 'react'
 import { css } from '@emotion/css'
 import { useTokens } from '@/hooks/useTokens'
-import { Button, Space } from 'antd'
-import { ApiOutlined, CompressOutlined, GlobalOutlined, RotateLeftOutlined, RotateRightOutlined } from '@ant-design/icons'
+import { Button, Card, message, Space } from 'antd'
+import { DeleteOutlined, PlusSquareOutlined, SlackOutlined, RotateLeftOutlined, RotateRightOutlined, MacCommandOutlined, CodeOutlined } from '@ant-design/icons'
 import { SchemaModal } from '@/components/framework/shared/schema-modal'
+import { useEditor, useNode } from '@craftjs/core'
 
 
 export const CanvasOperation = () => {
   const { token } = useTokens()
+  const { actions, selectedNodeId } = useEditor((state) => {
+    const ids = [...state.events.selected]
+    return {
+      selectedNodeId: ids?.[0] as string,
+    }
+  });
+  console.log(selectedNodeId, 'selectedNodeId')
+  const disabled = !selectedNodeId
+
+  const handleDeleteAction = () => {
+    if (selectedNodeId && selectedNodeId !== "ROOT") {
+      message.success(`删除成功, ${selectedNodeId}已经被移除`)
+      actions.delete(selectedNodeId as string)
+    } else {
+      message.error(`删除失败`)
+    }
+  }
+
   return (
     <div className={css({
       position: 'absolute',
-      top: 0,
-      left: 0,
-      height: '40px',
-      background: token.colorBgBase,
-      width: '100%',
+      top: 40,
+      right: 40,
       display: 'flex',
       alignItems: 'center',
-      paddingInline: token.paddingSM,
       justifyContent: "center",
-      borderBottom: `1px solid ${token.colorBorderSecondary}`
     })} >
-      <Space size="small" >
-        <Button type='text' ghost icon={<RotateLeftOutlined />} />
-        <Button type='text' ghost icon={<RotateRightOutlined />} />
-        <Button type='text' ghost icon={<GlobalOutlined />} />
-        <SchemaModal />
-        <Button type='text' ghost icon={<CompressOutlined />} />
-        <Button type='text' ghost icon={<ApiOutlined />} />
-      </Space>
+      <Card bordered size="small" bodyStyle={{ padding: 4 }} >
+        {
+          disabled ?<Button type="text" size="large" icon={<MacCommandOutlined />} />: <Space size={0} direction="vertical" >
+          <Button type="text" size="large" icon={<PlusSquareOutlined />} />
+          <Button type="text" size="large" icon={<RotateLeftOutlined />} onClick={() => actions.history.undo()} />
+          <Button type="text" size="large" icon={<RotateRightOutlined />} onClick={() => actions.history.redo()} />
+          <Button type="text" size="large" icon={<CodeOutlined />} />
+          <Button type="text" size="large" icon={<SlackOutlined />} />
+          <Button type="text" size="large" danger icon={<DeleteOutlined />} onClick={handleDeleteAction} />
+        </Space>
+        }
+      </Card>
     </div>
   )
 }

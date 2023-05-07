@@ -10,9 +10,8 @@ export interface IndicatorsProps {
 }
 
 export const IndicatorRound: React.FC<IndicatorsProps> = (props) => {
+  console.log(props, 'IndicatorsProps')
   const { token } = useToken()
-
-  if (!props.show) return null
 
   return (
     <div className={css({
@@ -22,6 +21,7 @@ export const IndicatorRound: React.FC<IndicatorsProps> = (props) => {
       width: '100%',
       height: '100%',
       pointerEvents: 'none',
+      visibility: props.show ? 'visible': 'hidden',
     })}
     >
       <span className={css({
@@ -33,7 +33,9 @@ export const IndicatorRound: React.FC<IndicatorsProps> = (props) => {
         background: token.colorPrimary,
         zIndex: 2,
         borderRadius: 200,
-        transform: 'translate(0, -50%)'
+        pointerEvents: 'none',
+        transform: 'translate(0, -50%)',
+        
       })} />
       <span className={css({
         position: 'absolute',
@@ -43,6 +45,7 @@ export const IndicatorRound: React.FC<IndicatorsProps> = (props) => {
         left: '50%',
         background: token.colorPrimary,
         zIndex: 2,
+        pointerEvents: 'none',
         borderRadius: 200,
       })} />
       <span />

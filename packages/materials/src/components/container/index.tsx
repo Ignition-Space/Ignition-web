@@ -38,11 +38,14 @@ export const Container: UserComponent<
     }, 400)
   }
 
+  console.log(active, 'active')
+
   return (
     <Resizable
       style={{
+        position: 'relative',
         ...style,
-        ...styleProps
+        ...styleProps,
       }}
       defaultSize={{
         width: initialWidth || '100%',

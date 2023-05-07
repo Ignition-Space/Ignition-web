@@ -1,1 +1,1 @@
-export * from './render'
+export * from './components/header'

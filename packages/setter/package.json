@@ -1,27 +1,21 @@
 {
   "name": "@lgnition-lowcode/setter",
   "version": "1.0.0",
-  "description": "",
+  "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/main.umd.js",
-  "module": "./dist/main.es.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/main.es.js",
-      "require": "./dist/main.umd.js"
-    }
-  },
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "vite build",
-    "start": "vite build --watch"
+    "start": "vite build --watch",
+    "build": "tsc && vite build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "form-render": "^2.1.11"
+    "re-resizable": "^6.9.9"
   }
 }
