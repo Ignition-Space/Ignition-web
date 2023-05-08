@@ -1,7 +1,7 @@
 import { useTokens } from "@/hooks/useTokens"
 import { ReloadOutlined } from "@ant-design/icons"
 import { css } from "@emotion/css"
-import { Button, Typography } from "antd"
+import { Button, Tag, Typography, Badge, Space } from "antd"
 
 export const WindowFrame = () => {
 

@@ -6,6 +6,7 @@ import { Frame } from './frame'
 import { WindowFrame } from './window'
 import { CanvasOperation } from './operation'
 import htmlParser from 'html-react-parser'
+import { Spin } from 'antd'
 
 export const Canvas = () => {
   const [headStr, setHeadStr] = React.useState("")
