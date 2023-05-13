@@ -24,7 +24,7 @@ export const Category: React.FC<CategoryProps> = (props) => {
             const { key, component } = item
             let value = React.createElement(component);
             if (["Container"].includes(key)) {
-              value = <Element canvas is={component} initialHeight={100} initialWidth={100} style={{
+              value = <Element canvas is={component} initialHeight={100} initialWidth={"10%"} style={{
                 background: token.colorPrimary
               }} />;
             }
@@ -43,7 +43,7 @@ export const Category: React.FC<CategoryProps> = (props) => {
         }
       </Row>
       <Divider style={{
-        marginBlock: token.marginSM
+        marginBlock: token.margin
       }} />
     </div>
   )
