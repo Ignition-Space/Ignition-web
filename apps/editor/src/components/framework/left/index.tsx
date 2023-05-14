@@ -1,17 +1,18 @@
 import * as React from 'react'
 import { Collapse, theme } from 'antd'
 import { NodeTree } from './node-tree'
-import { DataSource } from './data-source'
 import { DataState } from './data-state'
 import { Sidebar } from '../sider'
 import { CodepenOutlined, ApartmentOutlined, ApiOutlined, CloudSyncOutlined } from '@ant-design/icons'
 import { MaterialCategory } from './materials'
 import  { OutlineTree } from './outline-tree'
+import { DataSource } from './data-source'
 import { css } from '@emotion/css'
 
 const sidebarContext: Record<React.Key, any> = {
   0: <MaterialCategory/>,
-  1: <OutlineTree/>
+  1: <OutlineTree/>,
+  2: <DataSource/>
 }
 
 

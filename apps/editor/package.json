@@ -21,6 +21,7 @@
     "@types/react-helmet": "^6.1.6",
     "@uiw/codemirror-theme-github": "^4.19.11",
     "@uiw/react-codemirror": "^4.19.16",
+    "@uiw/react-markdown-preview": "^4.1.13",
     "form-render": "^2.1.11",
     "html-react-parser": "^3.0.16",
     "lzutf8": "^0.6.3",

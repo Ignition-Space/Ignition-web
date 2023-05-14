@@ -3,6 +3,8 @@ import type { UserComponent, UserComponentConfig } from '@craftjs/core';
 import { useNode } from '@craftjs/core'
 import { ErrorBoundary } from "react-error-boundary";
 import { Alert, Typography }  from 'antd'
+import { store, incremented } from './store'
+import { useSelector, useDispatch } from 'react-redux';
 
 /** 物料类型 */
 export type MaterialComponent = UserComponent
@@ -13,7 +15,9 @@ export type MaterialComponent = UserComponent
 export const fallbackRender = ({ error }: any) => {
 
   return (
-    <Alert description={<Typography.Text type="secondary" >{error.message}</Typography.Text>} />
+    <Alert banner icon={null}  type="error" description={<Typography.Text type="danger" >
+      当前组件发生错误，请查看日志平台
+    </Typography.Text>} />
   );
 }
 
@@ -23,22 +27,16 @@ export const fallbackRender = ({ error }: any) => {
  * @param WrapComponent 物料组件
  */
 export function withMaterialNode<T = any> (WrapComponent: React.FunctionComponent<T>) {
-  return React.forwardRef(function (props: any) {
+  return function (props: any) {
     const { id, connectors: { connect, drag } } = useNode()
-
-    React.useEffect(() => {
-      console.log(`组件启动`, id)
-      return () => {
-        console.log(`组件卸载`, id)
-      }
-    }, [])
+    const storeState = useSelector((state: any) => state);
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >
-        <WrapComponent ref={(dom: HTMLElement) => connect(drag(dom))} {...props} />
+        <WrapComponent ref={(dom: HTMLElement) => connect(drag(dom))} {...props} __data__={storeState} />
       </ErrorBoundary>
     )
-  })
+  }
 }
 
 /**

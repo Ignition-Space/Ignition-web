@@ -8,7 +8,9 @@ import { RightPanel } from './right'
 import { useTokens } from '@/hooks/useTokens'
 import { Editor } from '@craftjs/core'
 import { RenderNodeWrapper } from './canvas/render-node-wrapper'
+import { Provider as StoreProvider } from 'react-redux';
 import * as _materials_ from '@lgnition-lowcode/materials'
+import { store } from '@lgnition-lowcode/core'
 
 console.log(_materials_, '_materials_')
 
@@ -23,36 +25,38 @@ export function Framework({ children }: FrameworkProviderProps): JSX.Element {
   const { token } = useTokens()
 
   return (
-    <Editor enabled resolver={_materials_} onRender={RenderNodeWrapper} onNodesChange={(dragProps) => console.log(`onNodesChange`, dragProps)} >
-      <FrameworkContext.Provider value={null}>
-        {
-          children ? children : (
-            <Layout
-              className={css({
-                height: '100vh',
-                overflow: 'hidden',
-                background: token.colorBgContainer
-              })}
-            >
-              <ToolBox />
-              <Row className={css({
-                height: '100%'
-              })}
+    <StoreProvider store={store} >
+      <Editor enabled resolver={_materials_} onRender={RenderNodeWrapper} onNodesChange={(dragProps) => console.log(`onNodesChange`, dragProps)} >
+        <FrameworkContext.Provider value={null}>
+          {
+            children ? children : (
+              <Layout
+                className={css({
+                  height: '100vh',
+                  overflow: 'hidden',
+                  background: token.colorBgContainer
+                })}
               >
-                <Col flex='320px'>
-                  <LeftPanel />
-                </Col>
-                <Col flex='auto'>
-                  <Canvas />
-                </Col>
-                <Col flex='350px'>
-                  <RightPanel />
-                </Col>
-              </Row>
-            </Layout>
-          )
-        }
-      </FrameworkContext.Provider>
-    </Editor>
+                <ToolBox />
+                <Row className={css({
+                  height: '100%'
+                })}
+                >
+                  <Col flex='320px'>
+                    <LeftPanel />
+                  </Col>
+                  <Col flex='auto'>
+                    <Canvas />
+                  </Col>
+                  <Col flex='350px'>
+                    <RightPanel />
+                  </Col>
+                </Row>
+              </Layout>
+            )
+          }
+        </FrameworkContext.Provider>
+      </Editor>
+    </StoreProvider>
   )
 }

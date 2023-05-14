@@ -5,7 +5,15 @@ import dts from 'vite-plugin-dts'
 
 const externalPackages = [
   "@craftjs/core",
-  'react', 'react-dom', 'antd', "@ant-design/icons", "@emotion/css"
+  'react',
+  'react-dom',
+  'antd',
+  "@ant-design/icons",
+  "@emotion/css",
+  "redux",
+  "@reduxjs/toolkit",
+  "react-redux",
+  "@ant-design/pro-components"
 ]
 
 export default defineConfig({

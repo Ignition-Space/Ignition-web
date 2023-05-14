@@ -12,8 +12,11 @@
     "lint": {
       "outputs": []
     },
-    "dev": {
-      "cache": false
+    "start": {
+      "cache": false,
+      "dependsOn": [
+        "^start"
+      ]
     }
   }
 }

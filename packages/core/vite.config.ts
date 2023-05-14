@@ -3,7 +3,14 @@ import dts from 'vite-plugin-dts'
 
 const externalPackages = [
   "@craftjs/core",
-  'react', 'react-dom', 'antd'
+  'react',
+  'react-dom',
+  'antd',
+  "@ant-design/icons",
+  "@emotion/css",
+  "redux",
+  "@reduxjs/toolkit",
+  "react-redux"
 ]
 
 export default {

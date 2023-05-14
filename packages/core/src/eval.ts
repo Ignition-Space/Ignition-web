@@ -25,11 +25,12 @@ export class BrowserCodeExecVM {
     }
   }
 
-  init () {
+  init (depends?: Record<string, any>) {
     this.interpreter.import({
       __version__: '1.0.0',
       __origin__: 'BrowserCodeExecVM',
-      __desc__: '容器基于sval来做，用于执行一些动态的逻辑片段，最好有沙箱隔离。带双下划线的变量都是内部变量，不用理会和引用。生产环境会Remove掉。'
+      __desc__: '容器基于sval来做，用于执行一些动态的逻辑片段，最好有沙箱隔离。带双下划线的变量都是内部变量，不用理会和引用。生产环境会Remove掉。',
+      ...depends
     })
   }
 
