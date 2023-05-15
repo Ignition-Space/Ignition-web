@@ -16,5 +16,4 @@ const SlotView = withMaterialNode<SlotProps>(React.forwardRef((props, ref: any) 
 }))
 
 export const Slot = createReactMaterial(SlotView, {
-  displayName: '插槽组件'
 })

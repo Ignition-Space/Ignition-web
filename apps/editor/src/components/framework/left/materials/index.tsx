@@ -28,13 +28,6 @@ export const MaterialCategory = () => {
         marginBlock: token.marginSM
       }} />
       <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
-      <Category list={baseMaterials} />
     </Space>
   )
 }

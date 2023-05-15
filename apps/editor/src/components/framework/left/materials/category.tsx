@@ -3,7 +3,6 @@ import { Col, Row, Typography, Empty, Divider } from "antd"
 import { useEditor, Element } from '@craftjs/core'
 import { CardItem } from './card'
 import { useTokens } from '@/hooks/useTokens'
-import { css } from '@emotion/css'
 
 export interface CategoryProps {
   list?: any[]
@@ -28,6 +27,9 @@ export const Category: React.FC<CategoryProps> = (props) => {
                 background: token.colorPrimary
               }} />;
             }
+
+            if (!item?.component?.craft?.displayName) return null
+
             return (
               <Col span={8} key={item.key}
                 ref={(ref: HTMLDivElement) => connectors.create(ref, value)} >

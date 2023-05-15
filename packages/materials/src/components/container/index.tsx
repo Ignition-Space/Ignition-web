@@ -72,7 +72,7 @@ export const Container: UserComponent<
 
 
 Container.craft = {
-  displayName: '容器11',
+  displayName: '容器',
   related: {
   }
 }
