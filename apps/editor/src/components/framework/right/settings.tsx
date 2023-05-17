@@ -4,6 +4,7 @@ import { useEditor } from '@craftjs/core'
 import { merge } from 'lodash-es'
 import { Alert, Card, Form, Typography } from 'antd'
 import { ProForm } from '@ant-design/pro-components'
+import { css } from '@emotion/css'
 
 console.log(_setters, '_setters')
 
@@ -57,7 +58,13 @@ export const Settings = () => {
 
   return (
     nodeId && SettingRender ? (
-      <ProForm form={form} submitter={false} onValuesChange={handleFormChange} >
+      <ProForm form={form} submitter={false} onValuesChange={handleFormChange} className={css({
+        ['& .ant-pro-form-group-title']: {
+          fontWeight: 600,
+          marginBlockEnd: 12,
+          cursor: 'pointer'
+        }
+      })} >
         <SettingRender />
       </ProForm>
     ) : <Card size='small' >
