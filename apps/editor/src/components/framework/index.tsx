@@ -7,12 +7,10 @@ import { LeftPanel } from './left'
 import { RightPanel } from './right'
 import { useTokens } from '@/hooks/useTokens'
 import { Editor } from '@craftjs/core'
+import { store } from '@lgnition-lowcode/core'
 import { RenderNodeWrapper } from './canvas/render-node-wrapper'
 import { Provider as StoreProvider } from 'react-redux';
 import * as _materials_ from '@lgnition-lowcode/materials'
-import { store } from '@lgnition-lowcode/core'
-
-console.log(_materials_, '_materials_')
 
 export interface FrameworkProviderProps {
   children?: React.ReactNode
