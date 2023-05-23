@@ -1,7 +1,9 @@
 import { css } from '@emotion/css'
 import { Typography } from 'antd'
 
-export const SlotEmpty = () => {
+export const SlotEmpty: React.FC<{
+  children: React.ReactNode
+}> = ({ children }) => {
   return (
     <div className={css({
       height: '100%',
@@ -15,8 +17,12 @@ export const SlotEmpty = () => {
       background: 'rgba(255,255,255, 0.2)'
     })} >
       <Typography.Text type="secondary" >
-        当前为插槽容器，打开右侧属性面板可以替换当前坑位。
+        { children }
       </Typography.Text>
     </div>
   )
+}
+
+SlotEmpty.defaultProps = {
+  children: '当前为插槽容器，打开右侧属性面板可以替换当前坑位。'
 }

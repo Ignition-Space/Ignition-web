@@ -3,14 +3,15 @@ import { createReactMaterial, withMaterialNode } from '@lgnition-lowcode/core'
 import { SlotEmpty } from './empty'
 
 export interface SlotProps {
-  children?: React.ReactNode
+  children?: React.ReactNode;
+  empty?: React.ReactNode
 }
 
 const SlotView = withMaterialNode<SlotProps>(React.forwardRef((props, ref: any) => {
   return (
     <div ref={ref} style={{
     }} >
-      { props.children ? props.children : <SlotEmpty/> }
+      { props.children ? props.children : <SlotEmpty >{props.empty}</SlotEmpty> }
     </div>
   )
 }))

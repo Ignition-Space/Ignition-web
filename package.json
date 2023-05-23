@@ -23,7 +23,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
     "@umijs/max": "^4.0.64",
-    "antd": "^5.4.0",
+    "antd": "^5.5.1",
     "copy-to-clipboard": "^3.3.3",
     "lodash-es": "^4.17.21",
     "react": "^18.2.0",
