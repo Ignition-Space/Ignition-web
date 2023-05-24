@@ -8,8 +8,7 @@
     "start:editor": "turbo run start --filter @lgnition-web/editor",
     "start:root": "turbo run start --filter @lgnition-web/app-main",
     "lint:js": " eslint --ext .js,.jsx,.ts,.tsx .",
-    "build:editor": "pnpm run rebuild && turbo run build --filter @lgnition-web/editor",
-    "rebuild": "pnpm --filter './packages/**' recursive run build"
+    "build:editor": "turbo run build --filter @lgnition-web/editor"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +18,6 @@
     "@ant-design/pro-components": "^2.4.4",
     "@craftjs/core": "0.2.0-beta.8",
     "@emotion/css": "^11.10.6",
-    "@lgnition-lowcode/core": "workspace:^",
-    "@lgnition-lowcode/materials": "workspace:^",
-    "@lgnition-lowcode/setter": "workspace:^",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
     "@umijs/max": "^4.0.64",

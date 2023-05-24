@@ -25,6 +25,9 @@
     "lzutf8": "^0.6.3",
     "react-frame-component": "^5.2.6",
     "react-helmet": "^6.1.0",
-    "react-json-view": "^1.21.3"
+    "react-json-view": "^1.21.3",
+    "@lgnition-lowcode/core": "workspace:^",
+    "@lgnition-lowcode/materials": "workspace:^",
+    "@lgnition-lowcode/setter": "workspace:^"
   }
 }

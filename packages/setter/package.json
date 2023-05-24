@@ -16,9 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "re-resizable": "^6.9.9"
-  },
-  "peerDependencies": {
-    "@lgnition-lowcode/core": "*"
+    "re-resizable": "^6.9.9",
+    "@lgnition-lowcode/core": "workspace:^"
   }
 }
