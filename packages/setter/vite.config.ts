@@ -13,7 +13,8 @@ const externalPackages = [
   "redux",
   "@reduxjs/toolkit",
   "react-redux",
-  "@ant-design/pro-components"
+  "@ant-design/pro-components",
+  "@lgnition-lowcode/core",
 ]
 
 export default defineConfig({

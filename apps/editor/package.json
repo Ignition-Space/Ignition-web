@@ -6,7 +6,8 @@
   "scripts": {
     "start": "max dev",
     "build": "max build",
-    "setup": "max setup"
+    "setup": "max setup",
+    "preview": "max preview"
   },
   "keywords": [],
   "author": "",
