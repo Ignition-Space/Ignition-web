@@ -2,6 +2,8 @@ import * as React from 'react'
 import { useNode, useEditor } from '@craftjs/core'
 import { theme } from 'antd'
 import { css } from '@emotion/css'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 
 export interface RenderNodeWrapperProps {
     render: React.ReactElement
@@ -12,6 +14,7 @@ const ViewPortID = '#__CasterViewPort__'
 export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({ render }) => {
   const currentRef = React.useRef<HTMLDivElement>(null)
   const { token } = theme.useToken()
+  const [cache, setCache] = React.useState<any>()
 
   const { id } = useNode()
   const { query, isActive, isHovered } = useEditor((_, queryEditor) => ({
@@ -31,57 +34,26 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({ render }) 
     nodeChild: node
   }))
 
-  const hoveredCss = css({
-    position: 'relative',
-    '&::after': {
-      content: '""',
-      pointerEvents: 'none',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      display: 'block',
-      border: `1px dashed ${token.colorPrimary}`,
-      background: `rgba(0, 0, 0, 0.1)`
-    }
-  })
-
-  const activedCss = css({
-    position: 'relative',
-    '&::after': {
-      content: '""',
-      pointerEvents: 'none',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      display: 'block',
-      border: `1px solid ${token.colorPrimary}`,
-    }
-  })
-
   React.useEffect(() => {
     if (dom) {
       if (isActive) {
-        dom.classList.add(activedCss)
+        dom.classList.add("editor-component-active")
       } else {
-        dom.classList.remove(activedCss)
+        dom.classList.remove("editor-component-active")
       }
     }
-  }, [dom, isActive, activedCss])
+  }, [dom, isActive])
 
 
   React.useEffect(() => {
     if (dom && !isRootNode) {
       if (isHovered && !isActive) {
-        dom.classList.add(hoveredCss)
+        dom.classList.add("editor-component-hover")
       } else {
-        dom.classList.remove(hoveredCss)
+        dom.classList.remove("editor-component-hover")
       }
     }
-  }, [dom, isHovered, isRootNode, hoveredCss, isActive])
+  }, [dom, isHovered, isRootNode, isActive])
 
   const getPos = React.useCallback((curDOM: HTMLElement | null) => {
     const { top, left, bottom } = curDOM
@@ -103,15 +75,14 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({ render }) 
   }, [dom, getPos])
 
   React.useEffect(() => {
-    document?.querySelector(ViewPortID)?.addEventListener('scroll', scroll)
+    const mountDocument = document?.querySelector(ViewPortID)
+    mountDocument?.addEventListener('scroll', scroll)
 
     return () => {
-      document
-        ?.querySelector(ViewPortID)
+      mountDocument
         ?.removeEventListener('scroll', scroll)
     }
   }, [scroll])
-
   return (
     <>
       {render}

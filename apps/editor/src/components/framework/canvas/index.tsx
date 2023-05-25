@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { css } from '@emotion/css'
 import { useTokens } from '@/hooks/useTokens'
-import FrameSandbox from 'react-frame-component'
+import FrameSandbox, { FrameContextConsumer } from 'react-frame-component'
+import { CacheProvider } from '@emotion/react'
+import createCache from '@emotion/cache'
 import { Frame } from './frame'
 import { WindowFrame } from './window'
 import { CanvasOperation } from './operation'
 import htmlParser from 'html-react-parser'
-import { Button } from 'antd'
 
 export const Canvas = () => {
   const [headStr, setHeadStr] = React.useState("")
@@ -40,21 +41,34 @@ export const Canvas = () => {
         gridTemplateRows: '48px 1fr'
       })} >
         <WindowFrame />
-            <Frame />
-        {/* <FrameSandbox className={css({
+        <FrameSandbox id='FrameSandbox' className={css({
           height: '100%',
           width: '100%',
           border: 'none',
           background: '#FFF',
         })} head={htmlParser(headStr)}>
-          <div className={css({
-            boxSizing: 'border-box',
-            padding: 12,
-            height: '100vh'
-          })} >
-            <Frame />
-          </div>
-        </FrameSandbox> */}
+          <FrameContextConsumer>
+          {(frameContext) => {
+            const cache = createCache({
+              key: 'frame-sandbox',
+              container: frameContext?.document?.head,
+            })
+            return (
+              <CacheProvider value={cache}>
+                <div className={css({
+                  boxSizing: 'border-box',
+                  height: '100vh',
+                  width: '100vw',
+                  padding: 12
+                })} >
+                  <Frame />
+                </div>
+              </CacheProvider>
+            )
+          }}
+        </FrameContextConsumer>
+          
+        </FrameSandbox>
       </div>
       <CanvasOperation />
     </div>
