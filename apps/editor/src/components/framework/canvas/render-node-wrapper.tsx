@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { useNode, useEditor } from '@craftjs/core'
-import ReactDOM from 'react-dom'
-import { Space, theme } from 'antd'
-import { CopyOutlined, DeleteOutlined } from '@ant-design/icons'
+import { theme } from 'antd'
 import { css } from '@emotion/css'
 
 export interface RenderNodeWrapperProps {
@@ -16,17 +14,14 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({ render }) 
   const { token } = theme.useToken()
 
   const { id } = useNode()
-  const { actions, query, isActive, isHovered } = useEditor((_, queryEditor) => ({
+  const { query, isActive, isHovered } = useEditor((_, queryEditor) => ({
     isActive: queryEditor.getEvent('selected').contains(id),
     isHovered: queryEditor.getEvent("hovered").contains(id)
   }))
 
   const {
     dom,
-    name,
     isRootNode,
-    parent,
-    nodeChild
   } = useNode((node) => ({
     isRootNode: query.node(id).isRoot(),
     dom: node.dom,

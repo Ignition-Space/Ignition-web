@@ -6,6 +6,7 @@ import { Frame } from './frame'
 import { WindowFrame } from './window'
 import { CanvasOperation } from './operation'
 import htmlParser from 'html-react-parser'
+import { Button } from 'antd'
 
 export const Canvas = () => {
   const [headStr, setHeadStr] = React.useState("")
@@ -14,7 +15,7 @@ export const Canvas = () => {
   React.useEffect(() => {
     setTimeout(() => {
       setHeadStr(document.head.innerHTML)
-    }, 200)
+    }, 1000)
   }, [])
 
   return (
@@ -39,7 +40,8 @@ export const Canvas = () => {
         gridTemplateRows: '48px 1fr'
       })} >
         <WindowFrame />
-        <FrameSandbox className={css({
+            <Frame />
+        {/* <FrameSandbox className={css({
           height: '100%',
           width: '100%',
           border: 'none',
@@ -52,7 +54,7 @@ export const Canvas = () => {
           })} >
             <Frame />
           </div>
-        </FrameSandbox>
+        </FrameSandbox> */}
       </div>
       <CanvasOperation />
     </div>

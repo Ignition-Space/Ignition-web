@@ -1,6 +1,7 @@
 import { css } from '@emotion/css'
 import { Typography } from 'antd'
 
+
 export const SlotEmpty: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
