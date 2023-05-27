@@ -15,6 +15,11 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.1.5",
     "@codemirror/view": "^6.9.3",
+    "@emotion/core": "^11.0.0",
+    "@emotion/weak-memoize": "^0.3.1",
+    "@lgnition-lowcode/core": "workspace:^",
+    "@lgnition-lowcode/materials": "workspace:^",
+    "@lgnition-lowcode/setter": "workspace:^",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-helmet": "^6.1.6",
     "@uiw/codemirror-theme-github": "^4.19.11",
@@ -26,8 +31,6 @@
     "react-frame-component": "^5.2.6",
     "react-helmet": "^6.1.0",
     "react-json-view": "^1.21.3",
-    "@lgnition-lowcode/core": "workspace:^",
-    "@lgnition-lowcode/materials": "workspace:^",
-    "@lgnition-lowcode/setter": "workspace:^"
+    "stylis-plugin-extra-scope": "^0.3.0"
   }
 }
