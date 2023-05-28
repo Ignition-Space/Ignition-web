@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Tabs } from 'antd'
 import type { TabsProps } from 'antd'
-import { Settings } from './settings'
+import { Settings } from './render-settings'
 import { TabContext } from './tab-context'
 
 const items: TabsProps['items'] = [

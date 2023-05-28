@@ -4,7 +4,7 @@ import { HeaderSetter } from '@lgnition-lowcode/setter'
 export default () => {
   return (
     <>
-      <ProForm.Group title="ButtonProps"  collapsible >
+      <ProForm.Group title="标题"  collapsible >
         <HeaderSetter name="level" label="标题等级" />
       </ProForm.Group>
     </>
