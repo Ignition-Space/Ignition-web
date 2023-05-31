@@ -6,7 +6,6 @@ export default {
       {
         path: '/work-branch',
         name: '工作台',
-        component: './Welcome',
       },
     ]
   },
