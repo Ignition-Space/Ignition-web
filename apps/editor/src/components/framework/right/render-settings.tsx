@@ -23,13 +23,14 @@ export const Settings = () => {
 
   })
 
-  const handleFormChange = (changeValues: any) => {
+  const handleFormChange = async (changeValues: any) => {
 
     if (nodeId) {
       actions.setProp(nodeId, (setterProps) => {
         return merge(setterProps, changeValues)
       })
     }
+    return true
   }
 
   // 当前编辑的组件发生改变，nodeId副作用更新了
@@ -47,16 +48,18 @@ export const Settings = () => {
     }
   }, [nodeId, form])
 
-  React.useEffect(() => {
-    console.log(currentNodeProps, 'currentNodeProps')
-  }, [currentNodeProps])
-
   return (
     nodeId && SettingRender ? (
       <ProForm
+        grid
+        layout="vertical"
+        rowProps={{
+          gutter: [24, 0]
+        }}
         form={form}
         submitter={false}
         onValuesChange={handleFormChange}
+        onFinish={handleFormChange}
         className={css({
           ['& .ant-pro-form-group-title']: {
             fontWeight: 600,

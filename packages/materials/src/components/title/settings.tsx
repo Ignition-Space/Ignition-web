@@ -1,11 +1,14 @@
-import { ProForm } from "@ant-design/pro-components"
-import { HeaderSetter } from '@lgnition-lowcode/setter'
+import { ProForm, ProFormDigit, ProFormSelect } from "@ant-design/pro-components"
+import { HeaderSetter, ColorPickerSetter, BorderSetter, FontSetter, EffectSetter } from '@lgnition-lowcode/setter'
+
 
 export default () => {
   return (
     <>
-      <ProForm.Group title="标题"  collapsible >
-        <HeaderSetter name="level" label="标题等级" />
+      <ProForm.Group title="属性"  collapsible >
+        <BorderSetter/>
+        <FontSetter/>
+        <EffectSetter/>
       </ProForm.Group>
     </>
   )

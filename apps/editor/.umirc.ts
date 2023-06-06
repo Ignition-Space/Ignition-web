@@ -3,6 +3,10 @@ import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
 	npmClient: 'pnpm',
-	mfsu: false
+	model: {},
+	mfsu: false,
+	qiankun: {
+    slave: {},
+  },
 });
 

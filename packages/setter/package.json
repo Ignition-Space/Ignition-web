@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "re-resizable": "^6.9.9",
-    "@lgnition-lowcode/core": "workspace:^"
+    "@lgnition-lowcode/core": "workspace:^",
+    "re-resizable": "^6.9.9"
   }
 }

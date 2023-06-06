@@ -3,6 +3,12 @@ import { defineConfig } from '@umijs/max';
 
 export default defineConfig({
 	npmClient: 'pnpm',
+	model: {},
+  qiankun: {
+    master: {
+			sandbox: true
+		},
+  },
 	routes: [
 		{
 			path: "/home",
@@ -19,7 +25,17 @@ export default defineConfig({
 					component: "work-branch"
 				}
 			]
-		}
+		},
+		// 配置 app2 关联的路由
+		{
+			path: '/editor/*',
+			layout: false,
+			microApp: 'editor',
+      microAppProps: {
+        autoCaptureError: true,
+        autoSetLoading: true,
+      },
+		},
 	]
 });
 

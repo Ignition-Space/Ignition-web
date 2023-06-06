@@ -1,3 +1,6 @@
 export * from './components/header'
-export * from './components/input-state'
 export * from './components/color-picker-setter'
+export * from './components/expression-setter'
+export * from './components/font-setter'
+export * from './components/border-setter'
+export * from './components/effect-setter'

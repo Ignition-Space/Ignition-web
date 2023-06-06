@@ -3,7 +3,7 @@ import { ProLayout, SettingDrawer,  } from '@ant-design/pro-components';
 import * as React from 'react';
 import defaultProps from './data'
 import { Layout, theme } from 'antd';
-import { Outlet, useLocation } from '@umijs/max';
+import { Outlet, useLocation, history } from '@umijs/max';
 import { Header } from './header'
 import { css } from '@emotion/css';
 
@@ -49,7 +49,10 @@ export const RouterLayout = () => {
         menuItemRender={(item, dom) => (
           <div
             onClick={() => {
-              setPathname(item.path || '/welcome');
+              if (item.path) {
+                setPathname(item.path || '/');
+                history.replace(item.path)
+              }
             }}
           >
             {dom}
