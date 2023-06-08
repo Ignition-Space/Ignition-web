@@ -5,8 +5,8 @@ export default defineConfig({
 	npmClient: 'pnpm',
 	model: {},
 	mfsu: false,
-	qiankun: {
+	qiankun:  process.env.BUILD_MODE === "micro" ? {
     slave: {},
-  },
+  }: undefined,
 });
 
