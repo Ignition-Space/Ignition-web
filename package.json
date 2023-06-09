@@ -8,8 +8,7 @@
     "start:editor": "turbo run start --filter @lgnition-web/editor",
     "start:root": "turbo run start --filter @lgnition-web/app-main",
     "lint:js": " eslint --ext .js,.jsx,.ts,.tsx .",
-    "build:editor": "turbo run build --filter @lgnition-web/editor",
-    "postinstall": "pnpm run "
+    "build:editor": "turbo run build --filter @lgnition-web/editor"
   },
   "keywords": [],
   "author": "",
