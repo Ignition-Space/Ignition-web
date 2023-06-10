@@ -1,3 +1,4 @@
+import { history } from '@umijs/max'
 import { Typography, Space, theme, Button } from 'antd'
 import {
   ThunderboltFilled,
@@ -9,9 +10,21 @@ import CodeManage from './code-manage-modal'
 import { NodeAction } from './node-action'
 import { css } from '@emotion/css'
 import { AppDetailModal } from '../common/app-detail'
+import { useEditor } from '@craftjs/core'
 
 export function ToolBox(): JSX.Element {
   const { token } = theme.useToken()
+  const { query } = useEditor()
+
+
+  // 处理预览逻辑
+  const handlePreviewEvt = () => {
+    // 获取当前schema
+    const schema = query.serialize()
+    const previewId = "uid-" + new Date().getTime()
+    sessionStorage.setItem(previewId, schema)
+    history.push(`/preview/${previewId}`)
+  }
 
   return (
     <Space
@@ -37,7 +50,7 @@ export function ToolBox(): JSX.Element {
         <CodeManage />
         <MoreActions />
         <ScaleInput />
-        <Button>
+        <Button onClick={handlePreviewEvt} >
           <Space size={2}>
             <CaretRightOutlined />
             预览
