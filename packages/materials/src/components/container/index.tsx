@@ -4,6 +4,7 @@ import { useNode } from '@craftjs/core'
 import type { ResizeCallback } from 're-resizable';
 import { Resizable } from 're-resizable'
 import { IndicatorRound } from './Indicators'
+import { FrameworkContext } from '@lgnition-lowcode/core'
 
 export interface ContainerProps {
   style?: React.CSSProperties;
@@ -16,6 +17,7 @@ export const Container: UserComponent<
     ContainerProps
 > = ({ children, initialWidth, initialHeight, style, ...styleProps }) => {
   const resizable = React.useRef<any>(null)
+  const frameworkContext = React.useContext(FrameworkContext)
 
   const {
     actions: { setProp },
@@ -38,8 +40,6 @@ export const Container: UserComponent<
     }, 400)
   }
 
-  console.log(active, 'active')
-
   return (
     <Resizable
       style={{
@@ -53,8 +53,8 @@ export const Container: UserComponent<
       }}
       bounds='parent'
       enable={{
-        right: true,
-        bottom: true
+        right: frameworkContext?.enable,
+        bottom: frameworkContext?.enable
       }}
       ref={(ref) => {
         if (ref) {
