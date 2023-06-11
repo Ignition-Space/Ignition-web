@@ -9,6 +9,8 @@ export default () => {
   const editorFrameworkRef = React.useRef<FrameworRef>(null)
   const params = useParams()
 
+  console.log(editorFrameworkRef, 'editorFrameworkRef')
+
   React.useEffect(() => {
     if (params.id) {
       const schema = sessionStorage.getItem(params.id)

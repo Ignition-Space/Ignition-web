@@ -11,7 +11,6 @@ import { FrameworkContextProvider } from "@lgnition-lowcode/core";
 import { RenderNodeWrapper } from "./canvas/render-node-wrapper";
 import * as _materials_ from "@lgnition-lowcode/materials";
 import type { FrameworRef } from "./mount-ref";
-import { MountRef } from "./mount-ref";
 
 export type FrameworkProps = FrameworkProviderProps & {
   schema?: string;
@@ -23,12 +22,12 @@ export const Framework = React.forwardRef<FrameworRef, FrameworkProps>(
     const { token } = useTokens();
     return (
       <FrameworkContextProvider
+        ref={ref}
         enabled={props.enabled}
         resolver={_materials_}
         onRender={RenderNodeWrapper}
         onNodesChange={(dragProps) => console.log(`onNodesChange`, dragProps)}
       >
-        <MountRef ref={ref} />
         {props.children ? (
           props.children
         ) : (
