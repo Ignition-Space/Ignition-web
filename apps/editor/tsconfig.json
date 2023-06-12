@@ -1,11 +1,3 @@
 {
   "extends": "./src/.umi/tsconfig.json",
-  "compilerOptions": {
-    "paths": {
-      "@lgnition-lowcode/core": ["node_modules/@lgnition-lowcode/core"],
-      "@/*": [
-        "src/*"
-      ],
-    }
-  }
 }

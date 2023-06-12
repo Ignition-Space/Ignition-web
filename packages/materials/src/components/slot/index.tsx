@@ -14,7 +14,6 @@ export interface SlotProps {
 const SlotView = withMaterialNode<SlotProps>(
   React.forwardRef((props, ref: React.LegacyRef<HTMLDivElement>) => {
     const frameworkContext = React.useContext(FrameworkContext);
-    console.log(frameworkContext, 'frameworkContext')
 
     const emptyRender = frameworkContext?.enabled ? <SlotEmpty>{props.empty}</SlotEmpty> : null;
 

@@ -24,7 +24,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
     "@uiw/react-textarea-code-editor": "^2.1.1",
-    "@umijs/max": "^4.0.64",
+    "@umijs/max": "4.0.70",
     "antd": "^5.5.1",
     "copy-to-clipboard": "^3.3.3",
     "lodash-es": "^4.17.21",

@@ -8,5 +8,10 @@ export default defineConfig({
 	qiankun:  process.env.BUILD_MODE === "micro" ? {
     slave: {},
   }: undefined,
+	targets: {
+		chrome: 80,
+		ie: 11
+	},
+	jsMinifier: "terser"
 });
 
