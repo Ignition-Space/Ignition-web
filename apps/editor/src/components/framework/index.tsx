@@ -11,6 +11,7 @@ import { FrameworkContextProvider } from "@lgnition-lowcode/core";
 import { RenderNodeWrapper } from "./canvas/render-node-wrapper";
 import * as _materials_ from "@lgnition-lowcode/materials";
 import type { FrameworRef } from "./mount-ref";
+import  "@lgnition-lowcode/materials/dist/style.css";
 
 export type FrameworkProps = FrameworkProviderProps & {
   schema?: string;

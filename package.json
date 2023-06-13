@@ -26,6 +26,7 @@
     "@uiw/react-textarea-code-editor": "^2.1.1",
     "@umijs/max": "4.0.70",
     "antd": "^5.5.1",
+    "clsx": "^1.2.1",
     "copy-to-clipboard": "^3.3.3",
     "lodash-es": "^4.17.21",
     "lzutf8": "^0.6.3",
@@ -52,6 +53,7 @@
     "@umijs/fabric": "^2.14.1",
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.38.0",
+    "sass": "^1.63.3",
     "turbo": "^1.9.4",
     "typescript": "^5.0.3",
     "vite-plugin-dts": "^2.2.0"

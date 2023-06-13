@@ -1,0 +1,31 @@
+.indicatorRound
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  pointer-events: none
+  
+  &Inline
+    position: absolute
+    width: 6px
+    height: 30px
+    top: 50%
+    right: -3px
+    z-index: 2
+    border-radius: 200px
+    pointer-events: none
+    transform: translate(0, -50%)
+
+  &Block
+    position: absolute
+    width: 30px
+    height: 6px
+    bottom: -3px
+    left: 50%
+    z-index: 2
+    border-radius: 200px
+    pointer-events: none
+
+.hide
+  display: none

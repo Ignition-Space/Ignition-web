@@ -53,8 +53,8 @@ export const Container: UserComponent<
       }}
       bounds='parent'
       enable={{
-        right: frameworkContext?.enable,
-        bottom: frameworkContext?.enable
+        right: frameworkContext?.enabled,
+        bottom: frameworkContext?.enabled
       }}
       ref={(ref) => {
         if (ref) {

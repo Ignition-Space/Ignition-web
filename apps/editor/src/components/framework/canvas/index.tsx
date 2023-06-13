@@ -26,8 +26,6 @@ export const Canvas = () => {
     setHeadStr(headDOM.innerHTML);
   }, [masterProps?.container]);
 
-  console.log(headStr, 'htmlParser(headStr)')
-
   return (
     <div
       className={css({

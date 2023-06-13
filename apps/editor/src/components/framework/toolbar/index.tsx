@@ -23,7 +23,7 @@ export function ToolBox(): JSX.Element {
     const schema = query.serialize()
     const previewId = "uid-" + new Date().getTime()
     sessionStorage.setItem(previewId, schema)
-    history.push(`/preview/${previewId}`)
+    window.open(`/preview/${previewId}`)
   }
 
   return (
@@ -47,7 +47,7 @@ export function ToolBox(): JSX.Element {
         <NodeAction />
       </Space>
       <Space>
-        <CodeManage />
+        {/* <CodeManage /> */}
         <MoreActions />
         <ScaleInput />
         <Button onClick={handlePreviewEvt} >

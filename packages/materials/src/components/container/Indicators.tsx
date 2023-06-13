@@ -1,8 +1,10 @@
-import * as React from 'react'
-import { css } from '@emotion/css'
-import { theme } from 'antd'
+import * as React from "react";
+import { css } from "@emotion/css";
+import { theme } from "antd";
+import clsx from "clsx";
+import classes from "./index.module.sass";
 
-const { useToken } = theme
+const { useToken } = theme;
 
 export interface IndicatorsProps {
   bound?: string;
@@ -10,45 +12,27 @@ export interface IndicatorsProps {
 }
 
 export const IndicatorRound: React.FC<IndicatorsProps> = (props) => {
-  console.log(props, 'IndicatorsProps')
-  const { token } = useToken()
+  const { token } = useToken();
 
   return (
-    <div className={css({
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      pointerEvents: 'none',
-      visibility: props.show ? 'visible': 'hidden',
-    })}
+    <div
+      className={clsx(classes.indicatorRound, {
+        [classes.hide]: !props.show,
+      })}
     >
-      <span className={css({
-        position: 'absolute',
-        width: 6,
-        height: 30,
-        top: '50%',
-        right: -3,
-        background: token.colorPrimary,
-        zIndex: 2,
-        borderRadius: 200,
-        pointerEvents: 'none',
-        transform: 'translate(0, -50%)',
-        
-      })} />
-      <span className={css({
-        position: 'absolute',
-        width: 30,
-        height: 6,
-        bottom: -3,
-        left: '50%',
-        background: token.colorPrimary,
-        zIndex: 2,
-        pointerEvents: 'none',
-        borderRadius: 200,
-      })} />
+      <span
+        style={{
+          background: token.colorPrimary,
+        }}
+        className={classes.indicatorRoundInline}
+      />
+      <span
+        style={{
+          background: token.colorPrimary,
+        }}
+        className={classes.indicatorRoundBlock}
+      />
       <span />
     </div>
-  )
-}
+  );
+};

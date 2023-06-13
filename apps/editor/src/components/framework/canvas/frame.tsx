@@ -18,11 +18,11 @@ export const Frame = () => {
   return (
     <div
       id="__CasterViewPort__"
-      className={css({
+      style={{
         background: token.colorBgContainer,
         width: deviceWidthMap[deviceWidth],
         height: "100%",
-      })}
+      }}
     >
       <EditorFrame >
         <Element
