@@ -13,7 +13,6 @@ export const Settings = () => {
     if (currentNodeId) {
       const { data, related } = state.nodes[currentNodeId];
 
-      console.log(data, 'data')
       return {
         id: currentNodeId,
         currentNodeProps: data.props,

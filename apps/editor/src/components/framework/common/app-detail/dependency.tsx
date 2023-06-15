@@ -171,7 +171,6 @@ export const DependencyTable = () => {
         type: "multiple",
         editableKeys,
         onSave: async (rowKey, data, row) => {
-          console.log(rowKey, data, row);
           await waitTime(2000);
         },
         onChange: setEditableRowKeys,

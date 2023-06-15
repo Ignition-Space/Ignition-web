@@ -15,7 +15,6 @@ export const CanvasOperation = () => {
       selectedNodeId: ids?.[0] as string,
     }
   });
-  console.log(selectedNodeId, 'selectedNodeId')
   const disabled = !selectedNodeId
 
   const handleDeleteAction = () => {

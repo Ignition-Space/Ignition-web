@@ -12,10 +12,6 @@ const baseMaterials = Object.keys(_materials).map((key: any) => ({
   component: _materials[key as keyof typeof _materials]
 }))
 
-console.log(baseMaterials, '物料组件')
-
-// const materialGroups = 
-
 export const MaterialCategory = () => {
 
   const { token } = useTokens()

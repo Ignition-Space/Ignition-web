@@ -14,7 +14,6 @@ interface State {
 export const useStore = create<State>((set) => ({
   deviceWidth: DEVICE.PC,
   setDeviceWidth: (device: DEVICE) => {
-    console.log(device, 'device')
     set({ deviceWidth: device })
   }
 }))
