@@ -15,7 +15,8 @@ const externalPackages = [
   "react-redux",
   "@ant-design/pro-components",
   "@lgnition-lowcode/core",
-  "@uiw/react-textarea-code-editor"
+  "@uiw/react-textarea-code-editor",
+  "ahooks"
 ]
 
 export default defineConfig({

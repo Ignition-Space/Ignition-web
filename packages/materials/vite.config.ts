@@ -15,6 +15,7 @@ const externalPackages = [
   "@ant-design/pro-components",
   "@lgnition-lowcode/core",
   "@lgnition-lowcode/setter",
+  "ahooks"
 ];
 
 export default defineConfig({

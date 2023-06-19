@@ -16,13 +16,12 @@ import Seal from 'sval'
  */
 export class BrowserCodeExecVM {
   private interpreter: Seal
-  private options: SvalOptions
-  constructor (options: SvalOptions) {
-    this.interpreter = new Seal(options)
-    this.options = {
+  constructor (options?: SvalOptions) {
+    this.interpreter = new Seal({
       ecmaVer: 9,
-      sandBox: true
-    }
+      sandBox: true,
+      ...options
+    })
   }
 
   init (depends?: Record<string, any>) {

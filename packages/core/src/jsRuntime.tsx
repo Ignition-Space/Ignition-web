@@ -1,6 +1,7 @@
 export interface ExecuteResult {
   value: any,
-  error: any
+  error: any,
+  success: boolean;
 }
 
 
@@ -42,15 +43,14 @@ class BrowserRuntimeVM {
     `);
   }
 
-  public evaluateExpression(code: string, globalScope: any) {
+  public execute(code: string, globalScope: InjectVMVarsType) {
     try {
       const value = this.executeCode(code, globalScope);
-      return { value };
-    } catch (rawError) {
-      console.log(rawError, 'rawError');
-      return { error: rawError };
+      return { value, success: true };
+    } catch (err) {
+      return { success: false, error: err, value: null };
     }
   }
 }
 
-export const browserRuntimeVM = new BrowserRuntimeVM();
+export const browserRuntimeVM = new BrowserRuntimeVM()

@@ -10,7 +10,8 @@ const externalPackages = [
   "@emotion/css",
   "redux",
   "@reduxjs/toolkit",
-  "react-redux"
+  "react-redux",
+  "ahooks"
 ]
 
 export default {
@@ -18,6 +19,7 @@ export default {
     react(),
     dts()],
   build: {
+    sourceMap: true,
     lib: {
       entry: 'src/index.ts',
       name: 'lgnition.core',
