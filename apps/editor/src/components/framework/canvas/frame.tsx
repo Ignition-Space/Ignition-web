@@ -1,9 +1,8 @@
 import * as React from "react";
-import { css } from "@emotion/css";
 import { useTokens } from "@/hooks/useTokens";
 import { useStore, DEVICE } from "../toolbar/store";
 import { Frame as EditorFrame, Element } from "@craftjs/core";
-import { Container } from "@lgnition-lowcode/materials";
+import { Container, Title } from "@lgnition-lowcode/materials";
 
 const deviceWidthMap = {
   [DEVICE.PC]: "100%",
@@ -32,7 +31,9 @@ export const Frame = () => {
             background: token.colorBgBase,
             height: "100%",
           }}
-         />
+         >
+          <Title/>
+         </Element>
       </EditorFrame>
     </div>
   );
