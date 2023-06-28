@@ -7,9 +7,7 @@ const counterSlice = createSlice({
   } as Record<string, any>,
   reducers: {
     onUpdated: (state, { payload = {} }) => {
-      console.log(state, payload, 'onUpdated')
-      // eslint-disable-next-line no-param-reassign
-      return state = {
+      return {
         ...state,
         ...payload
       }

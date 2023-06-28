@@ -47,7 +47,7 @@ export function ToolBox(): JSX.Element {
         <NodeAction />
       </Space>
       <Space>
-        {/* <CodeManage /> */}
+        <CodeManage />
         <MoreActions />
         <ScaleInput />
         <Button onClick={handlePreviewEvt} >

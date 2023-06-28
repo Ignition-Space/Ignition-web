@@ -23,6 +23,7 @@ export const Settings = () => {
   })
 
   const handleFormChange = async (changeValues: any) => {
+    console.log(changeValues, 'changeValues')
 
     if (nodeId) {
       actions.setProp(nodeId, (setterProps) => {
@@ -50,11 +51,7 @@ export const Settings = () => {
   return (
     nodeId && SettingRender ? (
       <ProForm
-        grid
-        layout="vertical"
-        rowProps={{
-          gutter: [24, 0]
-        }}
+        layout="horizontal"
         form={form}
         submitter={false}
         onValuesChange={handleFormChange}
