@@ -51,9 +51,10 @@ export const Settings = () => {
   return (
     nodeId && SettingRender ? (
       <ProForm
-        layout="horizontal"
+        layout="vertical"
         form={form}
         submitter={false}
+        labelAlign="left"
         onValuesChange={handleFormChange}
         onFinish={handleFormChange}
         className={css({

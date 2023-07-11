@@ -61,6 +61,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      luna-object-viewer:
+        specifier: ^0.2.4
+        version: 0.2.4
       lzutf8:
         specifier: ^0.6.3
         version: 0.6.3
@@ -9740,6 +9743,10 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
+  /licia@1.38.2:
+    resolution: {integrity: sha512-QsX3fZt88e1KaNdZXTSXqGYNHFXMV8xgfwa3eCTYdv8k4OLQimxwjTdXXej11BdSyUUp0rCZROI8rcTvnZRZ7w==}
+    dev: false
+
   /lightningcss-darwin-arm64@1.19.0:
     resolution: {integrity: sha512-wIJmFtYX0rXHsXHSr4+sC5clwblEMji7HHQ4Ub1/CznVRxtCFha6JIt5JZaNf8vQrfdZnBxLLC6R8pC818jXqg==}
     engines: {node: '>= 12.0.0'}
@@ -9962,6 +9969,12 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+
+  /luna-object-viewer@0.2.4:
+    resolution: {integrity: sha512-jJoEd5902BIFp8lxbmeodEBPaPe5wjSDDBazQuzTT31qpTLNv64V+HzXtoFurzkvghlxPAyPUyYtzcjkSgBvcA==}
+    dependencies:
+      licia: 1.38.2
+    dev: false
 
   /lzutf8@0.6.3:
     resolution: {integrity: sha512-CAkF9HKrM+XpB0f3DepQ2to2iUEo0zrbh+XgBqgNBc1+k8HMM3u/YSfHI3Dr4GmoTIez2Pr/If1XFl3rU26AwA==}
