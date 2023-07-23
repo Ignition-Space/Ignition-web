@@ -16,7 +16,8 @@ const externalPackages = [
   "@ant-design/pro-components",
   "@lgnition-lowcode/core",
   "@uiw/react-textarea-code-editor",
-  "ahooks"
+  "ahooks",
+  "luna-object-viewer"
 ]
 
 export default defineConfig({
