@@ -12,6 +12,8 @@ import { RenderNodeWrapper } from "./canvas/render-node-wrapper";
 import * as _materials_ from "@lgnition-lowcode/materials";
 import type { FrameworRef } from "./mount-ref";
 import  "@lgnition-lowcode/materials/dist/style.css";
+import 'luna-object-viewer/luna-object-viewer.css'
+import { useEditor } from "@craftjs/core";
 
 export type FrameworkProps = FrameworkProviderProps & {
   schema?: string;
@@ -21,13 +23,13 @@ export type FrameworkProps = FrameworkProviderProps & {
 export const Framework = React.forwardRef<FrameworRef, FrameworkProps>(
   (props, ref) => {
     const { token } = useTokens();
+
     return (
       <FrameworkContextProvider
         ref={ref}
         enabled={props.enabled}
         resolver={_materials_}
         onRender={RenderNodeWrapper}
-        onNodesChange={(dragProps) => console.log(`onNodesChange`, dragProps)}
       >
         {props.children ? (
           props.children
@@ -45,13 +47,13 @@ export const Framework = React.forwardRef<FrameworRef, FrameworkProps>(
                 height: "100%",
               })}
             >
-              <Col flex="320px">
+              <Col id="HuosLeft" flex="320px" style={{ position: 'relative' }} >
                 <LeftPanel />
               </Col>
-              <Col flex="auto">
+              <Col id="IgnitionCanvas" flex="auto">
                 <Canvas />
               </Col>
-              <Col flex="350px">
+              <Col flex="300px">
                 <RightPanel />
               </Col>
             </Row>
