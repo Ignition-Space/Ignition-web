@@ -9,7 +9,22 @@ export interface FrameworRef {
 }
 
 export const MountRef = React.forwardRef<FrameworRef>((_, ref) => {
-  const { actions } = useEditor()
+  const { actions, query } = useEditor()
+    
+  React.useEffect(() => {
+
+    const autoSaveSchemaData = () => {
+      const schema = query.serialize();
+      console.log(schema, 'schema1')
+      // save实现
+    };
+
+    const interval = setInterval(autoSaveSchemaData, 30 * 60 * 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [query]);
 
   React.useImperativeHandle(ref, () => ({
     /**
