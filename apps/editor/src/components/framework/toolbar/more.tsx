@@ -40,7 +40,7 @@ export function MoreActions (): JSX.Element {
 
   return (
     <Dropdown
-      placement='bottomCenter'
+      placement='bottom'
       overlayStyle={{
         width: 200
       }}

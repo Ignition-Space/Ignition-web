@@ -13,7 +13,7 @@ const SidebarItem = (props: SidebarItemProps) => {
   const { actived, tooltip, ...restProps } = props
   return (
     <Tooltip placement="right" title={tooltip} >
-      <Button {...restProps} type={actived ? 'primary' : "text"} />
+      <Button {...restProps} ghost type={actived ? 'primary' : "text"} />
     </Tooltip>
   )
 }

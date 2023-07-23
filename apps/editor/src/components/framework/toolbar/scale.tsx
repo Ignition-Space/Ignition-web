@@ -21,7 +21,7 @@ export function ScaleInput (): JSX.Element {
 
   return (
     <Dropdown
-      placement='bottomCenter'
+      placement='bottom'
       menu={{ items }}
       dropdownRender={(menu) => (
         <div
