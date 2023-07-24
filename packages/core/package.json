@@ -5,18 +5,18 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.cjs",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
     }
   },
   "scripts": {
-    "build": "tsup --dts --format esm,cjs",
-    "start": "tsup --dts --format esm,cjs --watch"
+    "build": "vite build",
+    "start": "vite build --watch"
   },
   "keywords": [],
   "author": "",

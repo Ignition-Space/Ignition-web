@@ -1,5 +1,4 @@
 import { Typography } from 'antd'
-import { CreateAppModal } from './create-app-modal'
 import type { StatisticProps } from '@ant-design/pro-components';
 import { ProCard, StatisticCard, PageContainer } from '@ant-design/pro-components';
 
@@ -18,9 +17,7 @@ export const WorkBranchView = () => {
     <PageContainer
       content={<Typography.Text type="secondary" >Welcome to Retool, fanghua!</Typography.Text>}
       breadcrumb={undefined}
-      extra={[
-        <CreateAppModal key="create-app" />
-      ]}
+      
     >
       <ProCard
       tabs={{

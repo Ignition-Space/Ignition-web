@@ -3,7 +3,6 @@ import { Card, Col, Row, Space, Tabs, Tag, Typography, message } from "antd";
 import { css } from "@emotion/css";
 import type { Item } from "./db";
 import { getHisotryList, delHistoryRecord } from "./db";
-import { useEditor } from "@craftjs/core";
 
 const List: React.FC<{
   data: Item[];
@@ -20,7 +19,7 @@ const List: React.FC<{
 
   const handleLocalHisotryDelete = async (reocrd: Item) => {
     await delHistoryRecord(reocrd)
-    message.error("删除成功")
+    message.success("删除成功")
     reload()
   }
 
@@ -55,6 +54,7 @@ const List: React.FC<{
 
 export const Hisotry = () => {
   const [localList, setLocalList] = React.useState<Item[]>([]);
+  const [activeKey, setActiveKey] = React.useState("local")
 
   const getLocalHistory = async () => {
     const data = await getHisotryList();
@@ -62,13 +62,18 @@ export const Hisotry = () => {
   };
 
   React.useEffect(() => {
-    getLocalHistory();
-  }, []);
+    if (activeKey === 'local')  {
+
+      getLocalHistory();
+    } else {
+      // getRemoteHisotry
+    }
+  }, [activeKey]);
 
   return (
     <div>
       <Tabs
-        defaultActiveKey="1"
+        activeKey={activeKey}
         centered
         items={[
           {
@@ -82,6 +87,7 @@ export const Hisotry = () => {
             children: <List data={localList} reload={getLocalHistory} />,
           },
         ]}
+        onChange={(v) => setActiveKey(v)}
       />
     </div>
   );

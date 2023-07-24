@@ -20,3 +20,13 @@ export const parseJsStrToLte = (code: string): string => {
   return `\`${result}\``;
   
 }
+
+export interface parseSetterValType extends Object {
+  $$const?: any,
+  $$jsx?: string;
+  [key: string]: any
+}
+
+export const isBindState = (val: parseSetterValType) => {
+  return val?.$$const || val?.$$jsx
+}

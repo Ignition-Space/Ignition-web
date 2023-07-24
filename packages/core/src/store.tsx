@@ -1,4 +1,5 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { merge } from 'lodash-es'
 
 const counterSlice = createSlice({
   name: '@@lgnition-space',
@@ -7,10 +8,8 @@ const counterSlice = createSlice({
   } as Record<string, any>,
   reducers: {
     onUpdated: (state, { payload = {} }) => {
-      return {
-        ...state,
-        ...payload
-      }
+      const mergeState = merge(state, payload)
+      return mergeState
     }
   }
 })

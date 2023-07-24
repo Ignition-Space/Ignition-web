@@ -3,12 +3,12 @@ import type { UserComponent, UserComponentConfig } from '@craftjs/core';
 import { useNode } from '@craftjs/core'
 import { ErrorBoundary } from "react-error-boundary";
 import { Alert, Typography }  from 'antd'
-import { onUpdated } from './store'
+import { onUpdated, store } from './store'
 import { browserRuntimeVM } from  './jsRuntime'
-import { useSelector, useDispatch } from 'react-redux';
-import { useDeepCompareEffect } from 'ahooks'
-import { isExpression, parseJsStrToLte } from './expression';
-import { cloneDeep, cloneDeepWith } from 'lodash-es'
+import { useSelector } from 'react-redux';
+import { cloneDeepWith } from 'lodash-es'
+import { useMount, useThrottleEffect } from 'ahooks'
+import { has } from 'lodash-es'
 
 /** 物料类型 */
 export type MaterialComponent = UserComponent
@@ -17,7 +17,7 @@ export const fallbackRender = ({ error }: any) => {
 
   return (
     <Alert banner icon={null}  type="error" description={<Typography.Text type="danger" >
-      当前组件发生错误，请查看日志平台
+      {error}
     </Typography.Text>} />
   );
 }
@@ -29,22 +29,55 @@ export const fallbackRender = ({ error }: any) => {
  */
 export function withMaterialNode<T = any> (WrapComponent: React.FunctionComponent<T>) {
   return function (props: any) {
-    const { connectors: { connect, drag } } = useNode()
-    const storeValues = useSelector((state) => state)
+    const { connectors: { connect, drag }, id } = useNode()
+
+    useMount(() => {
+      console.log("Mount: ", props)
+    })
+
+    useThrottleEffect(() => {
+      if (props.$$store && Array.isArray(props.$$store)) {
+        const result: Record<string, any> = {}
+        props.$$store.forEach((item: any) => {
+          result[item.name] = item.defaultVal
+        })
+
+      
+      store.dispatch(onUpdated({
+        [id]: result
+      }))
+      }
+    }, [props.$$store])
+
+    const storeValues: any = useSelector((state) => state)
 
     const memoizedProps = React.useMemo(() => {
       const cloneProps =  cloneDeepWith(props,  (value) => {
-        if (value && typeof value === "string" && isExpression(value)) {
-          console.log(`执行代码： ${value}`)
-          return browserRuntimeVM.execute(parseJsStrToLte(value), {props, store: storeValues})?.value || null
+
+        if (has(value, '$$const')) {
+          return value.$$const
         }
+
+        if (has(value, '$$jsx')) {
+          const runRes =  browserRuntimeVM.execute(value.$$jsx, {props, store: storeValues?.[id], gloablScope: storeValues})?.value
+          return runRes || null
+        }
+
       })
+
       return cloneProps
-    }, [props, storeValues])
+    }, [props, storeValues, id])
+
+    // todo
+    const sholudUpdateRender = () => {}
+
+    console.log(memoizedProps, 'memoizedProps')
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >
-        <WrapComponent ref={(dom: HTMLElement) => connect(drag(dom))} {...memoizedProps}/>
+        {
+          memoizedProps ? <WrapComponent ref={(dom: HTMLElement) => connect(drag(dom))} {...memoizedProps}/> : null
+        }
       </ErrorBoundary>
     )
   }

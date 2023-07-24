@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { UserComponent} from '@craftjs/core';
 import { useNode } from '@craftjs/core'
-import type { ResizeCallback } from 're-resizable';
+import type { ResizeCallback , ResizableProps } from 're-resizable';
 import { Resizable } from 're-resizable'
 import { IndicatorRound } from './Indicators'
 import { FrameworkContext } from '@lgnition-lowcode/core'
@@ -11,6 +11,8 @@ export interface ContainerProps {
   children?: React.ReactNode;
   initialWidth?: string | number;
   initialHeight?: string | number;
+  width?: string | number;
+  height?: string | number;
 }
 
 export const Container: UserComponent<
@@ -40,12 +42,17 @@ export const Container: UserComponent<
     }, 400)
   }
 
+  console.log(style, 'style')
+
   return (
     <Resizable
       style={{
         position: 'relative',
         ...style,
-        ...styleProps,
+      }}
+      size={{
+        width: styleProps?.width as string,
+        height: styleProps?.height as string
       }}
       defaultSize={{
         width: initialWidth || '100%',
