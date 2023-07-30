@@ -28,6 +28,11 @@ export const Category: React.FC<CategoryProps> = (props) => {
               }} />;
             }
 
+            if (["Form", "FormItem"].includes(key)) {
+              console.log("TableView")
+              value = <Element canvas is={component} />
+            }
+
             if (!item?.component?.craft?.displayName) return null
 
             return (

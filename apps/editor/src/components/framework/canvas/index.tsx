@@ -50,7 +50,8 @@ export const Canvas = () => {
         })}
       >
         <WindowFrame />
-        <FrameSandbox
+        <Frame />
+        {/* <FrameSandbox
           id="FrameSandbox"
           className={css({
             height: "100%",
@@ -70,7 +71,7 @@ export const Canvas = () => {
           >
             <Frame />
           </div>
-        </FrameSandbox>
+        </FrameSandbox> */}
       </div>
       <CanvasOperation />
     </div>

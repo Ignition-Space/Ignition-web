@@ -28,7 +28,7 @@ export const fallbackRender = ({ error }: any) => {
  * @param WrapComponent 物料组件
  */
 export function withMaterialNode<T = any> (WrapComponent: React.FunctionComponent<T>) {
-  return function (props: any) {
+  return (props: any) => {
     const { connectors: { connect, drag }, id } = useNode()
 
     useMount(() => {
@@ -68,16 +68,11 @@ export function withMaterialNode<T = any> (WrapComponent: React.FunctionComponen
       return cloneProps
     }, [props, storeValues, id])
 
-    // todo
-    const sholudUpdateRender = () => {}
-
     console.log(memoizedProps, 'memoizedProps')
 
     return (
-      <ErrorBoundary fallbackRender={fallbackRender} >
-        {
-          memoizedProps ? <WrapComponent ref={(dom: HTMLElement) => connect(drag(dom))} {...memoizedProps}/> : null
-        }
+      <ErrorBoundary fallbackRender={fallbackRender}>
+        <WrapComponent ref={(dom: HTMLElement) => connect(drag(dom))} {...memoizedProps}/>
       </ErrorBoundary>
     )
   }
