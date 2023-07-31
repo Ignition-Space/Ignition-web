@@ -1,5 +1,5 @@
 import React from "react";
-import { ProFormCheckbox, ProFormSlider, ProFormSwitch, ProFormSegmented } from "@ant-design/pro-components";
+import { ProFormCheckbox, ProFormSlider, ProFormSwitch, ProFormSegmented, ProFormRadio } from "@ant-design/pro-components";
 
 export const SegmentedView = React.forwardRef<
   HTMLDivElement,
@@ -42,6 +42,17 @@ export const CheckboxView = React.forwardRef<
   return (
     <div ref={ref}>
       <ProFormCheckbox {...props} />
+    </div>
+  );
+});
+
+export const RadioGroupView = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<typeof ProFormRadio.Group>
+>((props, ref) => {
+  return (
+    <div ref={ref}>
+      <ProFormRadio.Group {...props} />
     </div>
   );
 });

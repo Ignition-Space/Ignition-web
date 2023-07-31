@@ -1,7 +1,7 @@
 import type * as React from 'react'
 import { createReactMaterial, withMaterialNode } from '@lgnition-lowcode/core'
 import TitleSettings from './settings'
-import { SliderView, SwitchView, CheckboxView, SegmentedView } from './view'
+import { SliderView, SwitchView, CheckboxView, SegmentedView, RadioGroupView } from './view'
 
 export const Segmented = createReactMaterial(withMaterialNode<React.ComponentProps<typeof SegmentedView>>(SegmentedView), {
   displayName: 'Segmented',
@@ -30,6 +30,13 @@ export const Switch = createReactMaterial(withMaterialNode<React.ComponentProps<
 
 export const Slider = createReactMaterial(withMaterialNode<React.ComponentProps<typeof SliderView>>(SliderView), {
   displayName: 'Slider',
+  related: {
+    settingRender: TitleSettings
+  },
+})
+
+export const RadioGroup = createReactMaterial(withMaterialNode<React.ComponentProps<typeof RadioGroupView>>(RadioGroupView), {
+  displayName: 'RadioGroup',
   related: {
     settingRender: TitleSettings
   },
