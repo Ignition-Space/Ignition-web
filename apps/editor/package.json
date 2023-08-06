@@ -1,29 +1,21 @@
 {
-  "name": "@lgnition-web/editor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "editor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "max dev",
-    "build": "max build",
-    "setup": "max setup"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@codemirror/lang-javascript": "^6.1.5",
-    "@codemirror/view": "^6.9.3",
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/react-helmet": "^6.1.6",
-    "@uiw/codemirror-theme-github": "^4.19.11",
-    "@uiw/react-codemirror": "^4.19.16",
-    "@uiw/react-markdown-preview": "^4.1.13",
-    "form-render": "^2.1.11",
-    "html-react-parser": "^3.0.16",
-    "lzutf8": "^0.6.3",
-    "react-frame-component": "^5.2.6",
-    "react-helmet": "^6.1.0",
-    "react-json-view": "^1.21.3"
+    "@huos/core": "workspace:^",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "vite": "^4.4.5"
   }
 }

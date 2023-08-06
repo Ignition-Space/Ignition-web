@@ -1,21 +1,13 @@
 {
-  "name": "@lgnition-lowcode/setter",
+  "name": "@huos/setter",
   "version": "1.0.0",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "vite build --watch",
-    "build": "tsc && vite build"
+    "start": "tsup --watch",
+    "build": "tsup"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "re-resizable": "^6.9.9"
-  }
+  "license": "ISC"
 }

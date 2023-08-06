@@ -1,3 +1,4 @@
 module.exports = {
-  extends: [require.resolve('@umijs/fabric/dist/eslint')],
-}
+  root: true,
+  extends: [require.resolve("@huos/eslint")],
+};
