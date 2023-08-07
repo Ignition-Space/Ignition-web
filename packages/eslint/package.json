@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typescript-eslint/parser": "^6.2.1",
     "eslint-config-airbnb": "^19.0.4"
   }
 }

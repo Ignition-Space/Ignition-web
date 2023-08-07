@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": ""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +13,9 @@
     "@ant-design/icons": "^5.2.5",
     "@ant-design/pro-components": "^2.6.11",
     "@craftjs/core": "0.2.0-beta.12",
+    "@emotion/css": "^11.11.2",
     "antd": "^5.8.2",
+    "clsx": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2"
