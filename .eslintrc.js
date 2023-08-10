@@ -1,5 +1,3 @@
 module.exports = {
-    "extends": [
-        "@huos/lint"
-    ],
-}
+  extends: ["@huos/lint"],
+};
