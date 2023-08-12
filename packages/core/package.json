@@ -2,13 +2,19 @@
   "name": "@huos/core",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "types": "dist/index.d.mts",
   "scripts": {
     "start": "tsup --watch",
     "build": "tsup"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "styled-system": "^5.1.5"
+  }
 }

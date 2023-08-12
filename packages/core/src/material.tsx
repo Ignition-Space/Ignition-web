@@ -4,7 +4,6 @@ import { UserComponent, UserComponentConfig, useNode } from '@craftjs/core'
 
 export type ReactMaterialComponent = UserComponent
 
-
 /**
  * 将UI组件和装饰器
  * @param { React.FunctionComponent } WrappedComponent 设计组件
@@ -12,7 +11,7 @@ export type ReactMaterialComponent = UserComponent
 const withConnectNode = (WrappedComponent: React.FunctionComponent): ReactMaterialComponent => {
   return function (props: Record<string, any>) {
 
-    const { connectors: { connect, drag }, id } = useNode()
+    const { connectors: { connect, drag } } = useNode()
 
     return (
       <div ref={(dom: HTMLDivElement) => connect(drag(dom))} >

@@ -6,8 +6,8 @@ export default defineConfig((options) => ({
   entry: ['src/index.ts'],
   splitting: false,
   sourcemap: false,
-  clean: false,
-  format: ['cjs', 'esm', 'iife'],
-  external: ["react", "react-dom", "@craftjs/core"],
-  dts: true
+  clean: true,
+  format: ["esm"],
+  external: ["react", "react-dom", "@craftjs/core", "zustand", "antd"],
+  dts: true,
 }))
