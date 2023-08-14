@@ -1,4 +1,4 @@
-import { __Box__ } from '@/framework/components/box'
+import { __Provider__ } from '@/framework/components'
 import { Frame as DocumentFrame, Element } from '@craftjs/core'
 
 
@@ -6,9 +6,7 @@ export const DocumentNodes = () => {
   return (
     <div id='__CasterViewPort__' >
       <DocumentFrame>
-        <Element canvas is={__Box__} height="100vh" width="100vw" backgroundColor="#f4f4f4" >
-          无内容
-        </Element>
+        <Element canvas is={__Provider__} height="100vh" width="100vw" backgroundColor="#f4f4f4" />
       </DocumentFrame>
     </div>
   )
