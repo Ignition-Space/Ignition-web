@@ -1,7 +1,7 @@
 import { Card, Spin, theme } from 'antd'
 import { css } from '@emotion/css'
 import { ToolBar } from './toolbar'
-import { IFrame } from './iframe'
+import { IFrame as RenderViewSanBox } from './iframe'
 import { DocumentNodes } from './document'
 
 export const Canvas = () => {
@@ -20,7 +20,9 @@ export const Canvas = () => {
     canvas: css({
       height: '100%',
       paddingInline:  token.paddingMD,
-      paddingBlock: token.paddingSM
+      paddingBlock: token.paddingSM,
+      backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)",
+      backgroundSize: '20px 20px'
     })
   }
 
@@ -28,11 +30,9 @@ export const Canvas = () => {
     <div className={classes.main} >
       <ToolBar/>
       <div className={classes.canvas} >
-        <Card  size="small" bodyStyle={{height: '100%'}} style={{height: '100%'}} >
-          <IFrame>
+          <RenderViewSanBox>
             <DocumentNodes/>
-          </IFrame>
-        </Card>
+          </RenderViewSanBox>
         </div>
     </div>
   )
