@@ -2,7 +2,11 @@
   "name": "@huos/setter",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "types": "dist/index.d.mts",
   "scripts": {
     "start": "tsup --watch",
     "build": "tsup"

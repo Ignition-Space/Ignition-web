@@ -6,6 +6,7 @@ export default defineConfig((options) => ({
   entry: ['src/index.ts'],
   splitting: false,
   sourcemap: false,
-  clean: false,
-  format: ['cjs', 'esm', 'iife']
+  format: ["esm"],
+  external: ["react", "react-dom", "@craftjs/core", "antd", "@ant-design/pro-components", "react-monaco-editor", "lodash"],
+  dts: true,
 }))
