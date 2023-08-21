@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/layout": "^2.3.0",
+    "@chakra-ui/react": "^2.8.0",
     "@huos/core": "workspace:^",
+    "@huos/setter": "workspace:^",
+    "re-resizable": "^6.9.11",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-frame-component": "^5.2.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "^3.3.2",
-    "vite": "^4.4.5"
+    "@vitejs/plugin-react-swc": "^3.3.2"
   }
 }
