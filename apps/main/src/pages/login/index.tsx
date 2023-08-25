@@ -1,9 +1,23 @@
 import { Section } from './left'
+import { Content } from './content'
+import { css } from '@emotion/css'
 
-export const LoginPage = () => {
+const classes = {
+  layout: css({
+    height: '100vh',
+    width: '100vw',
+    display: 'grid',
+    gridTemplateColumns: '520px 1fr',
+  }),
+}
+
+const LoginPage = () => {
   return (
-    <div>
+    <div className={classes.layout} >
       <Section/>
+      <Content/>
     </div>
   )
 }
+
+export default LoginPage
