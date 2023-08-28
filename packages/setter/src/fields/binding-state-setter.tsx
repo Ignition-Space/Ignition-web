@@ -1,70 +1,170 @@
 import React from "react";
-import { Button, message } from "antd";
+import {
+  Button,
+  Space,
+  theme,
+  Tooltip,
+  message,
+  Typography,
+  Alert,
+  Card,
+  Empty,
+  Row,
+  Col,
+  Spin,
+} from "antd";
+import { useEditor } from "@craftjs/core";
 import { ModalForm } from "@ant-design/pro-components";
-import ReactMonacoEditor from "react-monaco-editor";
-import type {  OnMount } from "@monaco-editor/react";
-import { HuosRemixIcon } from "@huos/icons";
-
-type ReactMonacoEditorProps = React.ComponentProps<typeof ReactMonacoEditor>;
+import ReactMonacoEditor from "@monaco-editor/react";
+import { FunctionOutlined, LoadingOutlined } from "@ant-design/icons";
+import ReactTextareaCodeEditor, {
+  TextareaCodeEditorProps,
+} from "@uiw/react-textarea-code-editor";
+import { jsRuntime, ExecuteResult } from "@huos/core";
+import { ObjectInspector } from "@devtools-ds/object-inspector";
+import { useDebounceFn, useBoolean } from "ahooks";
+import { css } from "@emotion/css";
 
 export interface BindingStateSetterProps {
   namePath: string;
-  onChange?: (value: any) => void,
+  onChange?: (value: any) => void;
   value?: any;
   isBinding: boolean;
 }
 
-const editorOptions: ReactMonacoEditorProps["options"] = {
-  overviewRulerLanes: 0,
-  // 控制在输入特定字符后是否接受建议
-  acceptSuggestionOnCommitCharacter: true,
-  contextmenu: true,
-  formatOnPaste: true,
-  lineNumbers: "off",
+const defaultRunValue: ExecuteResult = {
+  success: true,
+  error: "",
+  value: "",
 };
 
-export const BindingStateSetter: React.FC<BindingStateSetterProps> = (props) => {
+const classes = {
+  result: css({
+    height: 170,
+    overflow: "auto",
+  }),
+};
 
-  const editorRef = React.useRef<Parameters<OnMount>[0]>();
+export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
+  props
+) => {
+  const editorRef = React.useRef<HTMLTextAreaElement>(null!);
+  const { token } = theme.useToken();
+  const [runValue, setRuntimeValue] =
+    React.useState<ExecuteResult>(defaultRunValue);
+  const { id, currentNodeProps } = useEditor((state) => {
+    const [currentNodeId] = state.events.selected;
 
+    if (currentNodeId) {
+      const { data } = state.nodes[currentNodeId];
+
+      return {
+        id: currentNodeId,
+        currentNodeProps: data.props,
+      };
+    }
+  });
+  const [execLoading, { setTrue, setFalse }] = useBoolean(false);
 
   // handle modal submit binding.
-  const handleBindingState   = async () => {
-    
+  const handleBindingState = async () => {
     // get editor jse code.
-    const code = editorRef.current?.getValue()
+    const code = editorRef.current?.value;
 
     if (props.onChange) {
       if (code?.length && code.length > 0) {
-        props.onChange(code)
+        props.onChange(code);
       } else {
         message.error("暂无内容，请编写您的表达式或者是绑定的状态。");
       }
     }
-  }
+  };
+
+  const { run: handleEditorChange } = useDebounceFn((v) => {
+    const inputCode = v.target.value;
+    if (inputCode) {
+      const result = jsRuntime.execute(inputCode, {
+        props: currentNodeProps,
+      });
+      setRuntimeValue(result);
+    } else {
+      setRuntimeValue(defaultRunValue);
+    }
+    setFalse();
+  });
 
   return (
     <ModalForm
       title="绑定属性"
       trigger={
         <div>
-          <Button
-            type={props.isBinding ? 'primary' : 'default'}
-            icon={<HuosRemixIcon type="icon-capsule-line" />}
-          />
+          <Tooltip title="打开属性面板弹窗可以绑定状态" placement="left">
+            <Button
+              ghost={props.isBinding}
+              type={props.isBinding ? "primary" : "dashed"}
+              icon={<FunctionOutlined />}
+            />
+          </Tooltip>
         </div>
       }
+      modalProps={{
+        okText: "设置",
+      }}
       onFinish={handleBindingState}
     >
-      <ReactMonacoEditor
-        height={500}
-        language="javascript"
-        options={editorOptions}
-        editorDidMount={(editor) => {
-          // bind editor ref.current
-          editorRef.current = editor
-        }}
-      />
+      <Space style={{ width: "100%" }} direction="vertical">
+        <Alert
+          banner
+          type="info"
+          message={
+            <Typography.Link>
+              使用 JavaScript 表达式使“{props.namePath}”属性绑定状态。
+            </Typography.Link>
+          }
+        />
+        <Card size="small">
+          <ReactTextareaCodeEditor
+            ref={editorRef}
+            language="javascript"
+            placeholder="Please enter JS code."
+            minHeight={300}
+            padding={0}
+            onChange={(e) => {
+              setTrue();
+              handleEditorChange(e);
+            }}
+            style={{
+              fontSize: 14,
+              backgroundColor: token.colorBgBase,
+              fontFamily:
+                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+            }}
+          />
+        </Card>
+
+        <Card size="small">
+          <Spin tip="运行中..." spinning={execLoading}>
+            <div className={classes.result}>
+              {runValue.error ? (
+                <Typography.Text type="danger">
+                  执行失败：
+                  {String(runValue.error)}
+                </Typography.Text>
+              ) : null}
+              {runValue.value ? (
+                <ObjectInspector
+                  data={runValue.value}
+                  includePrototypes={false}
+                  expandLevel={1}
+                />
+              ) : null}
+              {runValue.success && !!runValue.value === false ? (
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="无运行结果" />
+              ) : null}
+            </div>
+          </Spin>
+        </Card>
+      </Space>
     </ModalForm>
   );
 };
