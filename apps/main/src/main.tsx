@@ -7,8 +7,6 @@ import type { AliasToken } from "antd/es/theme/internal";
 import "antd/dist/reset.css";
 
 const token: Partial<AliasToken> = {
-  colorPrimary: "#722ED1",
-  colorInfo: "#722ED1",
   borderRadius: 4,
   wireframe: false,
   colorBorder: "#e5e6eb",

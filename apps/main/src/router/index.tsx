@@ -1,21 +1,42 @@
-import { 
-  createBrowserRouter,
-} from 'react-router-dom'
-import { HomePage } from '@/pages/home'
-import { LoginPage } from '@/pages/login'
+import { createBrowserRouter } from "react-router-dom";
+import { lazy } from "react";
+import { OutletLayout } from "@/layouts";
+import { MicroApp } from "@/pages/micro";
+
+const LoginPage = lazy(() => import("@/pages/login"));
+const HomePage = lazy(() => import("@/pages/home"));
+const ProjectAppPage = lazy(() => import("@/pages/project/app"));
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    Component: HomePage,
+    Component: OutletLayout,
+    children: [
+      {
+        path: "/",
+        Component: HomePage,
+      },
+      {
+        path: "/project",
+        children: [
+          {
+            path: "app",
+            Component: ProjectAppPage,
+          },
+        ],
+      },
+      {
+        path: "/app",
+        children: [
+          {
+            path: "editor",
+            Component: MicroApp,
+          },
+        ],
+      },
+    ],
   },
   {
-    path: '/login',
+    path: "/login",
     Component: LoginPage,
-    loader: () => {
-      return {
-        name: ''
-      }
-    }
-  }
+  },
 ]);

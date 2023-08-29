@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 10010,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    }
   },
   resolve: {
     alias: {
