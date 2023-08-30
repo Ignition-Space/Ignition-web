@@ -2,8 +2,8 @@
   "name": "@huos/icons",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "scripts": {
     "start": "tsup --watch",
     "build": "tsup"
