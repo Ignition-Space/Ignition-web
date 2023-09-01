@@ -14,7 +14,7 @@ const items = [
 
 export const AppDashBoardTable = () => {
   return (
-    <Card size="small" bordered={false}>
+    <Card size="small">
       111
     </Card>
   );

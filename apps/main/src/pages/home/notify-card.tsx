@@ -12,7 +12,7 @@ const classes = {
 
 export const NotifyCard = () => {
   return (
-    <Card size="small" bordered={false} >
+    <Card size="small" hoverable >
       <Space style={{ width: '100%' }} size={14} direction="vertical" >
       {
         [1,3,4].map((item) => (
