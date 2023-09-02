@@ -7,6 +7,7 @@ export default defineConfig((options) => ({
   splitting: false,
   sourcemap: false,
   format: ["esm"],
-  external: ["react", "react-dom", "@craftjs/core", "antd", "@ant-design/pro-components", "react-monaco-editor", "lodash"],
+  clean: true,
+  external: ["react", "react-dom", "@craftjs/core", "antd", "@ant-design/pro-components", "lodash", '@devtools-ds/object-inspector', "@uiw/react-textarea-code-editor", "@devtools-ds/console"],
   dts: true,
 }))

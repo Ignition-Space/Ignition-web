@@ -34,11 +34,11 @@ const getFormItemNamePaths = (name: string | string[]): any[] => {
 };
 
 export const MountSetter: React.FC<MountSetterProps> = (props) => {
+
+  // get mount nameapth
   const namePath = React.useMemo(() => {
     return getFormItemNamePaths(props.fields.name);
   }, [props.fields?.name]);
-
-  console.log("namePath");
 
   return (
     <Form.Item {...props.fields}>

@@ -1,16 +1,31 @@
-import { Typography } from 'antd';
-import React from 'react'
-
+import React from "react";
+import { Tooltip, Tag, Button, Input } from "antd";
+import { QuestionOutlined } from '@ant-design/icons'
+import { css } from "@emotion/css";
 
 export interface ReadonlyStateProps {
-  value?: any
+  value?: any;
+  onChange?: (data: any) => void;
 }
+
+const classes = {
+  box: css({
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    alignItems: "center",
+  }),
+  icon: css({
+    fontSize: 18,
+  }),
+};
 
 export const ReadonlyState: React.FC<ReadonlyStateProps> = (props) => {
-
   return (
-    <Typography.Text>
-      {props?.value?.$$jsx}
-    </Typography.Text>
-  )
-}
+    <div className={classes.box}>
+      <Tag color="blue" closable onClose={() => props.onChange && props.onChange(null)} bordered={false} >
+        {props?.value?.$$jsx}
+      </Tag>
+    </div>
+  );
+};
