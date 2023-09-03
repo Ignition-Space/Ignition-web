@@ -1,39 +1,60 @@
-import { Card, Spin, theme } from 'antd'
-import { css } from '@emotion/css'
-import { ToolBar } from './toolbar'
-import { IFrame as RenderViewSanBox } from './iframe'
-import { DocumentNodes } from './document'
+import { theme } from "antd";
+import { css } from "@emotion/css";
+import { IFrame as RenderViewSanBox } from "./iframe";
+import { DocumentNodes } from "./document";
 
 export const Canvas = () => {
-
-  const { token } = theme.useToken()
+  const { token } = theme.useToken();
 
   const classes = {
     main: css({
-      backgroundColor: '#f3f3f3',
+      backgroundColor: "#f3f3f3",
       borderLeft: `1px solid ${token.colorBorderSecondary}`,
       borderRight: `1px solid ${token.colorBorderSecondary}`,
-      display: 'grid',
-      gridTemplateRows: '46px 1fr',
-      background: token.colorBgBase,
+      background: "#f9fafb",
     }),
     canvas: css({
-      height: '100%',
-      paddingInline:  token.paddingMD,
+      height: "100%",
+      width: "100%",
+      paddingInline: token.paddingMD,
       paddingBlock: token.paddingSM,
-      backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)",
-      backgroundSize: '20px 20px'
-    })
-  }
+      backgroundImage:
+        "linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)",
+      backgroundSize: "20px 20px",
+    }),
+    tabs: css({
+      height: "100%",
+      [".ant-tabs-content"]: {
+        height: "100%",
+        overflow: "hidden",
+      },
+      [".ant-tabs-tabpane"]: {
+        height: "100%",
+        overflow: "hidden",
+      },
+    }),
+    card: css({
+      height: "100%",
+      [".ant-card-body"]: {
+        height: "calc(100% - 0px)",
+        padding: 0,
+      },
+      [".ant-card-head"]: {
+        display: "flex",
+        justifyContent: "center",
+      },
+    }),
+  };
 
   return (
-    <div className={classes.main} >
-      <ToolBar/>
-      <div className={classes.canvas} >
-          <RenderViewSanBox>
-            <DocumentNodes/>
-          </RenderViewSanBox>
-        </div>
+    <div className={classes.main}>
+      {/* <ToolBar /> */}
+      <div className={classes.canvas}>
+        {/* 容器组件 */}
+        <RenderViewSanBox>
+          <DocumentNodes />
+        </RenderViewSanBox>
+      </div>
     </div>
-  )
-}
+  );
+};

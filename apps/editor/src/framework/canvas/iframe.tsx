@@ -24,6 +24,7 @@ const classes = {
 export const IFrame: React.FC<IFrameProps> = (props) => {
   return (
     <ReactFrameComponent
+      id="EditorCanvasFrame"
       head={
         <>
           {/* Reset Css */}
