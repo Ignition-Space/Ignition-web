@@ -1,57 +1,70 @@
-import type { StatisticProps } from '@ant-design/pro-components';
-import { ProCard, StatisticCard, PageContainer } from '@ant-design/pro-components';
+import {
+  ProFormDatePicker,
+  ProFormText,
+  QueryFilter,
+} from "@ant-design/pro-components";
+import { Card, Space, Avatar, Row, Col, Pagination, Spin } from "antd";
+import { Header } from "./header";
+import { right } from "@/tools/css";
+import { css } from "@emotion/css";
+import { AppCard } from "./card";
 
-const { Statistic } = StatisticCard;
-
-const items = [
-  { key: '1', title: '全部', value: 10, total: true },
-  { key: '2', status: 'default', title: '未发布', value: 5 },
-  { key: '3', status: 'processing', title: '发布中', value: 3 },
-  { key: '4', status: 'error', title: '发布异常', value: 1 },
-  { key: '5', status: 'success', title: '发布成功', value: 1 },
-];
+const classes = {
+  main: css({
+    height: "100%",
+    width: "100%",
+    display: "grid",
+    gridTemplateRows: "auto auto 1fr",
+    gap: 16,
+  }),
+  list: css({
+    height: "100%",
+    display: "grid",
+    gridTemplateRows: "1fr 50px",
+  }),
+  paination: css({
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  }),
+};
 
 export default () => {
   return (
-    <PageContainer ghost={true} fixedHeader header={{}}>
-      <ProCard
-      tabs={{
-        onChange: (key) => {
-          console.log('key', key);
-        },
-        items: items.map((item) => {
-          return {
-            key: item.key,
-            style: { width: '100%' },
-            label: (
-              <Statistic
-                layout="vertical"
-                title={item.title}
-                value={item.value}
-                status={item.status as StatisticProps['status']}
+    <div className={classes.main}>
+      <Header />
+      <Card size="small">
+        <QueryFilter searchText="搜索" defaultCollapsed style={{ padding: 0 }}>
+          <ProFormText name="name" label="应用名称" />
+          <ProFormDatePicker name="createDate" label="创建时间" />
+        </QueryFilter>
+      </Card>
+      <Card
+        bodyStyle={{
+          height: "calc(100% - 56px)",
+        }}
+        title="应用列表"
+      >
+        <div className={classes.list}>
+            <div>
+              <Row
+                gutter={[12, 12]}
                 style={{
-                  width: 120,
-                  borderInlineEnd: item.total ? '1px solid #f0f0f0' : undefined,
-                }}
-              />
-            ),
-            children: (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#fafafa',
-                  height: 100,
+                  overflow: "auto",
                 }}
               >
-                关联展示内容 {item.title}
-              </div>
-            ),
-          };
-        }),
-      }}
-    />
-    </PageContainer>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 122].map(() => (
+                  <Col span={8}>
+                    <AppCard />
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          <div className={classes.paination}>
+            <Pagination total={100} />
+          </div>
+        </div>
+      </Card>
+    </div>
   );
 };

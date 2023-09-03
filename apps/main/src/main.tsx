@@ -9,8 +9,6 @@ import "antd/dist/reset.css";
 const token: Partial<AliasToken> = {
   borderRadius: 4,
   wireframe: false,
-  colorBorder: "#e5e6eb",
-  colorBorderSecondary: "#e5e6eb",
   fontWeightStrong: 400
 };
 
