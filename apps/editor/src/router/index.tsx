@@ -2,11 +2,21 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 import { Index } from '../pages/index'
+import { PreviewPage } from '../pages/preview'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: Index
+    Component: Index,
+  },
+  {
+    path: '/preview',
+    Component: PreviewPage,
+    loader: () => {
+      return {
+        name: ''
+      }
+    }
   }
 ]);
 

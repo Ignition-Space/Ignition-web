@@ -5,6 +5,11 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    watch: {
+      usePolling: true,   // 修复HMR热更新失效
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
