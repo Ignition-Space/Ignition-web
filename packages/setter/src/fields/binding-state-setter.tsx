@@ -15,10 +15,8 @@ import {
 } from "antd";
 import { useEditor } from "@craftjs/core";
 import { ModalForm } from "@ant-design/pro-components";
-import ReactMonacoEditor from "@monaco-editor/react";
-import { FunctionOutlined, LoadingOutlined } from "@ant-design/icons";
+import { FunctionOutlined } from "@ant-design/icons";
 import ReactTextareaCodeEditor, {
-  TextareaCodeEditorProps,
 } from "@uiw/react-textarea-code-editor";
 import { jsRuntime, ExecuteResult } from "@huos/core";
 import { ObjectInspector } from "@devtools-ds/object-inspector";
