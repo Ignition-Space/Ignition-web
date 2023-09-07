@@ -1,6 +1,6 @@
 import { ProLayoutProps } from "@ant-design/pro-components";
 import { UserProfileDrawer } from "@/components/profile";
-import { Button, Space, Input, Divider } from "antd";
+import { Space, Input, Divider } from "antd";
 import {
   ExperimentOutlined,
   InboxOutlined,
