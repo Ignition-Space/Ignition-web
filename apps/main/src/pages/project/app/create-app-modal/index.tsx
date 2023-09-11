@@ -1,29 +1,52 @@
 import {
   ModalForm,
-  ProForm,
-  ProFormCheckbox,
-  ProFormDatePicker,
-  ProFormDateRangePicker,
   ProFormGroup,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
-  StepsForm,
+  ProFormList,
 } from "@ant-design/pro-components";
-import { Button, Card, message } from "antd";
+import { Button, Space, Tag, Typography, notification } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
+interface RecordType {
+  name: string;
+  device: string;
+  descripton?: string;
+  source: Array<{
+    tag: 'link' | 'script';
+    url: string;
+  }>
+}
+
 export const CreateAppModal = () => {
+
+  const handleCreatorRecord = async (values: RecordType) => {
+    localStorage.setItem("projectInfo", JSON.stringify(values))
+    notification.success({
+      message: '创建成功',
+      description: (
+        <div>
+          创建应用成功，点击开始编辑按钮可以快速进入编辑模式。
+        </div>
+      ),
+      btn: (
+        <Button size="small" type="link" >立即编辑</Button>
+      )
+    })
+  }
+
   return (
-    <ModalForm
-      width={820}
+    <ModalForm<RecordType>
+      width={860}
       title="新建应用"
-      submitter={false}
       modalProps={{
+        okText: "立即创建",
         bodyStyle: {
-          padding: "24px 12px",
+          paddingBlock: 12,
         },
       }}
+      onFinish={handleCreatorRecord}
       trigger={
         <Button type="primary">
           <PlusOutlined />
@@ -31,141 +54,104 @@ export const CreateAppModal = () => {
         </Button>
       }
     >
-      <StepsForm<{
-        name: string;
-      }>
-        formProps={{
-          validateMessages: {
-            required: "此项为必填项",
-          },
+      <ProFormGroup size="small">
+        <ProFormSelect
+          rules={[{ required: true }]}
+          name="device"
+          label="类型"
+          options={[
+            {
+              label: "客户端",
+              value: "pc",
+            },
+            {
+              label: "移动端",
+              value: "mobile",
+            },
+            {
+              label: "小程序",
+              value: "miniapp",
+            },
+            {
+              label: "AOT",
+              value: "pad",
+            },
+          ]}
+        />
+        <ProFormText
+          name="name"
+          label="名称"
+          width="lg"
+          tooltip="最长为 24 位"
+          placeholder="请输入名称"
+          rules={[{ required: true }]}
+        />
+      </ProFormGroup>
+      <ProFormTextArea
+        label="应用描述"
+        name="description"
+        placeholder="请输入应用描述"
+        tooltip="页面的描述，在这里可以将你的应用信息进行详细的描述"
+      />
+      <div
+        style={{
+          maxHeight: "400px",
+          overflow: "auto",
         }}
       >
-        <StepsForm.StepForm<{
-          name: string;
-        }>
-          name="base"
-          title="基本信息"
-          stepProps={{
-            description: "这里填入基本信息",
+        <ProFormList
+          label="预加载资源"
+          name="heads"
+          tooltip="需要提前加载的资源，脚本(js script)，资源(css, font...)"
+          initialValue={[
+            {
+              useMode: "chapter",
+            },
+          ]}
+          creatorButtonProps={{
+            position: "bottom",
+            creatorButtonText: "新建记录",
+          }}
+          creatorRecord={{
+            tag: "script",
           }}
         >
-          <ProFormGroup size="small">
+          <Space>
+            <ProFormText
+              width="xl"
+              name="url"
+              addonBefore={<Tag color="blue">http(s)://</Tag>}
+              rules={[
+                {
+                  required: true,
+                  message: "请输入资源地址",
+                },
+              ]}
+              placeholder="需要加载的资源地址"
+            />
             <ProFormSelect
-              rules={[{ required: true }]}
-              name="device"
-              label="页面类型"
+              name="tag"
+              placeholder="资源标签"
+              rules={[
+                {
+                  required: true,
+                  message: "请选择资源类型",
+                },
+              ]}
               options={[
                 {
-                  label: "客户端",
-                  value: "pc",
+                  label: "脚本",
+                  value: "script",
                 },
                 {
-                  label: "移动端",
-                  value: "mobile",
-                },
-                {
-                  label: "小程序",
-                  value: "miniapp",
-                },
-                {
-                  label: "AOT",
-                  value: "pad",
+                  label: "资源",
+                  value: "link",
                 },
               ]}
             />
-            <ProFormText
-              name="name"
-              label="实验名称"
-              width={450}
-              tooltip="最长为 24 位，用于标定的唯一 id"
-              placeholder="请输入名称"
-              rules={[{ required: true }]}
-            />
-          </ProFormGroup>
-          <ProFormTextArea
-            label="应用描述"
-            name="description"
-            placeholder="请输入应用描述"
-            tooltip="页面的描述，在这里可以将你的应用信息进行详细的描述"
-          />
-        </StepsForm.StepForm>
-        <StepsForm.StepForm<{
-          checkbox: string;
-        }>
-          name="checkbox"
-          title="初始化依赖"
-          stepProps={{
-            description: "这里填入运维参数",
-          }}
-        >
-          <ProFormCheckbox.Group
-            name="checkbox"
-            label="迁移类型"
-            options={["结构迁移", "全量迁移", "增量迁移", "全量校验"]}
-          />
-          <ProForm.Group>
-            <ProFormText name="dbname" label="业务 DB 用户名" />
-            <ProFormDatePicker
-              name="datetime"
-              label="记录保存时间"
-              width="sm"
-            />
-            <ProFormCheckbox.Group
-              name="checkbox"
-              label="迁移类型"
-              options={["完整 LOB", "不同步 LOB", "受限制 LOB"]}
-            />
-          </ProForm.Group>
-        </StepsForm.StepForm>
-        <StepsForm.StepForm
-          name="time"
-          title="发布实验"
-          stepProps={{
-            description: "这里填入发布判断",
-          }}
-        >
-          <ProFormCheckbox.Group
-            name="checkbox"
-            label="部署单元"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            options={["部署单元1", "部署单元2", "部署单元3"]}
-          />
-          <ProFormSelect
-          width="lg"
-            label="部署分组策略"
-            name="remark"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            initialValue="1"
-            options={[
-              {
-                value: "1",
-                label: "策略一",
-              },
-              { value: "2", label: "策略二" },
-            ]}
-          />
-          <ProFormSelect
-            label="Pod 调度策略"
-            name="remark2"
-            initialValue="2"
-            options={[
-              {
-                value: "1",
-                label: "策略一",
-              },
-              { value: "2", label: "策略二" },
-            ]}
-          />
-        </StepsForm.StepForm>
-      </StepsForm>
+          </Space>
+        </ProFormList>
+      </div>
     </ModalForm>
   );
 };
