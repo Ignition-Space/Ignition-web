@@ -1,13 +1,7 @@
-import { Input, theme, Button, Segmented, Badge, Space, Radio, ConfigProvider } from "antd";
+import { theme, Button, Space } from "antd";
 import { css } from "@emotion/css";
-import {
-  ArrowLeftOutlined,
-  ArrowRightOutlined,
-  FunctionOutlined,
-  RedoOutlined,
-} from "@ant-design/icons";
-import { SchemaModal } from "./schema-modal";
 import { useEditor } from "@craftjs/core";
+import { HuosRemixIcon } from "@huos/icons";
 
 export const ToolBar = () => {
   const { token } = theme.useToken();
@@ -16,7 +10,7 @@ export const ToolBar = () => {
   const classes = {
     toolbar: css({
       display: "flex",
-      justifyContent: "flex-end",
+      justifyContent: "center",
       alignItems: "center",
       background: token.colorBgBase,
     }),
@@ -31,24 +25,24 @@ export const ToolBar = () => {
     }),
   };
 
-  console.log(actions.history)
+  console.log(actions.history);
 
   return (
-      <div className={classes.toolbar}>
+    <div className={classes.toolbar}>
+      <Space>
         <Button
-          size="large"
-          type="text"
-          icon={<ArrowLeftOutlined />}
+          icon={<HuosRemixIcon type="icon-arrow-go-back-fill" />}
           onClick={actions.history.undo}
         />
         <Button
-          size="large"
-          type="text"
-          icon={<ArrowRightOutlined />}
+          icon={<HuosRemixIcon type="icon-arrow-go-forward-fill" />}
           onClick={actions.history.redo}
         />
-        <Button size="large" type="text" icon={<RedoOutlined />} />
-        <Button size="large" type="text" icon={<FunctionOutlined />} />
+        <Button
+          icon={<HuosRemixIcon type="icon-refresh-line" />}
+          onClick={() => window.location.reload()}
+        />
+      </Space>
     </div>
   );
 };
