@@ -24,6 +24,7 @@ class BrowserRuntimeVM {
   private executeCode(code: string, globalScope: InjectVMVarsType) {
     if (!this.iframe) {
       this.iframe = document.createElement('iframe');
+      this.iframe.id = "__HuoSRuntime__"
       this.iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
       this.iframe.style.display = 'none'
       document.documentElement.appendChild(this.iframe);
@@ -43,7 +44,10 @@ class BrowserRuntimeVM {
 
   public execute(code: string, globalScope?: InjectVMVarsType) {
     try {
-      const value = this.executeCode(code, globalScope || {});
+      const value = this.executeCode(code,  {
+        ...globalScope,
+        window
+      });
       return { value, success: true, error: null } as ExecuteResult;
     } catch (err) {
       return { success: false, error: err, value: null } as ExecuteResult;

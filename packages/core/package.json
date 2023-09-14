@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "re-resizable": "^6.9.11",
     "react-error-boundary": "^4.0.11",
     "styled-system": "^5.1.5"
   }

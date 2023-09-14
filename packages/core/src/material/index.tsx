@@ -2,6 +2,8 @@ import React from "react";
 import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
+import { ResizeBox } from './resizeor'
+import { isEqual } from 'lodash'
 
 export type ReactMaterialComponent = UserComponent;
 
@@ -34,14 +36,17 @@ const withConnectNode = (
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >
-        <div id={id} ref={(dom: HTMLDivElement) => connect(drag(dom))}>
+        <div id={id} style={{
+          display: 'inline-block',
+          boxSizing: 'border-box'
+        }} ref={(dom: HTMLDivElement) => connect(drag(dom))}>
           <WrappedComponent {...memoizdProps}>
             {children}
           </WrappedComponent>
         </div>
       </ErrorBoundary>
     );
-  })
+  }, isEqual)
 };
 
 /**
