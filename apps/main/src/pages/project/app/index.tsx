@@ -53,8 +53,8 @@ export default () => {
                   overflow: "auto",
                 }}
               >
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 122].map(() => (
-                  <Col span={8}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 122].map((key) => (
+                  <Col span={8} key={key} >
                     <AppCard />
                   </Col>
                 ))}

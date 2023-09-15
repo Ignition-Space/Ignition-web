@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { ConfigProvider, App } from "antd";
 import { router } from "@/router";
@@ -13,7 +12,6 @@ const token: Partial<AliasToken> = {
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
     <ConfigProvider
       theme={{
         token,
@@ -23,5 +21,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </App>
     </ConfigProvider>
-  </React.StrictMode>
 );
