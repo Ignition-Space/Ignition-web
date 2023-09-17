@@ -12,15 +12,15 @@ import {
   Row,
   Col,
   Spin,
+  Tag,
 } from "antd";
 import { useEditor } from "@craftjs/core";
 import { ModalForm } from "@ant-design/pro-components";
-import { FunctionOutlined } from "@ant-design/icons";
-import ReactTextareaCodeEditor, {
-} from "@uiw/react-textarea-code-editor";
+import { FunctionOutlined, CaretRightFilled } from "@ant-design/icons";
+import ReactTextareaCodeEditor from "@uiw/react-textarea-code-editor";
 import { jsRuntime, ExecuteResult } from "@huos/core";
 import { ObjectInspector } from "@devtools-ds/object-inspector";
-import { useDebounceFn, useBoolean } from "ahooks";
+import { useDebounceFn, useBoolean, useUpdate } from "ahooks";
 import { css } from "@emotion/css";
 
 export interface BindingStateSetterProps {
@@ -63,6 +63,7 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
     }
   });
   const [execLoading, { setTrue, setFalse }] = useBoolean(false);
+  const update = useUpdate();
 
   // handle modal submit binding.
   const handleBindingState = async () => {
@@ -78,18 +79,24 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
     }
   };
 
-  const { run: handleEditorChange } = useDebounceFn((v) => {
-    const inputCode = v.target.value;
-    if (inputCode) {
-      const result = jsRuntime.execute(inputCode, {
-        props: currentNodeProps,
-      });
-      setRuntimeValue(result);
-    } else {
-      setRuntimeValue(defaultRunValue);
+  const handleEditorChange = () => {
+    try {
+      setTrue();
+      const inputCode = editorRef.current?.value;
+      if (inputCode) {
+        const result = jsRuntime.execute(inputCode, {
+          props: currentNodeProps,
+        });
+        console.log(result, "result");
+        setRuntimeValue(result);
+      } else {
+        setRuntimeValue(defaultRunValue);
+      }
+    } finally {
+      setFalse();
+      update();
     }
-    setFalse();
-  });
+  };
 
   return (
     <ModalForm
@@ -107,6 +114,7 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
       }
       modalProps={{
         okText: "设置",
+        destroyOnClose: true,
       }}
       onFinish={handleBindingState}
     >
@@ -120,17 +128,21 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
             </Typography.Link>
           }
         />
-        <Card size="small">
+        <Card
+          size="small"
+          actions={[
+            <Typography.Link key="runtime" onClick={handleEditorChange}>
+              <CaretRightFilled />
+              运行
+            </Typography.Link>,
+          ]}
+        >
           <ReactTextareaCodeEditor
             ref={editorRef}
             language="javascript"
             placeholder="Please enter JS code."
             minHeight={300}
             padding={0}
-            onChange={(e) => {
-              setTrue();
-              handleEditorChange(e);
-            }}
             style={{
               fontSize: 14,
               backgroundColor: token.colorBgBase,
@@ -139,7 +151,6 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
             }}
           />
         </Card>
-
         <Card size="small">
           <Spin tip="运行中..." spinning={execLoading}>
             <div className={classes.result}>
@@ -151,13 +162,17 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
               ) : null}
               {runValue.value ? (
                 <ObjectInspector
+                  key={runValue.value}
                   data={runValue.value}
                   includePrototypes={false}
                   expandLevel={1}
                 />
               ) : null}
               {runValue.success && !!runValue.value === false ? (
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="无运行结果" />
+                <Empty
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                  description="无运行结果"
+                />
               ) : null}
             </div>
           </Spin>

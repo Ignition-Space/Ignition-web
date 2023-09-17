@@ -7,7 +7,7 @@ import { get } from "lodash";
 import { css } from "@emotion/css";
 
 export interface MountSetterProps {
-  fields: FormItemProps;
+  fields: React.ComponentProps<typeof Form.Item<any>>;
   children?: React.ReactNode;
 }
 

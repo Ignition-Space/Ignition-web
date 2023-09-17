@@ -18,7 +18,8 @@ export default defineConfig((options) => ({
     "@uiw/react-textarea-code-editor",
     "@devtools-ds/console",
     "@ant-design/icons",
-    "ahooks"
+    "ahooks",
+    "@huos/core"
   ],
   dts: true,
 }));

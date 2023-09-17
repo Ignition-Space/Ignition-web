@@ -13,5 +13,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@huos/core": "workspace:^"
+  }
 }
