@@ -1,11 +1,12 @@
 import React from "react";
+import { CnavasRootId } from '@huos/core'
 import ReactFrameComponent, {
   FrameContextConsumer,
 } from "react-frame-component";
 import { CacheProvider } from "@emotion/react";
-
 import createCache from "@emotion/cache";
 import { css } from "@emotion/css";
+import { StyleProvider } from '@ant-design/cssinjs';
 
 export interface IFrameProps {
   children?: React.ReactNode;
@@ -22,13 +23,15 @@ const classes = {
 };
 
 export const IFrame: React.FC<IFrameProps> = (props) => {
+
+  const iframeRef = React.useRef<HTMLIFrameElement>(null)
+
   return (
     <ReactFrameComponent
-      id="EditorCanvasFrame"
+      id={CnavasRootId}
+      ref={iframeRef}
       head={
         <>
-          {/* Reset Css */}
-          <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
           <style>
             {`
             .editor-component-active {
@@ -70,19 +73,17 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
       }
       className={classes.iframe}
     >
-      <FrameContextConsumer>
-        {({ document, window: sandboxWindow }) => {
-
-          sandboxWindow?.addEventListener("load", () => {
-            console.log('load')
-          })
+      <FrameContextConsumer >
+        {({ document }) => {
 
           const cache = createCache({
             key: "iframe",
             container: document?.head,
           });
           return (
-            <CacheProvider value={cache}>{props.children}</CacheProvider>
+            <StyleProvider container={document?.head} >
+              <CacheProvider value={cache}>{props.children}</CacheProvider>
+            </StyleProvider>
           );
         }}
       </FrameContextConsumer>
