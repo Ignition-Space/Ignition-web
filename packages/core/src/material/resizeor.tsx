@@ -1,14 +1,29 @@
-import React from "react"
-import { Resizable } from 're-resizable'
+/** @jsxImportSource @emotion/react */
+import React from "react";
+import { Resizable, ResizeCallback, ResizableProps } from "re-resizable";
 
-export interface ResizeBoxProps {
-  children?: React.ReactNode
-}
+export const ResizeBox: React.ComponentType<typeof Resizable & {
+  children: React.ReactNode;
+  ref:any
+}> = ({ children, ...props }) => {
+  
+  const handleResizableChange: ResizeCallback = (_, __, elRef) => {
+    const { width, height } = elRef.style;
+    // setProp((prop: Record<string, any>) => {
+    //   prop.width = width
+    //   prop.height = height
+    // }, 400)
+  };
 
-export const ResizeBox: React.FC<ResizeBoxProps> = (props) => {
   return (
-    <Resizable>
-      {props.children}
+    <Resizable
+      {...props}
+      snapGap={20}
+      onResizeStop={(_, __, elRef) => {
+        console.log(elRef.style, "args");
+      }}
+    >
+      {children}
     </Resizable>
-  )
-}
+  );
+};
