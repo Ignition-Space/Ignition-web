@@ -1,13 +1,22 @@
 import React from "react";
-import { ChakraProvider, Container, ContainerProps } from "@chakra-ui/react";
+import { Box, BoxProps, ChakraProvider } from "@chakra-ui/react";
+import { FunctionComponent } from "@huos/core";
 
-export const ProviderView: React.FC<ContainerProps> = React.memo((props) => {
+const transfromProps = (props: any): any => ({
+  ...props,
+  ref: props.mountRef,
+});
 
+export const ProviderView: FunctionComponent<BoxProps> = ({
+  children,
+  mountRef,
+  ...props
+}) => {
   return (
     <ChakraProvider>
-      <Container maxW="full" paddingInline={0} {...props} >
-        {props.children}
-      </Container>
+      <Box ref={mountRef} {...props}>
+        {children}
+      </Box>
     </ChakraProvider>
   );
-});
+};
