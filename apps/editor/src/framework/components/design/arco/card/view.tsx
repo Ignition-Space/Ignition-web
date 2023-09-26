@@ -2,11 +2,13 @@ import React from "react";
 import { Card, CardProps } from "@arco-design/web-react";
 import { EmptySetter } from "@/framework/canvas/empty-render";
 import { Element } from "@craftjs/core";
+import { FunctionComponent } from "@huos/core";
 
-export const CardView: React.FC<CardProps> = React.memo(
-  ({ children, ...props }) => {
+export const CardView: FunctionComponent<CardProps> = React.memo(
+  ({ children, mountRef,  ...props }) => {
     return (
       <Card
+        ref={mountRef}
         title={
           <Element canvas id="card-title-slot" is="div">
             标题

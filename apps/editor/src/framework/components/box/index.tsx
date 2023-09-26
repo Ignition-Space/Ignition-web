@@ -5,8 +5,8 @@ export const __Box__ = createReactMateril(BoxView, {
   displayName: '容器',
   props: {
     defaultSize: {
-      width: '100vw',
-      height: 300
+      width: '100%',
+      height: 120
     },
   },
   custom: {

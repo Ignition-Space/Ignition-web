@@ -1,18 +1,21 @@
+/** @jsxImportSource @emotion/react */
 import React from "react";
-import {
-  Box,
-  BoxProps,
-  Alert,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
-import { Resizable, ResizeCallback, ResizableProps } from "re-resizable";
+import { Resizable, ResizableProps } from "re-resizable";
 import { useNode, useEditor } from "@craftjs/core";
 import { useThrottleFn } from "ahooks";
 import { FunctionComponent } from "@huos/core";
+import { EmptySetter } from "@/framework/canvas/empty-render";
 
-export const BoxView: FunctionComponent<ResizableProps> = React.memo((props) => {
-  console.log(props, 'props')
+const initialStyle: React.CSSProperties = {
+  height: 8,
+  width: 8,
+  borderRadius: '50%',
+  border: `1px solid rgb(26, 115, 232)`,
+  background: '#FFF',
+  zIndex: 2
+}
+
+export const BoxView: FunctionComponent<ResizableProps> = (props) => {
   const { id } = useNode();
 
   const {
@@ -20,12 +23,9 @@ export const BoxView: FunctionComponent<ResizableProps> = React.memo((props) => 
   } = useEditor();
   const { children, mountRef, ...styledProps } = props;
 
-  const isEmptyChild = React.Children.count(children) === 0;
-
   const { run: handleResizableChange } = useThrottleFn((_, __, elRef) => {
     const { width, height } = elRef.style;
 
-    console.log(width, height, "handleResizableChange");
     setProp(id, (prop: any) => {
       prop.size = {
         width,
@@ -45,42 +45,26 @@ export const BoxView: FunctionComponent<ResizableProps> = React.memo((props) => 
       onResizeStop={handleResizableChange}
       handleStyles={{
         bottom: {
-          right: 0,
-          bottom: 0,
+          ...initialStyle,
+          bottom: -3.5,
+          left: '50%',
+          transform: "translateX(-50%)",
         },
 
         right: {
-          right: 0,
-          bottom: 0,
+          ...initialStyle,
+          right: -3.5,
+          top: '50%',
+          transform: "translateY(-50%)",
         },
       }}
-      handleComponent={{}}
       ref={(_instance) => {
         if (_instance?.resizable) {
           mountRef(_instance.resizable)
         }
       }}
     >
-      {isEmptyChild ? (
-        <Alert
-          status="success"
-          variant="subtle"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          textAlign="center"
-          height="200px"
-        >
-          <AlertTitle mt={4} mb={1} fontSize="lg">
-            提示
-          </AlertTitle>
-          <AlertDescription maxWidth="sm">
-            组件内容为空，可以将左侧组件拖放入内
-          </AlertDescription>
-        </Alert>
-      ) : (
-        children
-      )}
+      <EmptySetter>{children}</EmptySetter>
     </Resizable>
   );
-});
+}
