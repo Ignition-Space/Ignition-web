@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@arco-design/web-react": "^2.51.2",
     "@chakra-ui/layout": "^2.3.0",
     "@chakra-ui/react": "^2.8.0",
     "@huos/core": "workspace:^",
+    "@huos/icons": "workspace:^",
     "@huos/setter": "workspace:^",
     "re-resizable": "^6.9.11",
     "react-frame-component": "^5.2.6"
