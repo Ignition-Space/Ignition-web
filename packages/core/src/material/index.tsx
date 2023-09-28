@@ -2,15 +2,17 @@ import React from "react";
 import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
-import { isEqual, flowRight } from "lodash";
-import { Resizable } from "re-resizable";
 
 export type ReactMaterialComponent = UserComponent;
 
+export type ReactMaterialViewType<P = any, T = (dom: Element) => void> = React.ForwardRefRenderFunction<T, P>
+
 /** HOC类型 */
-export type ReactHocComposeType = <P extends object>(
-  component: React.ComponentType<P>
-) => React.ComponentType<P>;
+export type FunctionComponent<T = any> = React.FC<{
+  mountRef: (dom: HTMLElement) => void;
+  children?: React.ReactNode;
+} & T>
+
 
 const fallbackRender = (props: any) => {
   return (
@@ -26,37 +28,31 @@ const fallbackRender = (props: any) => {
  * @param { React.FunctionComponent } WrappedComponent 设计组件
  */
 const withConnectNode = (
-  WrappedComponent: React.FunctionComponent<{
-    children?: React.ReactNode;
-  }>
+  WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
 ): ReactMaterialComponent => {
-  return React.memo(function ({ children, ...props }: Record<string, any>) {
-    // init @creat.js/core
+  return function ({ children, ...props }: Record<string, any>) {
+    const ref = React.useRef()
     const {
       connectors: { connect, drag },
       id,
-      custom: { useResize },
+      custom: { useResize }
     } = useNode((node) => ({
       custom: node.data.custom,
     }));
     const memoizdProps = useParseBinding(props, id);
 
     return (
-      <ErrorBoundary fallbackRender={fallbackRender}>
-        <div
-          id={id}
-          style={{
-            display: "block",
-            boxSizing: "border-box",
-          }}
-          ref={(dom: HTMLDivElement) => connect(dom)}
-        >
-          
-          <WrappedComponent {...memoizdProps}>{children}</WrappedComponent>
-        </div>
+      <ErrorBoundary fallbackRender={fallbackRender} >
+        <WrappedComponent ref={(dom: HTMLElement) => {
+          if (useResize) {
+            connect(dom)
+          } else {
+            connect(drag(dom))
+          }
+        }} {...memoizdProps}>{children}</WrappedComponent>
       </ErrorBoundary>
     );
-  }, isEqual);
+  }
 };
 
 /**
@@ -65,15 +61,12 @@ const withConnectNode = (
  * @param { UserComponentConfig } config 物料配置
  */
 export const createReactMateril = <T = any,>(
-  component: React.FunctionComponent,
-  config: Partial<UserComponentConfig<T>>,
-  pipes: any = []
+  component: any,
+  config: Partial<UserComponentConfig<T>>
 ) => {
   // hoc的compose函数执行，
-
-  const mergeHocs = [withConnectNode, ...pipes];
-
-  const MateiralNode: ReactMaterialComponent = flowRight(mergeHocs)(component);
+  const forawadComponent = React.forwardRef<(dom: HTMLElement) => void, {}>(component)
+  const MateiralNode: ReactMaterialComponent = withConnectNode(forawadComponent)
   MateiralNode.craft = config;
 
   return MateiralNode;
