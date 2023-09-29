@@ -4,6 +4,7 @@ import { Tree } from "./tree";
 import { css } from "@emotion/css";
 import * as __baseMaterias__ from "@/framework/components";
 import * as __arcoDesignMaterias from "@/framework/components/design/arco";
+import { Queries } from './queries'
 
 export const Left = () => {
   const { token } = theme.useToken();
@@ -41,8 +42,8 @@ export const Left = () => {
     },
     {
       key: "3",
-      label: "缓存",
-      children: `Content of Tab Pane 3`,
+      label: "数据源",
+      children: <Queries/>
     },
   ];
 
