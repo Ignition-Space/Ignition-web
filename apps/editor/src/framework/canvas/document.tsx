@@ -1,6 +1,7 @@
 import React from "react";
 import { __Provider__, __Box__ } from "@/framework/components";
-import { Frame as DocumentFrame, Element } from "@craftjs/core";
+import { __ArcoButton__ } from "@/framework/components/design/arco/button";
+import { Canvas, Frame as DocumentFrame, Element } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
 import { CnavasRootId } from "@huos/core";
@@ -22,21 +23,23 @@ export const DocumentNodes = () => {
     <div
       id="__CasterViewPort__"
       style={{
-        height: "100vh",
         width: "100vw",
+        height: '100vh',
+        paddingInline: 12
       }}
     >
       <DocumentFrame>
-        <Element
+        <Canvas
           canvas
           is={__Provider__}
-          height="100vh"
-          width="100vw"
-          overflow="auto"
           backgroundColor="#FFF"
+          height="100%"
+          wdith="100%"
         >
-          <__Box__ />
-        </Element>
+          <Element canvas id="test" is={__Box__}>
+            <__ArcoButton__/>
+          </Element>
+        </Canvas>
       </DocumentFrame>
     </div>
   );

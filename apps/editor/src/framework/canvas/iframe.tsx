@@ -66,6 +66,11 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
               border: 1px dashed #1677ff;
               background: rgba(0, 0, 0, 0.1);
             }
+
+            #ROOT {
+              width: 100%;
+              height: 100%;
+            }
             
             `}
           </style>
@@ -75,7 +80,6 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
     >
       <FrameContextConsumer >
         {({ document }) => {
-
           const cache = createCache({
             key: "iframe",
             container: document?.head,

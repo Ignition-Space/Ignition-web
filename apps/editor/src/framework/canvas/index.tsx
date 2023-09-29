@@ -8,7 +8,6 @@ export const Canvas = () => {
 
   const classes = {
     main: css({
-      backgroundColor: "#f3f3f3",
       borderLeft: `1px solid ${token.colorBorderSecondary}`,
       borderRight: `1px solid ${token.colorBorderSecondary}`,
       background: "#f9fafb",
@@ -16,11 +15,10 @@ export const Canvas = () => {
     canvas: css({
       height: "100%",
       width: "100%",
-      paddingInline: token.paddingMD,
-      paddingBlock: token.paddingSM,
       backgroundImage:
         "linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)",
       backgroundSize: "20px 20px",
+      padding: 30,
     }),
     tabs: css({
       height: "100%",

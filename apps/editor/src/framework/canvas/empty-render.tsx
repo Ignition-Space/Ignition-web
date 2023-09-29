@@ -32,3 +32,5 @@ export const EmptySetter: React.FC<EmptySetterProps> = ({ children }) => {
     children
   );
 };
+
+export const EmptyRender = <EmptySetter/>
