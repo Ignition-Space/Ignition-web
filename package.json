@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:main": "turbo run start --filter @huos/main"
+    "start:main": "turbo run start --filter @huos/main",
+    "start:build": "turbo run build --filter @huos/main"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.5",
     "@ant-design/pro-components": "^2.6.11",
     "@codemirror/lang-javascript": "^6.1.9",
@@ -22,8 +24,6 @@
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@huos/core": "workspace:^",
-    "@huos/icons": "workspace:^",
     "@micro-zoe/micro-app": "^0.8.11",
     "@uiw/react-codemirror": "^4.21.9",
     "@uiw/react-textarea-code-editor": "^2.1.7",
@@ -31,6 +31,7 @@
     "antd": "^5.8.2",
     "clsx": "^2.0.0",
     "lodash": "^4.17.21",
+    "monaco-editor": "^0.43.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-monaco-editor": "^0.54.0",

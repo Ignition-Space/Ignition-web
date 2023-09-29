@@ -3,10 +3,8 @@ import * as React from "react";
 import { useNode, useEditor } from "@craftjs/core";
 import ReactDOM from "react-dom";
 import { useFrame } from "react-frame-component";
-import {
-  DragOutlined,
-} from "@ant-design/icons";
-import { Button,Space } from "antd";
+import { DragOutlined } from "@ant-design/icons";
+import { Button, theme } from "antd";
 
 export interface RenderNodeWrapperProps {
   render: React.ReactElement;
@@ -30,10 +28,10 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
 
   const {
     dom,
+    name,
     isRootNode,
     moveable,
     connectors: { drag },
-    name
   } = useNode((node) => ({
     isRootNode: query.node(id).isRoot(),
     dom: node.dom,
@@ -41,9 +39,12 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
     moveable: query.node(node.id).isDraggable(),
     deletable: query.node(node.id).isDeletable(),
     name: node.data.displayName,
+    isResize: node.data.custom.useResize || false,
   }));
 
   const { document: canvasDocument } = useFrame();
+
+  const { token } = theme.useToken()
 
   React.useEffect(() => {
     if (dom) {
@@ -66,13 +67,12 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
   }, [dom, isHovered, isRootNode, isActive]);
 
   const getPos = React.useCallback((dom: HTMLElement) => {
-    console.log(dom.getBoundingClientRect(), "dom.getBoundingClientRect()");
     const { top, left, bottom } = dom
       ? dom.getBoundingClientRect()
       : { top: 0, left: 0, bottom: 0 };
     return {
-      top: `${top > 0 ? top : bottom}px`,
-      left: `${left}px`,
+      top: top > 0 ? top : bottom,
+      left: left,
     };
   }, []);
 
@@ -88,27 +88,26 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
                 top: dom ? getPos(dom).top : undefined,
                 zIndex: 9999,
                 position: "fixed",
-                background: "white",
+                background: "#2178ea",
                 width: "max-content",
-                transform: "translate(0px, -28px)",
-                backgroundColor: "transparent",
+                transform: "translate(8px, -35px)",
+                display: 'flex',
+                alignItems: 'center',
+                minWidth: "max-content",
+                height: 30,
+                color: '#fff',
+                paddingInline: 6
               }}
             >
-              <Space.Compact size="small" block >
-                <Button type="primary">{name}</Button>
-                <Button
-                  disabled={!moveable}
-                  style={{ cursor: "move" }}
-                  ref={(_ref: HTMLElement) => drag(_ref)}
-                  type="primary"
-                  icon={<DragOutlined />}
-                />
-              </Space.Compact>
+             {name}
+             {
+              moveable ? <DragOutlined ref={drag as any} /> : null
+             }
             </div>,
             canvasDocument?.body as HTMLElement
           )
         : null}
-        {render}
+      {render}
     </>
   );
 };

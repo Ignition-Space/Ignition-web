@@ -1,5 +1,6 @@
 import React from 'react'
-import { addHttpPrefix } from '@/framework/utils'
+import { createPortal } from 'react-dom'
+import { addHttpPrefix, getAppendTargetElement } from '@/framework/utils'
 import { useBoolean, useMount } from 'ahooks'
 
 export const useInjectElement = () => {
@@ -17,12 +18,13 @@ export const useInjectElement = () => {
 
           const headElements = heads.map((head) => (
             head.tag === 'link' ? React.createElement(head.tag, {
+              key: head.url,
               rel: 'stylesheet',
               href: addHttpPrefix(head.url)
             }): React.createElement(head.tag, {
+              key: head.url,
               type: 'text/javascript',
               src: addHttpPrefix(head.url),
-              async: true
             })
           ))
 
@@ -36,6 +38,15 @@ export const useInjectElement = () => {
       } finally {
       }
   })
+
+  React.useEffect(() => {
+    const target: any = getAppendTargetElement()
+    console.log(target, 'target')
+    if (target) {
+      target.a = 'wangly19'
+    }
+    
+  }, [])
 
   return {
     injectHeadComponents

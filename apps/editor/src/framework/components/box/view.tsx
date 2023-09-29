@@ -3,25 +3,28 @@ import React from "react";
 import { Resizable, ResizableProps } from "re-resizable";
 import { useNode, useEditor } from "@craftjs/core";
 import { useThrottleFn } from "ahooks";
-import { FunctionComponent } from "@huos/core";
-import { EmptySetter } from "@/framework/canvas/empty-render";
+import { ReactMaterialViewType } from "@huos/core";
 
 const initialStyle: React.CSSProperties = {
-  height: 8,
-  width: 8,
+  height: 12,
+  width: 12,
   borderRadius: '50%',
-  border: `1px solid rgb(26, 115, 232)`,
+  border: `2px solid rgb(26, 115, 232)`,
   background: '#FFF',
   zIndex: 2
 }
 
-export const BoxView: FunctionComponent<ResizableProps> = (props) => {
-  const { id } = useNode();
+export const BoxView: ReactMaterialViewType<any> = (props, ref: any) => {
 
-  const {
-    actions: { setProp },
-  } = useEditor();
-  const { children, mountRef, ...styledProps } = props;
+  const { id, } = useNode()
+
+  const { actions: { setProp }, isActive, isHovered } = useEditor((_, queryEditor) => {
+    return {
+      isActive: queryEditor.getEvent("selected").contains(id),
+      isHovered: queryEditor.getEvent("hovered").contains(id),
+    };
+  });
+  const { children, ...styledProps } = props;
 
   const { run: handleResizableChange } = useThrottleFn((_, __, elRef) => {
     const { width, height } = elRef.style;
@@ -36,35 +39,35 @@ export const BoxView: FunctionComponent<ResizableProps> = (props) => {
 
   return (
     <Resizable
-      enable={{
+      enable={isActive || isHovered ? {
         bottom: true,
         right: true,
-      }}
+      } : false}
       bounds="parent"
       {...styledProps}
       onResizeStop={handleResizableChange}
       handleStyles={{
         bottom: {
           ...initialStyle,
-          bottom: -3.5,
+          bottom: -6,
           left: '50%',
           transform: "translateX(-50%)",
         },
 
         right: {
           ...initialStyle,
-          right: -3.5,
+          right: -6,
           top: '50%',
           transform: "translateY(-50%)",
         },
       }}
       ref={(_instance) => {
         if (_instance?.resizable) {
-          mountRef(_instance.resizable)
+          ref(_instance?.resizable)
         }
       }}
     >
-      <EmptySetter>{children}</EmptySetter>
+      {children}
     </Resizable>
-  );
+  ) as any;
 }

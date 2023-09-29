@@ -6,7 +6,7 @@ import {
   ProFormTextArea,
   ProFormList,
 } from "@ant-design/pro-components";
-import { Button, Space, Tag, Typography, notification } from "antd";
+import { Button, Space, Tag, notification } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 interface RecordType {

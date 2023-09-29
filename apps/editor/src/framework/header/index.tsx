@@ -5,6 +5,7 @@ import { Publish } from "./toolbar/publish";
 import { Priview } from "./toolbar/preview";
 import { AppMenus } from "./menus";
 import { ToolBar } from "./toolbar";
+import { ConfigSettings } from '../common/settings'
 
 export const Header: React.FC = () => {
   const { token } = theme.useToken();
@@ -23,7 +24,8 @@ export const Header: React.FC = () => {
 
     flex: css({
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      gap: 6
     })
   };
 
@@ -65,6 +67,7 @@ export const Header: React.FC = () => {
         </div>
         <ToolBar />
         <div className={classes.flex} style={{ justifyContent: 'flex-end' }} >
+          <ConfigSettings/>
           <Priview />
           <Publish />
         </div>

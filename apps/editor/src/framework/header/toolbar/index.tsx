@@ -1,11 +1,28 @@
-import { theme, Button, Space } from "antd";
+import {
+  theme,
+  Button,
+  Space,
+  message,
+  Tooltip,
+  Modal,
+  Popconfirm,
+} from "antd";
 import { css } from "@emotion/css";
 import { useEditor } from "@craftjs/core";
 import { HuosRemixIcon } from "@huos/icons";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 
 export const ToolBar = () => {
   const { token } = theme.useToken();
-  const { actions } = useEditor();
+  const { actions, selectedId, isRootNode } = useEditor(({ events }) => {
+    const [id] = events.selected;
+    return {
+      selectedId: id,
+      isRootNode: id === "ROOT",
+    };
+  });
+
+  console.log(selectedId, "selectedId");
 
   const classes = {
     toolbar: css({
@@ -13,6 +30,7 @@ export const ToolBar = () => {
       justifyContent: "center",
       alignItems: "center",
       background: token.colorBgBase,
+      gap: 8,
     }),
     center: css({
       background: token.colorBgContainerDisabled,
@@ -25,24 +43,60 @@ export const ToolBar = () => {
     }),
   };
 
-  console.log(actions.history);
+  /**
+   * 处理删除选中节点逻辑
+   */
+  const handleDeleteSelectedNode = () => {
+    try {
+      actions.delete(selectedId);
+      message.success("删除成功");
+    } catch (error) {
+      message.error("删除失败");
+    }
+  };
 
   return (
     <div className={classes.toolbar}>
-      <Space>
+      <Tooltip placement="bottom" color="blue" title="撤销">
         <Button
           icon={<HuosRemixIcon type="icon-arrow-go-back-fill" />}
           onClick={actions.history.undo}
         />
+      </Tooltip>
+      <Tooltip placement="bottom" title="恢复" color="blue">
         <Button
           icon={<HuosRemixIcon type="icon-arrow-go-forward-fill" />}
           onClick={actions.history.redo}
         />
+      </Tooltip>
+      <Tooltip color="blue" placement="bottom" title="强制刷新">
+        <Popconfirm
+          title="强制刷新"
+          description={<div style={{ width: 250 }} >强制刷新将会导致您页面的修改丢失，且无法恢复，如果继续进行下一步，请点击确认按钮。</div>}
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+          onConfirm={() => window.location.reload()}
+          okButtonProps={{
+            danger: true,
+            type: "dashed"
+          }}
+        >
+          <Button
+            icon={<HuosRemixIcon type="icon-refresh-line" />}
+          />
+        </Popconfirm>
+      </Tooltip>
+      <Tooltip
+        color={isRootNode ? "red" : "blue"}
+        placement="bottom"
+        title={isRootNode ? "当前选中为根节点，不允许删除" : "删除"}
+      >
         <Button
-          icon={<HuosRemixIcon type="icon-refresh-line" />}
-          onClick={() => window.location.reload()}
+          danger
+          icon={<HuosRemixIcon type="icon-delete-bin-4-line" />}
+          onClick={handleDeleteSelectedNode}
+          disabled={isRootNode}
         />
-      </Space>
+      </Tooltip>
     </div>
   );
 };

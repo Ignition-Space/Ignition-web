@@ -1,15 +1,16 @@
 import { Box, BoxProps, ChakraProvider } from "@chakra-ui/react";
-import { FunctionComponent } from "@huos/core";
+import { useNode } from "@craftjs/core";
+import { ReactMaterialViewType } from "@huos/core";
 
 
-export const ProviderView: FunctionComponent<BoxProps> = ({
+export const ProviderView: ReactMaterialViewType = ({
   children,
-  mountRef,
   ...props
-}) => {
+}, ref) => {
+
   return (
     <ChakraProvider>
-      <Box ref={mountRef} {...props}>
+      <Box ref={ref} {...props}>
         {children}
       </Box>
     </ChakraProvider>

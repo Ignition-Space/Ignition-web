@@ -28,23 +28,24 @@ const fallbackRender = (props: any) => {
  * @param { React.FunctionComponent } WrappedComponent 设计组件
  */
 const withConnectNode = (
-  WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
+  WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>,
 ): ReactMaterialComponent => {
   return function ({ children, ...props }: Record<string, any>) {
-    const ref = React.useRef()
     const {
       connectors: { connect, drag },
       id,
-      custom: { useResize }
-    } = useNode((node) => ({
-      custom: node.data.custom,
+      custom
+    } = useNode((evt) => ({
+      custom: evt.data.custom
     }));
     const memoizdProps = useParseBinding(props, id);
 
+    console.log(custom, 'custom')
+
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >
-        <WrappedComponent ref={(dom: HTMLElement) => {
-          if (useResize) {
+        <WrappedComponent ref={(dom) => {
+          if (custom.useResize) {
             connect(dom)
           } else {
             connect(drag(dom))
