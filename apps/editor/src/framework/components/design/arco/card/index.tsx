@@ -1,11 +1,19 @@
 import React from "react";
-import { createReactMateril } from "@huos/core";
+import { createReactMaterial } from "@huos/core";
 import { CardView } from "./view";
 import { Panel } from "./panel";
 import { Element } from "@craftjs/core";
-import { EmptySetter } from "@/framework/canvas/empty-render";
 
-CardView.defaultProps = {
+export const __ArcoCard__ = createReactMaterial(CardView, {
+  displayName: "卡片",
+  props: {},
+  custom: {
+    useCanvas: true,
+  },
+  related: {
+    settingRender: Panel,
+  },
+}, {
   title: (
     <Element canvas id="card-title-slot" is="div">
       标题
@@ -21,15 +29,4 @@ CardView.defaultProps = {
       <div>请添加组件</div>
     </Element>
   ),
-};
-
-export const __ArcoCard__ = createReactMateril(CardView, {
-  displayName: "卡片",
-  props: {},
-  custom: {
-    useCanvas: true,
-  },
-  related: {
-    settingRender: Panel,
-  },
 });

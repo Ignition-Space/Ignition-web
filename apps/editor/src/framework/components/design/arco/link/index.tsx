@@ -1,9 +1,9 @@
 import { createReactMaterial } from '@huos/core'
-import { ButtonView } from './view'
+import { LinkView } from './view'
 import { Panel } from './panel'
 
-export const __ArcoButton__ = createReactMaterial(ButtonView, {
-  displayName: '按钮',
+export const __ArcoLink__ = createReactMaterial(LinkView, {
+  displayName: '链接',
   custom: {
     useResize: false
   },
