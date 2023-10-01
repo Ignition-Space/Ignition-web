@@ -61,14 +61,16 @@ const withConnectNode = (
  * @param { ReactMaterialComponent } component  物料组件
  * @param { UserComponentConfig } config 物料配置
  */
-export const createReactMateril = <T = any,>(
+export const createReactMaterial = <T = any,>(
   component: any,
-  config: Partial<UserComponentConfig<T>>
+  config: Partial<UserComponentConfig<T>>,
+  defaultProps?: Record<string, any>
 ) => {
   // hoc的compose函数执行，
-  const forawadComponent = React.forwardRef<(dom: HTMLElement) => void, {}>(component)
-  const MateiralNode: ReactMaterialComponent = withConnectNode(forawadComponent)
-  MateiralNode.craft = config;
+  const forwardComponent = React.forwardRef<(dom: HTMLElement) => void, {}>(component)
+  forwardComponent.defaultProps = defaultProps
+  const MaterialNode: ReactMaterialComponent = withConnectNode(forwardComponent)
+  MaterialNode.craft = config;
 
-  return MateiralNode;
+  return MaterialNode;
 };
