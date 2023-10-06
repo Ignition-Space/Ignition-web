@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { ConfigProvider, App } from "antd";
@@ -10,8 +9,7 @@ const token = {
   wireframe: false,
 };
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+ReactDOM.createRoot(document.getElementById("EditorApp")!).render(
     <ConfigProvider
       theme={{
         token,
@@ -21,5 +19,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </App>
     </ConfigProvider>
-  </React.StrictMode>
 );

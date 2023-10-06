@@ -1,11 +1,10 @@
 import { createReactMaterial } from '@huos/core'
-import { ProviderView } from './view'
+import { ProTableView } from './view'
 import { Panel } from './panel'
 
-export const __Provider__ = createReactMaterial(ProviderView, {
-  displayName: 'Provider',
+export const __ArcoProTable__ = createReactMaterial(ProTableView, {
+  displayName: '高阶表格',
   custom: {
-    useCanvas: true,
     useResize: false
   },
   related: {

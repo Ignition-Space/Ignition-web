@@ -33,6 +33,9 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
       head={
         <>
           <style>
+            <link href="https://cdn.skypack.dev/sanitize.css" rel="stylesheet" />
+            <link href="https://unpkg.com/@arco-design/web-react@2.53.2/dist/css/arco.css" rel="stylesheet" ></link>
+            <link href="https://cdn.jsdelivr.net/npm/primereact@10.0.2/resources/themes/lara-light-indigo/theme.css" rel="stylesheet" />
             {`
             .editor-component-active {
               position: relative;

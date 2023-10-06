@@ -4,12 +4,11 @@ import { Select, Switch } from 'antd'
 export const Panel = () => {
   return (
     <div>
-      {/* preview */}
+      {/* Disabled */}
       <MountSetter fields={{
-        name: 'preview',
-        label: '预览状态',
-        valuePropName: "checked",
-        tooltip: '是否开启预览'
+        name: 'disabled',
+        label: '禁用状态',
+        valuePropName: "checked"
       }}>
         <Switch checkedChildren="禁用" unCheckedChildren="启用" />
       </MountSetter>

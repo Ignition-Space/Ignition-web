@@ -1,18 +1,20 @@
-import { Box, BoxProps, ChakraProvider } from "@chakra-ui/react";
-import { useNode } from "@craftjs/core";
 import { ReactMaterialViewType } from "@huos/core";
+import { ConfigProvider } from '@arco-design/web-react'
+import React from 'react';
 
 
-export const ProviderView: ReactMaterialViewType = ({
+export const ProviderView: ReactMaterialViewType<React.CSSProperties & {
+  children: React.ReactNode;
+}> = ({
   children,
   ...props
-}, ref) => {
+}, ref: any) => {
 
   return (
-    <ChakraProvider>
-      <Box ref={ref} {...props}>
+    <ConfigProvider>
+      <div ref={ref} style={{ ...props }} >
         {children}
-      </Box>
-    </ChakraProvider>
+      </div>
+    </ConfigProvider>
   );
 };

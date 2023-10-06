@@ -8,3 +8,6 @@ export * from './text'
 export * from './card'
 export * from './title'
 export * from './image'
+
+// Pro-components
+export * from './pro-table'

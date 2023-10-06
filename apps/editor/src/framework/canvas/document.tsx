@@ -34,7 +34,7 @@ export const DocumentNodes = () => {
           is={__Provider__}
           backgroundColor="#FFF"
           height="100%"
-          wdith="100%"
+          width="100%"
         >
           <Element canvas id="test" is={__Box__}>
             <__ArcoButton__/>

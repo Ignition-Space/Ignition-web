@@ -7,7 +7,9 @@ export const Right = () => {
   // const [activeKey, setActiveKey] = React.useState("components");
   const classes = {
     main: css({
-      paddingInline: token.paddingXS,
+      padding: token.paddingXS,
+      overflow: 'auto',
+      height: 'calc(100% - 50px)'
     }),
     tabIcon: css({
       marginRight: 2,
@@ -24,14 +26,7 @@ export const Right = () => {
 
   return (
     <div className={classes.main}>
-      <Tabs
-        style={{
-          height: "100%",
-        }}
-        size="small"
-        defaultActiveKey="1"
-        items={items}
-      />
+      <MountSettings/>
     </div>
   );
 };

@@ -1,10 +1,19 @@
+import WujieReact from "wujie-react";
+
 export const MicroApp = () => {
   return (
     <div style={{
       height: '100vh',
       width: '100vw'
     }} >
-      1
+      <WujieReact
+      width="100%"
+      height="100%"
+      name="editor"
+      url="http://localhost:5173/"
+      sync={true}
+      fetch={fetch}
+    ></WujieReact>
     </div>
   )
 }

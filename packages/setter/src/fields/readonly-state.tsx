@@ -21,6 +21,7 @@ const classes = {
 };
 
 export const ReadonlyState: React.FC<ReadonlyStateProps> = (props) => {
+  console.log(props, 'props')
   return (
     <div className={classes.box}>
       <Tag color="blue" closable onClose={() => props.onChange && props.onChange(null)} bordered={false} >

@@ -27,7 +27,7 @@ export const MountSettings = () => {
 
 
 
-  const handleFormChange = async (changeValues: any) => {
+  const handleFormChange = async (changeValues: any, allValues: any) => {
     console.log(changeValues, 'changeValues')
 
     if (nodeId) {
@@ -40,18 +40,19 @@ export const MountSettings = () => {
 
   // 当前编辑的组件发生改变，nodeId副作用更新了
   React.useEffect(() => {
+    console.log('trigger', currentNodeProps)
     if (nodeId) {
+
+      console.log('switchNodeId', nodeId, currentNodeProps)
 
       /** 切换组件清除setter配置 */
       form.resetFields()
 
 
       /** 设置新组件内容属性配置 */
-      form.setFieldsValue({
-        ...currentNodeProps
-      })
+      form.setFieldsValue(currentNodeProps)
     }
-  }, [nodeId, form])
+  }, [nodeId])
 
   return (
     <div

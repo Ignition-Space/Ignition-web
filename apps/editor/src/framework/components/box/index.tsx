@@ -1,7 +1,7 @@
-import { createReactMateril } from '@huos/core'
+import { createReactMaterial } from '@huos/core'
 import { BoxView } from './view'
 
-export const __Box__ = createReactMateril(BoxView, {
+export const __Box__ = createReactMaterial(BoxView, {
   displayName: '容器',
   props: {
     defaultSize: {

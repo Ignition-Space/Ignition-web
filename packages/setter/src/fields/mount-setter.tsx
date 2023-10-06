@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormItemProps, Input, Select, Space, Typography } from "antd";
+import { Form } from "antd";
 import { BindingStateSetter } from "./binding-state-setter";
 import { ProFormDependency } from "@ant-design/pro-components";
 import { ReadonlyState } from './readonly-state'
@@ -39,7 +39,7 @@ export const MountSetter: React.FC<MountSetterProps> = (props) => {
   const namePath = React.useMemo(() => {
     return getFormItemNamePaths(props.fields.name);
   }, [props.fields?.name]);
-
+  
   return (
     <Form.Item {...props.fields}>
       <ProFormDependency name={namePath}>
@@ -48,10 +48,9 @@ export const MountSetter: React.FC<MountSetterProps> = (props) => {
           const filedValue = get(value, namePath);
 
           const isJsx = !!filedValue?.$$jsx
-
           return (
             <div className={classes.space}>
-              <Form.Item noStyle name={namePath}>
+              <Form.Item noStyle {...props.fields} name={namePath} >
                 { isJsx ? <ReadonlyState/> : props.children }
               </Form.Item>
               <Form.Item noStyle name={[...namePath, "$$jsx"]}>
