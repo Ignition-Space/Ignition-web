@@ -3,10 +3,8 @@ import { ConfigProvider, App } from "antd";
 import { router } from "@/router";
 import { RouterProvider } from "react-router-dom";
 import type { AliasToken } from "antd/es/theme/internal";
-import MyButton from 'remoteApp/Button
 import "antd/dist/reset.css";
 
-console.log(MyButton, 'MyButton')
 
 
 const token: Partial<AliasToken> = {

@@ -24,14 +24,14 @@ export const router = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+  {
+    path: "/app",
+    children: [
       {
-        path: "/app",
-        children: [
-          {
-            path: "editor",
-            Component: MicroApp,
-          },
-        ],
+        path: "editor",
+        Component: MicroApp,
       },
     ],
   },
