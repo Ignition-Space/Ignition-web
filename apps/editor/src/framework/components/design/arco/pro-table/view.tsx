@@ -61,8 +61,6 @@ export const ProTableView: ReactMaterialViewType<any> = ({children = '默认填�
   ]
 
   return (
-    <div style={{ display: 'inline-block' }} ref={ref} >
-      <ProTable columns={columns} data={data} />
-    </div>
+    <ProTable ref={ref} {...props}/>
   );
 }

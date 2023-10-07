@@ -13,7 +13,7 @@ export const MicroApp = () => {
         url="http://localhost:5173/"
         sync={true}
         fetch={fetch}
-      ></WujieReact>
+      />
     </div>
   )
 }

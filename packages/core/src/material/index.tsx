@@ -59,7 +59,7 @@ const withConnectNode = (
  * @param { ReactMaterialComponent } component  物料组件
  * @param { UserComponentConfig } config 物料配置
  */
-export const createReactMaterial = <T = any,>(
+export const createReactMaterial = <T = any>(
   component: any,
   config: Partial<UserComponentConfig<T>>,
   defaultProps?: Record<string, any>

@@ -1,5 +1,5 @@
 import React from "react";
-import { CnavasRootId } from '@huos/core'
+import { CanvasRootId } from '@huos/core'
 import ReactFrameComponent, {
   FrameContextConsumer,
 } from "react-frame-component";
@@ -28,7 +28,7 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
 
   return (
     <ReactFrameComponent
-      id={CnavasRootId}
+      id={CanvasRootId}
       ref={iframeRef}
       head={
         <>

@@ -5,14 +5,14 @@ import { __ArcoProTable__ } from "@/framework/components/design/arco/pro-table";
 import { Canvas, Frame as DocumentFrame, Element } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
-import { CnavasRootId } from "@huos/core";
+import { CanvasRootId } from "@huos/core";
 
 export const DocumentNodes = () => {
   const { document: canvasDocument } = useFrame();
   const elements = useDynamicHeadInsertion();
 
   React.useEffect(() => {
-    const canvasElement = document.getElementById(CnavasRootId);
+    const canvasElement = document.getElementById(CanvasRootId);
     const insertElement = canvasElement ? canvasDocument : document;
 
     if (insertElement && elements) {
@@ -38,9 +38,9 @@ export const DocumentNodes = () => {
           width="100%"
         >
           <Element canvas id="test" is={__Box__}>
-            <__ArcoButton__/>
+            <__ArcoButton__ />
           </Element>
-          <__ArcoProTable__/>
+          <__ArcoProTable__ />
         </Canvas>
       </DocumentFrame>
     </div>

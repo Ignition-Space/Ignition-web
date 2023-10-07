@@ -1,5 +1,5 @@
 /** HuOS画布的Id */
-export const CnavasRootId = "__HuoSEditorPreview__";
+export const CanvasRootId = "__HuoSEditorPreview__";
 
 /** HuOS代码运行时的ID */
 export const RuntimeCtxId = "__HuoSRuntime__";

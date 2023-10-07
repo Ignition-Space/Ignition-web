@@ -35,7 +35,6 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
     moveable,
     connectors: { drag },
   } = useNode((node) => {
-    console.log(query.node(id), 'query.node(id)')
     return {
       isRootNode: query.node(id).isRoot(),
       dom: node.dom,
