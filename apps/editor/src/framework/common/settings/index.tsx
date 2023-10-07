@@ -8,7 +8,6 @@ import type { TabsProps } from "antd";
 
 
 const onChange = (key: string) => {
-  console.log(key);
 };
 
 const TabContent = (el: React.ReactNode) => (

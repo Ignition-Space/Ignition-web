@@ -7,7 +7,6 @@ import { EmptySetter } from '@/framework/canvas/empty-render'
 import { jsRuntime } from '@huos/core'
 import { useMount } from "ahooks";
 
-console.log(DefaultMaterials, 'DefaultMaterials')
 
 export interface EditoRootWrapperProps {
   // 本地storageKey, 用户缓存当前

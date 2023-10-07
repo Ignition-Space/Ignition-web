@@ -29,7 +29,6 @@ export const withResizeableNode = (
   }>
 ): React.FunctionComponent => {
   return function ({ children, ...props }: Record<string, any>) {
-    console.log(props, "props");
 
     const { id } = useNode();
 
@@ -40,7 +39,6 @@ export const withResizeableNode = (
     const handleResizableChange: ResizeCallback = (_, __, elRef) => {
       const { width, height } = elRef.style;
 
-      console.log(width, height, 'handleResizableChange')
       setProp(id, (prop) => {
         prop.width = width
         prop.heigt = height

@@ -77,6 +77,7 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
             
             `}
           </style>
+          <script src="https://www.unpkg.com/draggable-polyfill@1.2.4/index.js" ></script>
         </>
       }
       className={classes.iframe}

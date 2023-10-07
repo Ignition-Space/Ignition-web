@@ -40,8 +40,6 @@ const withConnectNode = (
     }));
     const memoizdProps = useParseBinding(props, id);
 
-    console.log(custom, 'custom')
-
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >
         <WrappedComponent ref={(dom) => {

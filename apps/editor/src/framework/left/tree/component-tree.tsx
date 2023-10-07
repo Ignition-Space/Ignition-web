@@ -37,7 +37,6 @@ export const ComponentTree: React.FC = () => {
     return convertJSONToTreeData(treeNode);
   }, [treeNode]);
 
-  console.log(nodes, "nodes");
 
   return (
     <div>

@@ -87,7 +87,6 @@ export const BindingStateSetter: React.FC<BindingStateSetterProps> = (
         const result = jsRuntime.execute(inputCode, {
           props: currentNodeProps,
         });
-        console.log(result, "result");
         setRuntimeValue(result);
       } else {
         setRuntimeValue(defaultRunValue);

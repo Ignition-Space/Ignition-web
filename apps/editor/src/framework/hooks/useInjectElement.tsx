@@ -41,7 +41,6 @@ export const useInjectElement = () => {
 
   React.useEffect(() => {
     const target: any = getAppendTargetElement()
-    console.log(target, 'target')
     if (target) {
       target.a = 'wangly19'
     }

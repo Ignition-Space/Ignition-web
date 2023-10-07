@@ -20,7 +20,6 @@ export const ResizeBox: React.ComponentType<typeof Resizable & {
       {...props}
       snapGap={20}
       onResizeStop={(_, __, elRef) => {
-        console.log(elRef.style, "args");
       }}
     >
       {children}

@@ -4,7 +4,6 @@ import { useNode, useEditor } from "@craftjs/core";
 import ReactDOM from "react-dom";
 import { useFrame } from "react-frame-component";
 import { DragOutlined } from "@ant-design/icons";
-import { Button, theme } from "antd";
 
 export interface RenderNodeWrapperProps {
   render: React.ReactElement;
@@ -15,14 +14,17 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
 }) => {
   const { id } = useNode();
   const currentRef = React.useRef<HTMLDivElement>(null);
-  const { query, isActive, isHovered } = useEditor((state, queryEditor) => {
+  const { query, isActive, isHovered, isDragged } = useEditor((state, queryEditor) => {
     const [selectId] = state.events.selected;
     const [hoverId] = state.events.hovered;
+    const [ dragged ] = state.events.dragged
     return {
       isActive: queryEditor.getEvent("selected").contains(id),
       isHovered: queryEditor.getEvent("hovered").contains(id),
+      isDragged: queryEditor.getEvent("dragged").contains(id),
       selectId,
       hoverId,
+      dragged,
     };
   });
 
@@ -32,19 +34,21 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
     isRootNode,
     moveable,
     connectors: { drag },
-  } = useNode((node) => ({
-    isRootNode: query.node(id).isRoot(),
-    dom: node.dom,
-    parent: node.data.parent,
-    moveable: query.node(node.id).isDraggable(),
-    deletable: query.node(node.id).isDeletable(),
-    name: node.data.displayName,
-    isResize: node.data.custom.useResize || false,
-  }));
+  } = useNode((node) => {
+    console.log(query.node(id), 'query.node(id)')
+    return {
+      isRootNode: query.node(id).isRoot(),
+      dom: node.dom,
+      parent: node.data.parent,
+      moveable: query.node(node.id).isDraggable(),
+      deletable: query.node(node.id).isDeletable(),
+      name: node.data.displayName,
+      isResize: node.data.custom.useResize || false,
+    }
+  });
 
   const { document: canvasDocument } = useFrame();
 
-  const { token } = theme.useToken()
 
   React.useEffect(() => {
     if (dom) {
@@ -75,6 +79,8 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
       left: left,
     };
   }, []);
+
+  console.log(isDragged, 'isDragged')
 
   return (
     <>
@@ -107,7 +113,9 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
             canvasDocument?.body as HTMLElement
           )
         : null}
-      {render}
+      {
+        render
+      }
     </>
   );
 };

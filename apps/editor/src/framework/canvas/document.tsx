@@ -1,6 +1,7 @@
 import React from "react";
 import { __Provider__, __Box__ } from "@/framework/components";
 import { __ArcoButton__ } from "@/framework/components/design/arco/button";
+import { __ArcoProTable__ } from "@/framework/components/design/arco/pro-table";
 import { Canvas, Frame as DocumentFrame, Element } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
@@ -39,6 +40,7 @@ export const DocumentNodes = () => {
           <Element canvas id="test" is={__Box__}>
             <__ArcoButton__/>
           </Element>
+          <__ArcoProTable__/>
         </Canvas>
       </DocumentFrame>
     </div>

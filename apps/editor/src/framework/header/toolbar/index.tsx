@@ -22,7 +22,6 @@ export const ToolBar = () => {
     };
   });
 
-  console.log(selectedId, "selectedId");
 
   const classes = {
     toolbar: css({
