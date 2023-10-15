@@ -47,13 +47,13 @@ export const MountSetter: React.FC<MountSetterProps> = (props) => {
           // get filedValue by namepath
           const filedValue = get(value, namePath);
 
-          const isJsx = !!filedValue?.$$jsx
+          const isJsx = !!filedValue?.$$jsx 
           return (
             <div className={classes.space}>
               <Form.Item noStyle {...props.fields} name={namePath} >
-                { isJsx ? <ReadonlyState/> : props.children }
+                { isJsx ? <ReadonlyState valuePropName={props.fields?.valuePropName || 'value'} /> : props.children }
               </Form.Item>
-              <Form.Item noStyle name={[...namePath, "$$jsx"]}>
+              <Form.Item noStyle name={[...namePath, "$$jsx"]}  >
                 <BindingStateSetter
                   namePath={namePath.join(".")}
                   isBinding={isJsx}
