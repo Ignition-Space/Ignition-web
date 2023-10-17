@@ -1,15 +1,14 @@
 import {
   theme,
   Button,
-  Space,
   message,
   Tooltip,
-  Modal,
   Popconfirm,
 } from "antd";
 import { css } from "@emotion/css";
 import { useEditor } from "@craftjs/core";
 import { HuosRemixIcon } from "@huos/icons";
+import { JsEditor } from './js-editor'
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 export const ToolBar = () => {
@@ -84,6 +83,14 @@ export const ToolBar = () => {
           />
         </Popconfirm>
       </Tooltip>
+      <JsEditor trigger={(
+        <Tooltip placement="bottom" title="代码">
+        <Button
+          icon={<HuosRemixIcon type="icon-braces-line" />}
+          onClick={actions.history.redo}
+        />
+      </Tooltip>
+      )} />
       <Tooltip
         color={isRootNode ? "red" : "blue"}
         placement="bottom"
