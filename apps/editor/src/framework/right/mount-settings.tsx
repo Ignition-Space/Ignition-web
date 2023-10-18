@@ -55,6 +55,7 @@ export const MountSettings = () => {
   return (
     <div
       className={css({
+        height: '100%',
         ["& .ant-pro-form-group-title"]: {
           fontWeight: 600,
           marginBlockEnd: 0,
