@@ -27,7 +27,7 @@ export const Framework = () => {
         {/** 头部 */}
         <Header />
         {/** 编辑器主体 */}
-        <div className={classes.main}>
+        <div id="EditorContent" className={classes.main}>
           {/* 左侧面板 */}
           <Left />
           {/* 画布 */}

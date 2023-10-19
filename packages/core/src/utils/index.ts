@@ -1,6 +1,9 @@
 /** HuOS画布的Id */
 export const CanvasRootId = "__HuoSEditorPreview__";
 
+/** HuOS实例的Id */
+export const ScopeMoudleId = "__HuoSBuilderScope__"
+
 /** HuOS代码运行时的ID */
 export const RuntimeCtxId = "__HuoSRuntime__";
 

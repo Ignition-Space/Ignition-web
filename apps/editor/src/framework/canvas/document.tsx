@@ -5,11 +5,14 @@ import { __ArcoProTable__ } from "@/framework/components/design/arco/pro-table";
 import { Canvas, Frame as DocumentFrame, Element } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
-import { CanvasRootId } from "@huos/core";
+import { CanvasRootId, compileModuleResolve, sucraseTransformCode, ScopeMoudleId } from "@huos/core";
+import { useSchema } from '@/framework/stores/useSchema'
+import { useAsyncEffect } from "ahooks";
 
 export const DocumentNodes = () => {
   const { document: canvasDocument } = useFrame();
   const elements = useDynamicHeadInsertion();
+  const jsMoudleCode = useSchema(select => select.jsMoudleCode)
 
   React.useEffect(() => {
     const canvasElement = document.getElementById(CanvasRootId);
@@ -19,6 +22,14 @@ export const DocumentNodes = () => {
       insertElement.head.appendChild(elements);
     }
   }, [canvasDocument, elements]);
+
+  useAsyncEffect(async () => {
+    const cjsCode = await sucraseTransformCode(jsMoudleCode)
+    const { exports  } = compileModuleResolve(cjsCode);
+    (window as any)[ScopeMoudleId] = {
+      jsMoudle: exports
+    }
+  }, [jsMoudleCode])
 
   return (
     <div
@@ -37,7 +48,7 @@ export const DocumentNodes = () => {
           height="100%"
           width="100%"
         >
-          <Element canvas id="test" is={__Box__}>
+          <Element canvas is={__Box__}>
             <__ArcoButton__ />
           </Element>
           <__ArcoProTable__ />

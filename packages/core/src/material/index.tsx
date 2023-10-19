@@ -2,6 +2,8 @@ import React from "react";
 import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
+import { forEach } from "lodash";
+import { ScopeMoudleId } from '../utils'
 
 export type ReactMaterialComponent = UserComponent;
 
@@ -30,7 +32,7 @@ const fallbackRender = (props: any) => {
 const withConnectNode = (
   WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>,
 ): ReactMaterialComponent => {
-  return function ({ children, ...props }: Record<string, any>) {
+  return function ({ children, __events = [], ...props }: Record<string, any>) {
     const {
       connectors: { connect, drag },
       id,
@@ -40,6 +42,16 @@ const withConnectNode = (
     }));
     const memoizdProps = useParseBinding(props, id);
 
+    const eventProps = React.useMemo(() => {
+      let eventMap: Record<string, Function> = {}
+      forEach(__events, (item) => {
+        if (item.propName && item.eventName) {
+          eventMap[item.propName] = (window as any)?.[ScopeMoudleId]["jsMoudle"]?.[item.eventName]
+        }
+      })
+      return eventMap
+    }, [__events])
+
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >
         <WrappedComponent ref={(dom) => {
@@ -48,7 +60,7 @@ const withConnectNode = (
           } else {
             connect(drag(dom))
           }
-        }} {...memoizdProps}>{children}</WrappedComponent>
+        }} {...memoizdProps} {...eventProps} >{children}</WrappedComponent>
       </ErrorBoundary>
     );
   }

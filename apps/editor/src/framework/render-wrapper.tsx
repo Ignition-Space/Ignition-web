@@ -14,7 +14,7 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
 }) => {
   const { id } = useNode();
   const currentRef = React.useRef<HTMLDivElement>(null);
-  const { query, isActive, isHovered, isDragged } = useEditor((state, queryEditor) => {
+  const { query, isActive, isHovered } = useEditor((state, queryEditor) => {
     const [selectId] = state.events.selected;
     const [hoverId] = state.events.hovered;
     const [ dragged ] = state.events.dragged
@@ -79,7 +79,6 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
     };
   }, []);
 
-  console.log(isDragged, 'isDragged')
 
   return (
     <>

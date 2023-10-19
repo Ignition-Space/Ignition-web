@@ -1,5 +1,5 @@
 import { difference } from "lodash";
-import { createRuntmieContext } from "./utils";
+import { createRuntmieContext, ScopeMoudleId } from "./utils";
 
 export interface ExecuteResult {
   value: any;
@@ -13,6 +13,7 @@ interface IBrowserRuntimeVMWindow extends Window {
   __INJECT_VARS__?: InjectVMVarsType;
   logger: typeof console;
   eval: typeof window.eval;
+  '__HuoSBuilderScope__': any
 }
 
 class BrowserRuntimeVM {
@@ -42,8 +43,7 @@ class BrowserRuntimeVM {
 
     const sandbox = this.iframe.contentWindow as IBrowserRuntimeVMWindow;
     sandbox.__INJECT_VARS__ = globalScope;
-
-    console.log(sandbox, code, "sandbox");
+    sandbox[ScopeMoudleId] = (window as any).__HuoSBuilderScope__
 
     return sandbox.eval(`
         (() => {
@@ -59,7 +59,6 @@ class BrowserRuntimeVM {
       const value = this.onEvalCode(code, {
         ...globalScope,
       });
-      console.log(value, "value");
       return { value, success: true, error: null } as ExecuteResult;
     } catch (err) {
       return { success: false, error: err, value: null } as ExecuteResult;

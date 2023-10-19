@@ -1,4 +1,4 @@
-import { ProFormTextArea } from '@ant-design/pro-components'
+import { ProFormText, ProFormTextArea } from '@ant-design/pro-components'
 import { MountSetter, toOptions } from '@huos/setter'
 import { Input, Segmented, Select, Switch } from "antd"
 
@@ -95,6 +95,14 @@ export const Panel = () => {
         tooltip: '按钮的类型'
       }}>
         <Select options={toOptions(['default', 'primary', 'secondary', 'dashed', 'text', 'outline'])} />
+      </MountSetter>
+
+      <MountSetter fields={{
+        name: 'test1',
+        label: "类型",
+        tooltip: '按钮的类型'
+      }}>
+        <ProFormText name="test1" />
       </MountSetter>
 
       <ProFormTextArea name="children" label="文本内容" tooltip="文本内容渲染" />
