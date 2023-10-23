@@ -4,29 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "start": "vite build --watch",
-    "build": "vite build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@chakra-ui/react": "^2.8.0",
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@lgnition-lowcode/core": "workspace:^",
-    "@lgnition-lowcode/setter": "workspace:^",
-    "@react-css/flex": "^2.2.0",
-    "framer-motion": "^10.15.0",
-    "re-resizable": "^6.9.9"
-  }
-=======
     "start": "tsup --watch",
     "build": "tsup"
   },
   "keywords": [],
   "author": "",
   "license": "ISC"
->>>>>>> next
 }

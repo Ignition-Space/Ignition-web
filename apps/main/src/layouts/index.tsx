@@ -6,15 +6,10 @@ import { startTransition } from "react";
 import { Card, theme } from "antd";
 import { css } from "@emotion/css";
 
-<<<<<<< HEAD
-
-export default () => {
-=======
 export const OutletLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { token } = theme.useToken();
->>>>>>> next
 
   const classes = {
     root: css({
@@ -36,17 +31,11 @@ export const OutletLayout = () => {
     }),
   };
 
-<<<<<<< HEAD
-  if (location.pathname === '/home') {
-    return <Outlet/>
-  }
-=======
   const handleMenuRouteChange = (path?: string) => {
     startTransition(() => {
       navigate(path || "/");
     });
   };
->>>>>>> next
 
   return (
     <ProLayout

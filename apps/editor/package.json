@@ -4,43 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-<<<<<<< HEAD
-    "start": "max dev",
-    "build": "max build",
-    "setup": "max setup",
-    "preview": "max preview"
-=======
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
     "preview": "tsc && vite build && vite preview --port=5173"
->>>>>>> next
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@codemirror/lang-javascript": "^6.1.5",
-    "@codemirror/view": "^6.9.3",
-    "@emotion/core": "^11.0.0",
-    "@emotion/weak-memoize": "^0.3.1",
-    "@lgnition-lowcode/core": "workspace:^",
-    "@lgnition-lowcode/materials": "workspace:^",
-    "@lgnition-lowcode/setter": "workspace:^",
-    "@reduxjs/toolkit": "^1.9.5",
-    "@types/react-helmet": "^6.1.6",
-    "@uiw/codemirror-theme-github": "^4.19.11",
-    "@uiw/react-codemirror": "^4.19.16",
-    "@uiw/react-markdown-preview": "^4.1.13",
-    "dayjs": "^1.11.9",
-    "dexie": "^3.2.4",
-    "dexie-react-hooks": "^1.1.6",
-    "form-render": "^2.1.11",
-    "html-react-parser": "^3.0.16",
-    "lzutf8": "^0.6.3",
-    "react-frame-component": "^5.2.6",
-    "react-helmet": "^6.1.0",
-    "react-json-view": "^1.21.3",
-    "stylis-plugin-extra-scope": "^0.3.0"
-=======
     "@arco-design/web-react": "^2.51.2",
     "@chakra-ui/layout": "^2.3.0",
     "@chakra-ui/react": "^2.8.0",
@@ -50,6 +19,5 @@
     "primereact": "^10.0.2",
     "re-resizable": "^6.9.11",
     "react-frame-component": "^5.2.6"
->>>>>>> next
   }
 }

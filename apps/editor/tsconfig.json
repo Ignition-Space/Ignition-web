@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "extends": "./src/.umi/tsconfig.json",
-}
-=======
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -31,4 +27,3 @@
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
->>>>>>> next
