@@ -1,22 +1,30 @@
 {
-  "name": "@lgnition-lowcode/setter",
+  "name": "@huos/setter",
   "version": "1.0.0",
-  "type": "module",
+  "description": "",
   "files": [
     "dist"
   ],
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "dist/index.d.mts",
   "scripts": {
+<<<<<<< HEAD
     "start": "vite build --watch",
     "build": "vite build"
+=======
+    "start": "tsup --watch",
+    "build": "tsup"
+>>>>>>> next
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "@lgnition-lowcode/core": "workspace:^",
     "re-resizable": "^6.9.9"
+=======
+    "@huos/core": "workspace:^"
+>>>>>>> next
   }
 }

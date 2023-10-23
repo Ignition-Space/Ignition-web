@@ -1,16 +1,77 @@
-import { RouterLayout } from './router-layout'
-import { Outlet, useLocation } from '@umijs/max'
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { ProLayout, PageHeader } from "@ant-design/pro-components";
+import { customRenderHeaderContent } from "./header";
+import { proLayoutDefaultProps } from "./default-config";
+import { startTransition } from "react";
+import { Card, theme } from "antd";
+import { css } from "@emotion/css";
 
+<<<<<<< HEAD
 
 export default () => {
+=======
+export const OutletLayout = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { token } = theme.useToken();
+>>>>>>> next
 
-  const location = useLocation()
+  const classes = {
+    root: css({
+      background: '#FFF',
+      [".ant-layout-sider-children"]: {
+        borderInlineEnd: "1px solid #e5e6eb !important",
+      },
+      [".ant-pro-sider-collapsed-button"]: {
+        borderRadius: 4,
+        ["&:hover"]: {
+          border: `1px solid ${token.colorPrimaryHover}`,
+          color: token.colorPrimaryHover,
+        },
+      },
+    }),
+    content: css({
+      width: "100%",
+      height: "100%",
+    }),
+  };
 
+<<<<<<< HEAD
   if (location.pathname === '/home') {
     return <Outlet/>
   }
+=======
+  const handleMenuRouteChange = (path?: string) => {
+    startTransition(() => {
+      navigate(path || "/");
+    });
+  };
+>>>>>>> next
 
   return (
-    <RouterLayout />
-  )
-}
+    <ProLayout
+      className={classes.root}
+      title="HuoS"
+      layout="mix"
+      logo={null}
+      token={{
+      }}
+      location={{
+        pathname: location.pathname,
+      }}
+      headerContentRender={customRenderHeaderContent}
+      menuItemRender={(item, dom) => (
+        <a onClick={() => handleMenuRouteChange(item.path)}>{dom}</a>
+      )}
+      contentStyle={{
+        maxWidth: "1320px",
+        margin: "0 auto",
+        height: 'calc(100vh - 56px)',
+      }}
+      
+      {...proLayoutDefaultProps}
+    >
+      <Outlet />
+    </ProLayout>
+  );
+};

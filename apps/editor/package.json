@@ -1,18 +1,23 @@
 {
-  "name": "@lgnition-web/editor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@huos/editor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
+<<<<<<< HEAD
     "start": "max dev",
     "build": "max build",
     "setup": "max setup",
     "preview": "max preview"
+=======
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "tsc && vite build && vite preview --port=5173"
+>>>>>>> next
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "@codemirror/lang-javascript": "^6.1.5",
     "@codemirror/view": "^6.9.3",
     "@emotion/core": "^11.0.0",
@@ -35,5 +40,16 @@
     "react-helmet": "^6.1.0",
     "react-json-view": "^1.21.3",
     "stylis-plugin-extra-scope": "^0.3.0"
+=======
+    "@arco-design/web-react": "^2.51.2",
+    "@chakra-ui/layout": "^2.3.0",
+    "@chakra-ui/react": "^2.8.0",
+    "@huos/core": "workspace:^",
+    "@huos/icons": "workspace:^",
+    "@huos/setter": "workspace:^",
+    "primereact": "^10.0.2",
+    "re-resizable": "^6.9.11",
+    "react-frame-component": "^5.2.6"
+>>>>>>> next
   }
 }

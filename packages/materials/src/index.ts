@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export * from './components/container'
 export * from './components/text'
 export * from './components/card'
@@ -13,3 +14,6 @@ export * from './form'
 export * from './form/input'
 export * from './form/date'
 export * from './form/control'
+=======
+console.log(1)
+>>>>>>> next

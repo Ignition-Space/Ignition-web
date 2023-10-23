@@ -1,34 +1,48 @@
-import { BellOutlined, QuestionCircleOutlined } from "@ant-design/icons"
-import { css } from "@emotion/css"
-import { Input, theme, Space, Tag, Divider, Avatar, Button, Typography } from "antd"
+import { ProLayoutProps } from "@ant-design/pro-components";
+import { UserProfileDrawer } from "@/components/profile";
+import { Space, Input, Divider } from "antd";
+import {
+  ExperimentOutlined,
+  InboxOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import { TooltipButton } from '@/components/tooltip-button'
+import { HuosRemixIcon } from "@huos/icons";
+import { css } from "@emotion/css";
 
-export const Header = () => {
+const classes = {
+  contetnt: css({
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  }),
+};
 
-  const { token } = theme.useToken()
-
+export const customRenderHeaderContent: ProLayoutProps["headerContentRender"] = () => {
   return (
-    <div className={css({
-      height: 55,
-      display: 'flex',
-      alignItems: 'center',
-      paddingInline: token.paddingLG,
-      justifyContent: 'space-between',
-      borderBottom: `1px solid ${token.colorBorderSecondary}`,
-    })}>
-      <Space>
-        <Input width={250}  placeholder="搜索文件、文件夹、用户" suffix={<Typography.Text type="secondary" >⌘ F</Typography.Text>} />
-      </Space>
-      <Space>
-        <Button type="primary" >返回旧版本</Button>
-        <Divider type="vertical" style={{
-          marginRight: 0
-        }} />
-        <Space size={0} >
-          <Button size="large" type="text" icon={<QuestionCircleOutlined />}  />
-          <Button size="large" type="text" icon={<BellOutlined />}  />
+    <div className={classes.contetnt}>
+      <Space split={<Divider style={{ margin: 0 }} type="vertical" />}>
+        {/* 搜索框&弹窗 */}
+        <Input
+          suffix={
+            <HuosRemixIcon
+              style={{ cursor: "pointer" }}
+              type="icon-terminal-fill"
+            />
+          }
+          prefix={<SearchOutlined />}
+          placeholder="搜索内容"
+          style={{ width: 300 }}
+        />
+        {/* 操作栏 */}
+        <Space>
+          <TooltipButton title="实验室" icon={<ExperimentOutlined />} />
+          <TooltipButton title="问题" icon={<HuosRemixIcon type="icon-record-circle-line" />} />
+          <TooltipButton title="信息" icon={<InboxOutlined />} />
         </Space>
-        <Avatar size={35} shape="square" src="https://i.pravatar.cc/150" />
+        {/* 用户信息 */}
+        <UserProfileDrawer />
       </Space>
     </div>
-  )
-}
+  );
+};

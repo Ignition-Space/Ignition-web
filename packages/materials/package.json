@@ -1,14 +1,10 @@
 {
-  "name": "@lgnition-lowcode/materials",
+  "name": "@huos/materials",
   "version": "1.0.0",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "vite build --watch",
     "build": "vite build"
   },
@@ -25,4 +21,12 @@
     "framer-motion": "^10.15.0",
     "re-resizable": "^6.9.9"
   }
+=======
+    "start": "tsup --watch",
+    "build": "tsup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+>>>>>>> next
 }
