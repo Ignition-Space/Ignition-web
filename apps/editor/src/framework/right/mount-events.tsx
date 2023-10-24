@@ -99,7 +99,7 @@ export const MountEvents = () => {
               defaultCollapsed={true}
               bordered
               size="small"
-              title={`事件${meta.index}`}
+              title={`事件${meta.index + 1}`}
               style={{ marginBlockEnd: 8 }}
               extra={action}
               bodyStyle={{ paddingBlockEnd: 0 }}
