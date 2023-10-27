@@ -4,8 +4,8 @@ import * as DefaultMaterials from "./components";
 import * as ArcoMaterials from "./components/design/arco";
 import { RenderNodeWrapper } from "./render-wrapper";
 import { EmptySetter } from '@/framework/canvas/empty-render'
+import { useSchema } from './stores/useSchema'
 import { jsRuntime } from '@huos/core'
-import { useMount } from "ahooks";
 
 
 export interface EditoRootWrapperProps {
@@ -15,10 +15,11 @@ export interface EditoRootWrapperProps {
 
 export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
 
-  // 生命周期实现
-  useMount(() => {
-    jsRuntime.loadJS("https://www.unpkg.com/dayjs@1.11.9/dayjs.min.js")
-  })
+  const { jsMoudleCode } = useSchema();
+
+  React.useEffect(() => {
+    jsRuntime.mountJsMoudle(jsMoudleCode)
+  }, [jsMoudleCode])
 
   return (
     <RootEditor

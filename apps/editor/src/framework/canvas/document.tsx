@@ -25,6 +25,7 @@ export const DocumentNodes = () => {
 
   useAsyncEffect(async () => {
     const cjsCode = await sucraseTransformCode(jsMoudleCode)
+    console.log(cjsCode, 'cjsCode')
     const { exports  } = compileModuleResolve(cjsCode);
     (window as any)[ScopeMoudleId] = {
       jsMoudle: exports
