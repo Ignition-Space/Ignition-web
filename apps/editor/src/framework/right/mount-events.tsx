@@ -8,7 +8,10 @@ import {
 } from "@ant-design/pro-components";
 import { useEditor } from "@craftjs/core";
 import { AutoComplete, Form } from "antd";
-import { merge } from 'lodash'
+import { getHuosScopeJsMoudle } from '@huos/core';
+import { useSchema } from '../stores/useSchema';
+import { filter, omit } from 'lodash';
+import { toOptions } from '@huos/setter';
 
 const defaultOptions = [
   {
@@ -25,6 +28,7 @@ export const MountEvents = () => {
 
 
   const [form] = Form.useForm<any>();
+  const [methodOptions, setMethodOptions] = React.useState<any[]>([])
 
   const {
     id: nodeId,
@@ -69,6 +73,21 @@ export const MountEvents = () => {
     }
   }, [nodeId])
 
+  const handleOnMoudleSearch = (searchVal: string) => {
+   try {
+    console.log('handleOnMoudleSearch')
+    const jsMoudle =  getHuosScopeJsMoudle() || {}
+    console.log(Object.keys(jsMoudle), 'handleOnMoudleSearch')
+    const moudleKeys = Object.keys(jsMoudle)
+
+    const optionkeys = filter(moudleKeys, (key: string) => key.includes(searchVal))
+
+    setMethodOptions(toOptions(optionkeys))
+   } catch (error) {
+    console.log(error)
+   }
+  }
+
   return (
     <ProForm
       style={{
@@ -112,12 +131,17 @@ export const MountEvents = () => {
           eventName: "handle$Event",
         }}
       >
-        <ProFormText
+        <ProFormItem style={{ padding: 0 }}
+          name="eventName"
+          label="事件名称" >
+          <AutoComplete onSearch={handleOnMoudleSearch} options={methodOptions}  />
+        </ProFormItem>
+        {/* <ProFormText
           style={{ padding: 0 }}
           width="md"
           name="eventName"
           label="事件名称"
-        />
+        /> */}
         <ProFormItem style={{ padding: 0 }}
           name="propName"
           label="绑定事件"

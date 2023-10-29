@@ -65,6 +65,7 @@ const handleMountJsMoudle = async (
   const cjsCode = await sucraseTransformCode(code)
   if (cjsCode) {
     const module = compileModuleResolve(cjsCode, sandbox.huosScope.depends)
+    console.log(module, 'module')
     sandbox.huosScope.jsMoudle = module.exports 
     logger.info("JS模块挂载成功")
   }

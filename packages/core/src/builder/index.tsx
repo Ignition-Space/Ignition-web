@@ -38,7 +38,7 @@ export const babelTransformCode = async (code: string) => {
 };
 
 /**
- * esbuild、swc等这些基于原生语言的wasm的编译器。
+ * wasm容器打包方案
  * @description 激进策略，需要支持wasm, 且加载一个wasm容器。
  * @param code 需要编译的代码,
  */
@@ -47,6 +47,11 @@ export const wasmTransformCode = async (code: string) => {
   return code;
 };
 
+/**
+ * 
+ * @param code cjs代码
+ * @param dependencies 模块依赖
+ */
 export const compileModuleResolve = (
   code: string,
   dependencies: Record<string, any> = {}
