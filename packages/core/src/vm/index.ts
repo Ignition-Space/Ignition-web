@@ -46,12 +46,12 @@ const handleExecuteEvalCode = (
  * @param cdnUrl 包地址
  */
 const handleInstallNpm = async (packageName: string, cdnUrl?: string) => {
-  if (cdnUrl) {
-    const data = await import(cdnUrl)
-    console.log(data, 'data')
-  } else {
-    logger.error("CDN路径不存在")
-  }
+  // if (cdnUrl) {
+  //   const data = await import(cdnUrl)
+  //   console.log(data, 'data')
+  // } else {
+  //   logger.error("CDN路径不存在")
+  // }
 }
 
 /**

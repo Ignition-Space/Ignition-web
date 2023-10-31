@@ -16,6 +16,8 @@
     "@huos/core": "workspace:^",
     "@huos/icons": "workspace:^",
     "@huos/setter": "workspace:^",
+    "@tanstack/react-query": "^5.4.3",
+    "@tanstack/react-query-devtools": "^5.4.3",
     "primereact": "^10.0.2",
     "re-resizable": "^6.9.11",
     "react-frame-component": "^5.2.6"
