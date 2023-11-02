@@ -2,6 +2,7 @@ import React from "react";
 import { theme, Tabs, TabsProps, ConfigProvider } from "antd";
 import { MountSettings } from "./mount-settings";
 import { MountEvents } from "./mount-events";
+import { ComponentDoTCode } from './component-code'
 import { css } from "@emotion/css";
 
 export const Right = () => {
@@ -41,6 +42,11 @@ export const Right = () => {
       label: "事件",
       children: <MountEvents />,
     },
+    {
+      key: 'component',
+      label: '代码',
+      children: <ComponentDoTCode/>
+    }
   ];
 
   return (

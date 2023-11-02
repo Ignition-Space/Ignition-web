@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 export interface SchemaInfo {
   opertionDate: number;
   jsMoudleCode: string;
+  schema: string,
 }
 
 
@@ -18,6 +19,7 @@ export interface ISchemaState extends SchemaInfo {
 export const useSchema = create<ISchemaState>()(immer((set) => ({
   jsMoudleCode: '',
   opertionDate: dayjs().valueOf(),
+  schema: '',
   setJsModuleCode: (code) => {
     set((state) => {
       state.opertionDate = dayjs().valueOf()

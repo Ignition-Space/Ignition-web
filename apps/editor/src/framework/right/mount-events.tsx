@@ -8,7 +8,7 @@ import {
 } from "@ant-design/pro-components";
 import { useEditor } from "@craftjs/core";
 import { AutoComplete, Form } from "antd";
-import { getHuosScopeJsMoudle } from '@huos/core';
+import { getHuosScopeJsModule } from '@huos/core';
 import { useSchema } from '../stores/useSchema';
 import { filter, omit } from 'lodash';
 import { toOptions } from '@huos/setter';
@@ -76,7 +76,7 @@ export const MountEvents = () => {
   const handleOnMoudleSearch = (searchVal: string) => {
    try {
     console.log('handleOnMoudleSearch')
-    const jsMoudle =  getHuosScopeJsMoudle() || {}
+    const jsMoudle =  getHuosScopeJsModule() || {}
     console.log(Object.keys(jsMoudle), 'handleOnMoudleSearch')
     const moudleKeys = Object.keys(jsMoudle)
 

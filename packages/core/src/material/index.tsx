@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
 import { forEach } from "lodash";
 import { ScopeMoudleId } from '../utils'
+import { getHuosScopeJsModule } from "..";
 
 export type ReactMaterialComponent = UserComponent;
 
@@ -42,11 +43,13 @@ const withConnectNode = (
     }));
     const memoizdProps = useParseBinding(props, id);
 
+    const jsModule = getHuosScopeJsModule()
+
     const eventProps = React.useMemo(() => {
       let eventMap: Record<string, Function> = {}
       forEach(__events, (item) => {
         if (item.propName && item.eventName) {
-          eventMap[item.propName] = (window as any)?.[ScopeMoudleId]["jsMoudle"]?.[item.eventName]
+          eventMap[item.propName] = jsModule?.[item.eventName] as Function
         }
       })
       return eventMap

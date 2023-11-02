@@ -1,11 +1,11 @@
 import { connectJsRuntimeVM } from "./iframe"
 
-export const getHuosScopeJsMoudle = () => {
+export const getHuosScopeJsModule = () => {
   try {
     const { sandbox } = connectJsRuntimeVM()
-    return sandbox.huosScope.jsMoudle
+    return sandbox?.huosScope?.jsMoudle
   } catch (error) {
-    throw new Error(`getHuosScopeJsMoudle Error...`)
+    throw new Error(`getHuosScopeJsModule Error...`)
   }
 }
 

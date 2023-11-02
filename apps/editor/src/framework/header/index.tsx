@@ -5,15 +5,15 @@ import { Publish } from "./toolbar/publish";
 import { Priview } from "./toolbar/preview";
 import { AppMenus } from "./menus";
 import { ToolBar } from "./toolbar";
-import { ConfigSettings } from '../common/settings'
+import { ConfigSettings } from "../common/settings";
 
 export const Header: React.FC = () => {
   const { token } = theme.useToken();
 
   const classes = {
     header: css({
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr',
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr 1fr",
       paddingInline: token.paddingSM,
       height: "50px",
       border: `1px solid ${token.colorBorderSecondary}`,
@@ -23,10 +23,10 @@ export const Header: React.FC = () => {
     }),
 
     flex: css({
-      display: 'flex',
-      alignItems: 'center',
-      gap: 6
-    })
+      display: "flex",
+      alignItems: "center",
+      gap: 6,
+    }),
   };
 
   return (
@@ -46,28 +46,24 @@ export const Header: React.FC = () => {
         closable
       />
       <div className={classes.header}>
-        <div className={classes.flex} style={{
-          justifyContent: 'flex-start'
-        }} >
+        <div
+          className={classes.flex}
+          style={{
+            justifyContent: "flex-start",
+          }}
+        >
           <AppMenus />
           <Divider
             style={{ marginInline: 8, borderColor: "rgb(229,230,235)" }}
             type="vertical"
           />
-          <div>
-            <Typography.Text
-              strong
-              editable={{
-                autoSize: true,
-              }}
-            >
-              标准标题
-            </Typography.Text>
-          </div>
+          <Space>
+            <Typography.Text>标准标题</Typography.Text>
+          </Space>
         </div>
         <ToolBar />
-        <div className={classes.flex} style={{ justifyContent: 'flex-end' }} >
-          <ConfigSettings/>
+        <div className={classes.flex} style={{ justifyContent: "flex-end" }}>
+          <ConfigSettings />
           <Priview />
           <Publish />
         </div>
