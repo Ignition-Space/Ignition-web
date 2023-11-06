@@ -4,25 +4,12 @@ import {
   ProForm,
   ProFormItem,
   ProFormList,
-  ProFormText,
 } from "@ant-design/pro-components";
 import { useEditor } from "@craftjs/core";
 import { AutoComplete, Form } from "antd";
 import { getHuosScopeJsModule } from '@huos/core';
-import { useSchema } from '../stores/useSchema';
-import { filter, omit } from 'lodash';
+import { filter } from 'lodash';
 import { toOptions } from '@huos/setter';
-
-const defaultOptions = [
-  {
-    label: "(onClick)点击事件",
-    value: "onClick",
-  },
-  {
-    label: "(onChange)修改事件",
-    value: "onChange",
-  },
-];
 
 export const MountEvents = () => {
 
@@ -34,15 +21,19 @@ export const MountEvents = () => {
     id: nodeId,
     events,
     actions,
+    eventOptions
   } = useEditor((state) => {
     const [currentNodeId] = state.events.selected;
 
     if (currentNodeId) {
       const { data } = state.nodes[currentNodeId];
 
+      console.log(data, 'data')
+
       return {
         id: currentNodeId,
-        events: data.props?.__events
+        events: data.props?.__events,
+        eventOptions: data?.custom?.eventOptions || []
       };
     }
   });
@@ -146,7 +137,7 @@ export const MountEvents = () => {
           name="propName"
           label="绑定事件"
            >
-          <AutoComplete options={defaultOptions} />
+          <AutoComplete options={eventOptions} />
         </ProFormItem>
       </ProFormList>
     </ProForm>
