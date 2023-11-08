@@ -69,7 +69,6 @@ export const compileModuleResolve = (
     if (dependencies[packageName]) {
       return dependencies[packageName];
     }
-    throw new Error(`${packageName} is not found.`);
   };
   // 动态执行
   Function("require, exports, module", code)(require, module.exports, module);

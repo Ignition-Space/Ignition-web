@@ -34,6 +34,7 @@ const withConnectNode = (
   WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>,
 ): ReactMaterialComponent => {
   return function ({ children, __events = [], ...props }: Record<string, any>) {
+    const jsModuleRef = React.useRef(getHuosScopeJsModule())
     const {
       connectors: { connect, drag },
       id,
@@ -43,17 +44,18 @@ const withConnectNode = (
     }));
     const memoizdProps = useParseBinding(props, id);
 
-    const jsModule = getHuosScopeJsModule()
-
     const eventProps = React.useMemo(() => {
       let eventMap: Record<string, Function> = {}
       forEach(__events, (item) => {
         if (item.propName && item.eventName) {
-          eventMap[item.propName] = jsModule?.[item.eventName] as Function
+          const fn = jsModuleRef.current?.[item.eventName] as Function
+          eventMap[item.propName] = (...args: any) => fn(...args)
         }
       })
       return eventMap
     }, [__events])
+
+    console.log(eventProps, 'eventProps')
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >

@@ -8,6 +8,7 @@ import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
 import { CanvasRootId, compileModuleResolve, sucraseTransformCode, ScopeMoudleId } from "@huos/core";
 import { useSchema } from '@/framework/stores/useSchema'
 import { useAsyncEffect } from "ahooks";
+import dayjs from 'dayjs'
 
 export const DocumentNodes = () => {
   const { document: canvasDocument } = useFrame();
@@ -26,7 +27,17 @@ export const DocumentNodes = () => {
   useAsyncEffect(async () => {
     const cjsCode = await sucraseTransformCode(jsMoudleCode)
     console.log(cjsCode, 'cjsCode')
-    const { exports  } = compileModuleResolve(cjsCode);
+    const { exports  } = compileModuleResolve(cjsCode, {
+      dayjs,
+      "@huso/store": {
+        getState: () => {
+          console.log('我是get方法')
+        },
+        setState: () => {
+          console.log("我是set方法")
+        }
+      }
+    });
     (window as any)[ScopeMoudleId] = {
       jsMoudle: exports
     }

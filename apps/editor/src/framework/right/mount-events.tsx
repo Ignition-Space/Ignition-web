@@ -28,8 +28,6 @@ export const MountEvents = () => {
     if (currentNodeId) {
       const { data } = state.nodes[currentNodeId];
 
-      console.log(data, 'data')
-
       return {
         id: currentNodeId,
         events: data.props?.__events,
