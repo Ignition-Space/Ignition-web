@@ -13,6 +13,7 @@ const classes = {
     fontSize: 20,
     transition: 'color 0.85s',
     ["&:hover"]: {
+      // background: '#',
       color: "#1677ff"
     }
   })
@@ -21,7 +22,7 @@ const classes = {
 export const AppMenus = () => {
   return (
     <div className={classes.btn} >
-      <HuosRemixIcon className={classes.icon} type="icon-apps-2-line" />
+      <HuosRemixIcon className={classes.icon} type="icon-menu-fill" />
     </div>
   )
 }
