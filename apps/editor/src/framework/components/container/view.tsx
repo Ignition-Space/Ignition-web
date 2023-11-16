@@ -1,22 +1,14 @@
-import { ReactMaterialViewType, CanvasRootId } from "@huos/core";
-import { ConfigProvider } from '@arco-design/web-react'
-import React from 'react';
+import React from "react";
+import { ReactMaterialViewType } from "@huos/core";
 
-
-export const ProviderView: ReactMaterialViewType<React.CSSProperties & {
-  children: React.ReactNode;
-}> = ({
-  children,
-  ...props
-}, ref: any) => {
-
-  const iframe = document.getElementById(CanvasRootId) as HTMLIFrameElement
-
+export const ProviderView: ReactMaterialViewType<
+  React.CSSProperties & {
+    children: React.ReactNode;
+  }
+> = ({ children, ...props }, ref: any) => {
   return (
-    <ConfigProvider getPopupContainer={() => iframe.contentDocument?.body || document.body} >
-      <div ref={ref} style={{ ...props }} >
-        {children}
-      </div>
-    </ConfigProvider>
+    <div ref={ref} style={{ ...props }}>
+      {children}
+    </div>
   );
 };

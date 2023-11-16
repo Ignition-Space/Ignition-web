@@ -5,7 +5,7 @@ import router from "./router";
 import "antd/dist/reset.css";
 
 const token = {
-  borderRadius: 3,
+  borderRadius: 6,
   wireframe: false,
 };
 

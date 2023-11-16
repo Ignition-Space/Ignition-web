@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ant-design/cssinjs": "^1.17.0",
+    "@ant-design/cssinjs": "^1.17.2",
     "@ant-design/icons": "^5.2.5",
     "@ant-design/pro-components": "^2.6.11",
     "@codemirror/lang-javascript": "^6.1.9",
@@ -30,7 +30,7 @@
     "@uiw/react-codemirror": "^4.21.9",
     "@uiw/react-textarea-code-editor": "^2.1.7",
     "ahooks": "^3.7.8",
-    "antd": "^5.10.0",
+    "antd": "^5.11.1",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
     "framer-motion": "^10.16.4",

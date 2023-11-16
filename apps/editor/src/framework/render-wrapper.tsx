@@ -86,8 +86,7 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
         ? ReactDOM.createPortal(
             <div
               ref={currentRef}
-              className="px-2 py-2 text-white bg-primary fixed flex items-center"
-              style={{
+              css={{
                 left: dom ? getPos(dom).left : undefined,
                 top: dom ? getPos(dom).top : undefined,
                 zIndex: 9999,
@@ -100,7 +99,8 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
                 minWidth: "max-content",
                 height: 30,
                 color: '#fff',
-                paddingInline: 6
+                paddingInline: 6,
+                fontSize: 14
               }}
             >
              {name}

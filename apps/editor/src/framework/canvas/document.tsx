@@ -60,10 +60,6 @@ export const DocumentNodes = () => {
           height="100%"
           width="100%"
         >
-          <Element canvas is={__Box__}>
-            <__ArcoButton__ />
-          </Element>
-          <__ArcoProTable__ />
         </Canvas>
       </DocumentFrame>
     </div>

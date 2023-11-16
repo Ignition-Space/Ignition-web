@@ -1,12 +1,12 @@
 import React from "react";
-import { CanvasRootId } from '@huos/core'
+import { CanvasRootId } from "@huos/core";
 import ReactFrameComponent, {
   FrameContextConsumer,
 } from "react-frame-component";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { css } from "@emotion/css";
-import { StyleProvider } from '@ant-design/cssinjs';
+import { StyleProvider, createCache as createCacheByAntd } from "@ant-design/cssinjs";
 
 export interface IFrameProps {
   children?: React.ReactNode;
@@ -23,8 +23,7 @@ const classes = {
 };
 
 export const IFrame: React.FC<IFrameProps> = (props) => {
-
-  const iframeRef = React.useRef<HTMLIFrameElement>(null)
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
 
   return (
     <ReactFrameComponent
@@ -33,9 +32,10 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
       head={
         <>
           <style>
-            <link href="https://cdn.skypack.dev/sanitize.css" rel="stylesheet" />
-            <link href="https://unpkg.com/@arco-design/web-react@2.53.2/dist/css/arco.css" rel="stylesheet" ></link>
-            <link href="https://cdn.jsdelivr.net/npm/primereact@10.0.2/resources/themes/lara-light-indigo/theme.css" rel="stylesheet" />
+            <link
+              href="https://cdn.skypack.dev/sanitize.css"
+              rel="stylesheet"
+            />
             {`
             .editor-component-active {
               position: relative;
@@ -77,20 +77,25 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
             
             `}
           </style>
-          <script src="https://www.unpkg.com/draggable-polyfill@1.2.4/index.js" ></script>
+          <script src="https://www.unpkg.com/draggable-polyfill@1.2.4/index.js"></script>
         </>
       }
       className={classes.iframe}
     >
-      <FrameContextConsumer >
-        {({ document }) => {
+      <FrameContextConsumer>
+        {({ document: _document }) => {
           const cache = createCache({
             key: "iframe",
-            container: document?.head,
+            container: _document?.head,
           });
+          const antdCache = createCacheByAntd()
           return (
-            <StyleProvider container={document?.head} >
-              <CacheProvider value={cache}>{props.children}</CacheProvider>
+            <StyleProvider defaultCache={false} container={_document?.body} cache={antdCache} >
+              <CacheProvider value={cache}>
+                <StyleProvider cache={antdCache} >
+                  {props.children}
+                </StyleProvider>
+              </CacheProvider>
             </StyleProvider>
           );
         }}

@@ -1,9 +1,9 @@
 import React from "react";
 import { Editor as RootEditor, Options, 
   DefaultEventHandlers,
-  DefaultEventHandlersOptions, NodeId } from "@craftjs/core";
+  NodeId } from "@craftjs/core";
 import * as DefaultMaterials from "./components";
-import * as ArcoMaterials from "./components/design/arco";
+import * as AntDMaterials from "./components/design/antd";
 import { RenderNodeWrapper } from "./render-wrapper";
 import { EmptySetter } from "@/framework/canvas/empty-render";
 import { useSchema } from "./stores/useSchema";
@@ -62,7 +62,7 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
   return (
     <ReactQeuryProvider>
       <RootEditor
-        resolver={{ ...DefaultMaterials, ...ArcoMaterials, EmptySetter }}
+        resolver={{ ...DefaultMaterials, EmptySetter, ...AntDMaterials }}
         onRender={RenderNodeWrapper}
         onNodesChange={handleEditorChange}
 
