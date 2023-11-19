@@ -55,7 +55,6 @@ const withConnectNode = (
       return eventMap
     }, [__events])
 
-    console.log(eventProps, 'eventProps')
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender} >

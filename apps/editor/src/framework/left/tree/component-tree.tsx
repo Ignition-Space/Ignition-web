@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Tree } from "antd";
+import { Flex, Tree } from "antd";
 import type { DataNode } from "antd/es/tree";
 import { useEditor, SerializedNodes, SerializedNode } from "@craftjs/core";
 
@@ -40,11 +40,20 @@ export const ComponentTree: React.FC = () => {
 
   return (
     <div>
-      <Tree
+      <Tree.DirectoryTree
+        showIcon={false}
         defaultExpandedKeys={["ROOT"]}
         defaultExpandParent
         blockNode
         treeData={nodes}
+        titleRender={(node) => {
+          return (
+            <Flex justify="space-between" >
+              <Flex>{node.title as any}</Flex>
+              <Flex>2</Flex>
+            </Flex>
+          )
+        }}
       />
     </div>
   );

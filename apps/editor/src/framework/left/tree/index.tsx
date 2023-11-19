@@ -4,7 +4,6 @@ export const Tree = () => {
   return (
     <div>
       <ComponentTree/>
-      111
     </div>
   )
 }

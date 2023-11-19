@@ -2,11 +2,11 @@ import React from "react";
 import _ from "lodash";
 import { useEditor, Canvas } from "@craftjs/core";
 import { css } from "@emotion/css";
-import { theme } from "antd";
+import { Flex, theme } from "antd";
 import { SlackCircleFilled } from "@ant-design/icons";
 
 export interface MaterialProps {
-  components: Record<string, any>
+  components: Record<string, any>;
 }
 
 export const Materials: React.FC<MaterialProps> = (props) => {
@@ -24,7 +24,6 @@ export const Materials: React.FC<MaterialProps> = (props) => {
       border: `1px solid #e4e4e7`,
       paddingInline: token.paddingSM,
       paddingBlock: 8,
-      borderRadius: 8,
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -48,6 +47,7 @@ export const Materials: React.FC<MaterialProps> = (props) => {
     <div className={classes.list}>
       {_.map(props.components, (value, key: string) => {
         const displayName = value.craft?.displayName;
+        const { icon } = value.craft.related || {};
         const { useCanvas = false } = value.craft?.custom || {};
         return (
           <div
@@ -55,12 +55,23 @@ export const Materials: React.FC<MaterialProps> = (props) => {
             className={classes.item}
             ref={(ref: HTMLDivElement) => {
               if (ref) {
-                connectors.create(ref, useCanvas ? <Canvas canvas is={value} /> : React.createElement(value));
+                connectors.create(
+                  ref,
+                  useCanvas ? (
+                    <Canvas canvas is={value} />
+                  ) : (
+                    React.createElement(value)
+                  )
+                );
               }
             }}
           >
-            <SlackCircleFilled />
-            {displayName}
+            <Flex vertical justify="center" align="center" gap={8}>
+              <div style={{ fontSize: 16}} >
+              {icon ? React.createElement(icon) : null}
+              </div>
+              {displayName}
+            </Flex>
           </div>
         );
       })}
