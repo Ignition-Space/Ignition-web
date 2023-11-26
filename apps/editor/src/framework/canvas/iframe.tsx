@@ -7,6 +7,7 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { css } from "@emotion/css";
 import { StyleProvider, createCache as createCacheByAntd } from "@ant-design/cssinjs";
+import { ConfigProvider } from "antd";
 
 export interface IFrameProps {
   children?: React.ReactNode;
@@ -90,13 +91,15 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
           });
           const antdCache = createCacheByAntd()
           return (
-            <StyleProvider defaultCache={false} container={_document?.body} cache={antdCache} >
+            <ConfigProvider getPopupContainer={() => _document ? _document.body : document.body} >
+              <StyleProvider defaultCache={false} container={_document?.body} cache={antdCache} >
               <CacheProvider value={cache}>
                 <StyleProvider cache={antdCache} >
                   {props.children}
                 </StyleProvider>
               </CacheProvider>
             </StyleProvider>
+            </ConfigProvider>
           );
         }}
       </FrameContextConsumer>

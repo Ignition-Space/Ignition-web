@@ -2,7 +2,7 @@ import React from "react";
 import { __Provider__, __Box__ } from "@/framework/components";
 import { __ArcoButton__ } from "@/framework/components/design/arco/button";
 import { __ArcoProTable__ } from "@/framework/components/design/arco/pro-table";
-import { Canvas, Frame as DocumentFrame, Element } from "@craftjs/core";
+import { Canvas, Frame as DocumentFrame } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
 import { CanvasRootId, compileModuleResolve, sucraseTransformCode, ScopeMoudleId } from "@huos/core";
@@ -52,7 +52,7 @@ export const DocumentNodes = () => {
         paddingInline: 12
       }}
     >
-      <DocumentFrame>
+      <DocumentFrame >
         <Canvas
           canvas
           is={__Provider__}

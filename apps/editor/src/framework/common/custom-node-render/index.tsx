@@ -3,21 +3,25 @@ import * as React from "react";
 import { useNode, useEditor } from "@craftjs/core";
 import ReactDOM from "react-dom";
 import { useFrame } from "react-frame-component";
-import { DragOutlined } from "@ant-design/icons";
+import { DragOutlined, HolderOutlined } from "@ant-design/icons";
+import { Button, Flex, Popover, Space, Tooltip, Typography, theme } from "antd";
+import { PortalOperationNode } from "./portal";
+import { css } from "@emotion/react";
 
 export interface RenderNodeWrapperProps {
   render: React.ReactElement;
 }
 
-export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
+export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
   render,
 }) => {
   const { id } = useNode();
+  const { token } = theme.useToken();
   const currentRef = React.useRef<HTMLDivElement>(null);
   const { query, isActive, isHovered } = useEditor((state, queryEditor) => {
     const [selectId] = state.events.selected;
     const [hoverId] = state.events.hovered;
-    const [ dragged ] = state.events.dragged
+    const [dragged] = state.events.dragged;
     return {
       isActive: queryEditor.getEvent("selected").contains(id),
       isHovered: queryEditor.getEvent("hovered").contains(id),
@@ -43,11 +47,10 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
       deletable: query.node(node.id).isDeletable(),
       name: node.data.displayName,
       isResize: node.data.custom.useResize || false,
-    }
+    };
   });
 
   const { document: canvasDocument } = useFrame();
-
 
   React.useEffect(() => {
     if (dom) {
@@ -69,51 +72,63 @@ export const RenderNodeWrapper: React.FC<RenderNodeWrapperProps> = ({
     }
   }, [dom, isHovered, isRootNode, isActive]);
 
-  const getPos = React.useCallback((dom: HTMLElement) => {
-    const { top, left, bottom } = dom
-      ? dom.getBoundingClientRect()
-      : { top: 0, left: 0, bottom: 0 };
-    return {
-      top: top > 0 ? top : bottom,
-      left: left,
-    };
-  }, []);
-
-
   return (
     <>
-      {isHovered || isActive
+      {dom && isActive
         ? ReactDOM.createPortal(
             <div
-              ref={currentRef}
-              css={{
-                left: dom ? getPos(dom).left : undefined,
-                top: dom ? getPos(dom).top : undefined,
-                zIndex: 9999,
-                position: "fixed",
+              css={css({
+                position: "absolute",
+                bottom: -29,
+                left: 0,
                 background: "#2178ea",
-                width: "max-content",
-                transform: "translate(8px, -35px)",
-                display: 'flex',
-                alignItems: 'center',
-                minWidth: "max-content",
+                display: "flex",
                 height: 30,
-                color: '#fff',
-                paddingInline: 6,
-                fontSize: 14
-              }}
+                width: "100%",
+                maxWidth: 100,
+                zIndex: 10000,
+                pointerEvents: "none",
+                paddingInline: 4,
+              })}
             >
-             {name}
-             {
-              moveable ? <DragOutlined ref={drag as any} /> : null
-             }
+              <Flex
+                align="center"
+                css={css({
+                  pointerEvents: "auto",
+                  color: "#FFF",
+                  height: 30,
+                })}
+              >
+                {moveable ? (
+                  <Flex
+                    ref={drag as any}
+                    align="center"
+                    justify="center"
+                    css={css({
+                      height: 30,
+                      width: 30,
+                      fontWeight: 'bold'
+                    })}
+                  >
+                    <HolderOutlined />
+                  </Flex>
+                ) : null}
+                {name ? (
+                  <Flex
+                    align="center"
+                    css={css({
+                      height: 30,
+                    })}
+                  >
+                    {name}
+                  </Flex>
+                ) : null}
+              </Flex>
             </div>,
-            canvasDocument?.body as HTMLElement
+            dom!
           )
         : null}
-      {
-        render
-      }
+      {render}
     </>
   );
 };

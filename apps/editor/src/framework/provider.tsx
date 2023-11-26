@@ -4,7 +4,8 @@ import { Editor as RootEditor, Options,
   NodeId } from "@craftjs/core";
 import * as DefaultMaterials from "./components";
 import * as AntDMaterials from "./components/design/antd";
-import { RenderNodeWrapper } from "./render-wrapper";
+// import { RenderNodeWrapper } from "./render-wrapper";
+import { CustomNodeRender } from '@/framework/common/custom-node-render'
 import { EmptySetter } from "@/framework/canvas/empty-render";
 import { useSchema } from "./stores/useSchema";
 import { jsRuntime } from "@huos/core";
@@ -63,12 +64,8 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
     <ReactQeuryProvider>
       <RootEditor
         resolver={{ ...DefaultMaterials, EmptySetter, ...AntDMaterials }}
-        onRender={RenderNodeWrapper}
+        onRender={CustomNodeRender}
         onNodesChange={handleEditorChange}
-
-      handlers={(store) =>
-        new CustomEventHandlers({ store, isMultiSelectEnabled: () => false })
-      }
       >
         {props.children}
       </RootEditor>

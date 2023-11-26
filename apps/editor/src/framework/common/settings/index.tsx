@@ -22,27 +22,16 @@ const TabContent = (el: React.ReactNode) => (
 );
 
 const items: TabsProps["items"] = [
-  {
-    key: "BaseSet",
-    label: "基础设置",
-    children: TabContent(<AppConfig/>),
-  },
-  {
-    key: "GlobalCSS",
-    label: "全局CSS",
-    children: TabContent(<CssEditor/>),
-  },
 ];
 
 export const ConfigSettings = () => {
   return (
     <ModalForm
-      
-      title="应用设置"
+      title="应用配置"
       submitter={false}
       trigger={<Button icon={<HuosRemixIcon type="icon-settings-3-line" />} />}
     >
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+      <Tabs items={items} />
     </ModalForm>
   );
 };

@@ -16,6 +16,7 @@ const classes = {
     display: "grid",
     gridTemplateColumns: "auto 1fr 300px",
     height: "100%",
+    position: 'relative',
   }),
 };
 
