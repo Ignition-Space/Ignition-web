@@ -3,9 +3,8 @@ import {
   ProFormText,
   QueryFilter,
 } from "@ant-design/pro-components";
-import { Card, Space, Avatar, Row, Col, Pagination, Spin } from "antd";
+import { Card,  Row, Col, Pagination } from "antd";
 import { Header } from "./header";
-import { right } from "@/tools/css";
 import { css } from "@emotion/css";
 import { AppCard } from "./card";
 
@@ -54,7 +53,7 @@ export default () => {
                 }}
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 122].map((key) => (
-                  <Col span={8} key={key} >
+                  <Col key={key} xxl={4} lg={8} md={8} xs={12} >
                     <AppCard />
                   </Col>
                 ))}

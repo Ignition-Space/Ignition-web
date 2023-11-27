@@ -53,8 +53,7 @@ export const OutletLayout = () => {
         <a onClick={() => handleMenuRouteChange(item.path)}>{dom}</a>
       )}
       contentStyle={{
-        maxWidth: "1320px",
-        margin: "0 auto",
+        // maxWidth: "1320px",
         height: 'calc(100vh - 56px)',
       }}
       
