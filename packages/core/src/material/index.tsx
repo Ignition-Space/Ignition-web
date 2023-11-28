@@ -3,19 +3,23 @@ import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
 import { forEach } from "lodash";
-import { ScopeMoudleId } from '../utils'
 import { getHuosScopeJsModule } from "..";
+import { Button, Popover } from 'antd'
 
 export type ReactMaterialComponent = UserComponent;
 
-export type ReactMaterialViewType<P = any, T = (dom: Element) => void> = React.ForwardRefRenderFunction<T, P>
+export type ReactMaterialViewType<
+  P = any,
+  T = (dom: Element) => void
+> = React.ForwardRefRenderFunction<T, P>;
 
 /** HOC类型 */
-export type FunctionComponent<T = any> = React.FC<{
-  mountRef: (dom: HTMLElement) => void;
-  children?: React.ReactNode;
-} & T>
-
+export type FunctionComponent<T = any> = React.FC<
+  {
+    mountRef: (dom: HTMLElement) => void;
+    children?: React.ReactNode;
+  } & T
+>;
 
 const fallbackRender = (props: any) => {
   return (
@@ -31,43 +35,48 @@ const fallbackRender = (props: any) => {
  * @param { React.FunctionComponent } WrappedComponent 设计组件
  */
 const withConnectNode = (
-  WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>,
+  WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
 ): ReactMaterialComponent => {
   return function ({ children, __events = [], ...props }: Record<string, any>) {
-    const jsModuleRef = React.useRef(getHuosScopeJsModule())
+    const jsModuleRef = React.useRef(getHuosScopeJsModule());
     const {
       connectors: { connect, drag },
       id,
-      custom
+      custom,
     } = useNode((evt) => ({
-      custom: evt.data.custom
+      custom: evt.data.custom,
     }));
     const memoizdProps = useParseBinding(props, id);
 
     const eventProps = React.useMemo(() => {
-      let eventMap: Record<string, Function> = {}
+      let eventMap: Record<string, Function> = {};
       forEach(__events, (item) => {
         if (item.propName && item.eventName) {
-          const fn = jsModuleRef.current?.[item.eventName] as Function
-          eventMap[item.propName] = (...args: any) => fn(...args)
+          const fn = jsModuleRef.current?.[item.eventName] as Function;
+          eventMap[item.propName] = (...args: any) => fn(...args);
         }
-      })
-      return eventMap
-    }, [__events])
-
+      });
+      return eventMap;
+    }, [__events]);
 
     return (
-      <ErrorBoundary fallbackRender={fallbackRender} >
-        <WrappedComponent ref={(dom) => {
-          if (custom.useResize) {
-            connect(dom)
-          } else {
-            connect(drag(dom))
-          }
-        }} {...memoizdProps} {...eventProps} >{children}</WrappedComponent>
+      <ErrorBoundary fallbackRender={fallbackRender}>
+        <WrappedComponent
+          ref={(dom) => {
+            if (custom.useResize) {
+              connect(dom);
+            } else {
+              connect(drag(dom));
+            }
+          }}
+          {...memoizdProps}
+          {...eventProps}
+        >
+          {children}
+        </WrappedComponent>
       </ErrorBoundary>
     );
-  }
+  };
 };
 
 /**
@@ -75,15 +84,18 @@ const withConnectNode = (
  * @param { ReactMaterialComponent } component  物料组件
  * @param { UserComponentConfig } config 物料配置
  */
-export const createReactMaterial = <T = any>(
+export const createReactMaterial = <T = any,>(
   component: any,
   config: Partial<UserComponentConfig<T>>,
   defaultProps?: Record<string, any>
 ) => {
   // hoc的compose函数执行，
-  const forwardComponent = React.forwardRef<(dom: HTMLElement) => void, {}>(component)
-  forwardComponent.defaultProps = defaultProps
-  const MaterialNode: ReactMaterialComponent = withConnectNode(forwardComponent)
+  const forwardComponent = React.forwardRef<(dom: HTMLElement) => void, {}>(
+    component
+  );
+  forwardComponent.defaultProps = defaultProps;
+  const MaterialNode: ReactMaterialComponent =
+    withConnectNode(forwardComponent);
   MaterialNode.craft = config;
 
   return MaterialNode;
