@@ -1,14 +1,22 @@
 import React from "react";
 import type { MenuProps } from "antd";
-import { ConfigProvider, Menu } from "antd";
+import { Button, Card, ConfigProvider, Flex, Input, Menu, Space, Typography } from "antd";
 import { useSchema } from "@/framework/stores/useSchema";
 import { SerializedNodes } from "@craftjs/core";
+import { useDebounceEffect } from "ahooks";
+import { css } from "@emotion/css";
+import { SearchOutlined, ClearOutlined } from "@ant-design/icons";
+import { HuosRemixIcon } from "@huos/icons";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-function convertToTree(data: SerializedNodes): MenuItem[] {
+function convertToTree(data: SerializedNodes): {
+  items: MenuItem[];
+  openKeys: string[];
+} {
   const rootNode = data["ROOT"];
   const tree: MenuItem[] = [];
+  const openKeys: string[] = [];
 
   function traverse(nodeId: string): MenuItem {
     const node = data[nodeId];
@@ -20,6 +28,11 @@ function convertToTree(data: SerializedNodes): MenuItem[] {
       children: nodes.length > 0 ? nodes.map(traverse) : undefined,
     };
 
+    if (nodes.length > 0) {
+      console.log(nodes, 'nodes')
+      openKeys.push(nodeId);
+    }
+
     return treeItem;
   }
 
@@ -27,42 +40,71 @@ function convertToTree(data: SerializedNodes): MenuItem[] {
     tree.push(traverse("ROOT"));
   }
 
-  return tree;
+  return {
+    items: tree,
+    openKeys,
+  };
+}
+
+const classes = {
+  tree: css({
+    paddingBlock: 12,
+    paddingInline: 4
+  }),
+  search: css({
+    paddingInline: 12
+  })
 }
 
 export const Tree = () => {
   const { serializeNodes } = useSchema();
+  const [menuItems, setMenuItems] = React.useState<MenuItem[]>([]);
+  const [menuOpenKeys, setMenuOpenKeys] = React.useState<string[]>([]);
 
-  const ndoeTreeData = React.useMemo(() => {
+  useDebounceEffect(() => {
     if (serializeNodes) {
-      console.log(serializeNodes, "serializeNodes");
-      return convertToTree(serializeNodes);
+      const { items, openKeys } = convertToTree(serializeNodes);
+      setMenuOpenKeys((oldState) => {
+        return [...oldState, ...openKeys];
+      });
+      setMenuItems(items);
     }
-    return [];
   }, [serializeNodes]);
 
-  console.log(ndoeTreeData, "ndoeTreeData");
-
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Menu: {
-            itemHeight: 35,
-            itemBorderRadius: 0,
-            itemMarginBlock: 0,
-            itemMarginInline: 0,
-            activeBarBorderWidth: 0,
-            itemPaddingInline: 0,
+    <Flex className={classes.tree} vertical gap={12} >
+      <Flex className={classes.search} justify="space-around" gap={12} >
+        <Input placeholder="请输入组件名称" suffix={<SearchOutlined/>} />
+        <Space>
+          <Button ghost size="small" type="primary" icon={<ClearOutlined />} ></Button>
+        </Space>
+      </Flex>
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              itemHeight: 32,
+              itemBorderRadius: 4,
+              itemMarginBlock: 0,
+              itemMarginInline: 0,
+              activeBarBorderWidth: 0,
+              itemPaddingInline: 0,
+            },
           },
-        },
-      }}
-    >
-      <Menu
-        items={ndoeTreeData}
-        inlineIndent={12}
-        expandIcon={null}
-      />
-    </ConfigProvider>
+        }}
+      >
+        <Menu
+          mode="inline"
+          items={menuItems}
+          inlineIndent={12}
+          openKeys={menuOpenKeys}
+          expandIcon={<HuosRemixIcon type="icon-arrow-down-s-line" />}
+          selectable={false}
+          onOpenChange={(keys) => {
+            setMenuOpenKeys(keys);
+          }}
+        />
+      </ConfigProvider>
+    </Flex>
   );
 };

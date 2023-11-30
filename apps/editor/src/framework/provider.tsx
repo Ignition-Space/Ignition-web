@@ -44,20 +44,20 @@ export interface EditoRootWrapperProps {
 }
 
 export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
-  const { jsMoudleCode } = useSchema();
+  const { jsMoudleCode, onChange } = useSchema();
 
   // 初始化js模块
   React.useEffect(() => {
     jsRuntime.mountJsMoudle(jsMoudleCode);
   }, [jsMoudleCode]);
 
-  // 初始化依赖包
-
-  // 初始化wasm
-
+  /**
+   * 处理编辑器画布修改
+   * @param query 查询参数
+   */
   const handleEditorChange: Options["onNodesChange"] = (query) => {
-
-    const json = query.serialize();
+    const serNodes = query.getSerializedNodes()
+    onChange('serializeNodes', serNodes)
   }
 
   return (

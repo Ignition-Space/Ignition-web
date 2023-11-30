@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
+import { SerializedNodes } from '@craftjs/core'
 import dayjs from 'dayjs'
 
 
@@ -7,12 +8,13 @@ export interface SchemaInfo {
   opertionDate: number;
   jsMoudleCode: string;
   schema: string,
+  serializeNodes?: SerializedNodes
 }
 
 
 export interface ISchemaState extends SchemaInfo {
   setJsModuleCode: (code: string) => void;
-  onChange: (key: keyof SchemaInfo, value: never) => void;
+  onChange: (key: keyof SchemaInfo, value: any) => void;
 }
 
 
@@ -22,13 +24,12 @@ export const useSchema = create<ISchemaState>()(immer((set) => ({
   schema: '',
   setJsModuleCode: (code) => {
     set((state) => {
-      state.opertionDate = dayjs().valueOf()
       state.jsMoudleCode = code
     })
   },
-  onChange: (key, value) => {
+  onChange: (key, value: any) => {
     set((state) => {
-      state.opertionDate = dayjs().valueOf()
+      // @ts-ignore
       state[key] = value
     })
   }

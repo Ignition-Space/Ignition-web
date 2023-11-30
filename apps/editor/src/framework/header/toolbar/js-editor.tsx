@@ -39,6 +39,10 @@ export const JsEditor: React.FC<JsEditorProps> = (props) => {
       noSemanticValidation: true,
       noSyntaxValidation: true,
     });
+    monaco.languages.typescript.javascriptDefaults.addExtraLib(
+      'content of react/index.d.ts',
+      'file:///node_modules/@types/react/index.d.ts'
+  );
 
     // 设置当前js配置
     monaco.languages.typescript.javascriptDefaults.setCompilerOptions({

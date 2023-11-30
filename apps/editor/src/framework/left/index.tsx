@@ -1,4 +1,4 @@
-import { theme, Tabs, TabsProps, Typography, Space, Divider, Card } from "antd";
+import { theme, Tabs, TabsProps } from "antd";
 import { Tree } from "./tree";
 import { css } from "@emotion/css";
 import { Queries } from "./queries";
@@ -6,10 +6,8 @@ import { MaterialList } from "./materials/list";
 
 export const Left = () => {
   const { token } = theme.useToken();
-  // const [activeKey, setActiveKey] = React.useState("components");
   const classes = {
     main: css({
-      paddingInline: token.paddingXS,
       width: 280,
     }),
   };
@@ -37,6 +35,10 @@ export const Left = () => {
   return (
     <div className={classes.main}>
       <Tabs
+        tabBarStyle={{
+          paddingInline: token.paddingSM,
+          margin: ` 0 0 4px 0`
+        }}
         style={{
           height: "100%",
         }}
