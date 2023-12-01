@@ -1,7 +1,5 @@
 import React from "react";
-import { Editor as RootEditor, Options, 
-  DefaultEventHandlers,
-  NodeId } from "@craftjs/core";
+import { Editor as RootEditor, Options,  } from "@craftjs/core";
 import * as DefaultMaterials from "./components";
 import * as AntDMaterials from "./components/design/antd";
 // import { RenderNodeWrapper } from "./render-wrapper";
@@ -10,33 +8,31 @@ import { EmptySetter } from "@/framework/canvas/empty-render";
 import { useSchema } from "./stores/useSchema";
 import { jsRuntime } from "@huos/core";
 import { ReactQeuryProvider } from "./common/react-query";
+import {I18nextProvider } from 'react-i18next'
+import i18n from 'i18next';
 
 
-class CustomEventHandlers extends DefaultEventHandlers {
-  handlers() {
-    const defaultHandlers = super.handlers()
-
-    return {
-      ...defaultHandlers,
-      // Customize the hover event handler
-      hover: (el: HTMLElement, id: NodeId) => {
-        const unbindDefaultHoverHandler = defaultHandlers.hover(el, id)
-
-        // Track when the mouse leaves a node and remove the hovered state
-        const unbindMouseleave = this.addCraftEventListener(el, 'mouseleave', (e) => {
-          e.craft.stopPropagation()
-          this.options.store.actions.setNodeEvent('hovered', '')
-          console.log(`mouseleave node ${id}`)
-        })
-
-        return () => {
-          unbindDefaultHoverHandler();
-          unbindMouseleave();
-        }
+i18n.init({
+  resources: {
+    en: {
+      translation: {
+        "hello": "Hello",
+        "welcome": "Welcome to my app!"
+      }
+    },
+    zh: {
+      translation: {
+        "hello": "你好",
+        "welcome": "欢迎来到我的应用！"
       }
     }
+  },
+  lng: 'en',
+  fallbackLng: 'en',
+  interpolation: {
+    escapeValue: false
   }
-}
+});
 
 export interface EditoRootWrapperProps {
   // 本地storageKey, 用户缓存当前
@@ -67,7 +63,9 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
         onRender={CustomNodeRender}
         onNodesChange={handleEditorChange}
       >
-        {props.children}
+        <I18nextProvider i18n={i18n} >
+          {props.children}
+        </I18nextProvider>
       </RootEditor>
     </ReactQeuryProvider>
   );

@@ -4,7 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
 import { forEach } from "lodash";
 import { getHuosScopeJsModule } from "..";
-import { Button, Popover } from 'antd'
+import { useTranslation } from 'react-i18next';
 
 export type ReactMaterialComponent = UserComponent;
 
@@ -38,7 +38,6 @@ const withConnectNode = (
   WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
 ): ReactMaterialComponent => {
   return function ({ children, __events = [], ...props }: Record<string, any>) {
-    const jsModuleRef = React.useRef(getHuosScopeJsModule());
     const {
       connectors: { connect, drag },
       id,
@@ -48,16 +47,7 @@ const withConnectNode = (
     }));
     const memoizdProps = useParseBinding(props, id);
 
-    const eventProps = React.useMemo(() => {
-      let eventMap: Record<string, Function> = {};
-      forEach(__events, (item) => {
-        if (item.propName && item.eventName) {
-          const fn = jsModuleRef.current?.[item.eventName] as Function;
-          eventMap[item.propName] = (...args: any) => fn(...args);
-        }
-      });
-      return eventMap;
-    }, [__events]);
+    const renderChildRen = memoizdProps?.__child || children
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender}>
@@ -70,9 +60,8 @@ const withConnectNode = (
             }
           }}
           {...memoizdProps}
-          {...eventProps}
         >
-          {children}
+          {renderChildRen}
         </WrappedComponent>
       </ErrorBoundary>
     );

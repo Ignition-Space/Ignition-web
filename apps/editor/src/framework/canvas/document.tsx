@@ -1,6 +1,6 @@
 import React from "react";
 import { __Provider__, __Box__ } from "@/framework/components";
-import { __ArcoButton__ } from "@/framework/components/design/arco/button";
+import { __AntButton__ } from "@/framework/components/design/antd/button";
 import { __ArcoProTable__ } from "@/framework/components/design/arco/pro-table";
 import { Canvas, Frame as DocumentFrame } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
@@ -60,6 +60,7 @@ export const DocumentNodes = () => {
           height="100%"
           width="100%"
         >
+          <__AntButton__/>
         </Canvas>
       </DocumentFrame>
     </div>
