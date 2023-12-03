@@ -1,5 +1,6 @@
 import type { ProColumns } from "@ant-design/pro-components";
 import { EditableProTable } from "@ant-design/pro-components";
+import { useThrottleEffect } from "ahooks";
 import { Button, Typography } from "antd";
 import React, { useState } from "react";
 
@@ -15,14 +16,11 @@ export type LocaleDataRecordType = {
 
 export interface LocaleEditTableProps {
   value?: LocaleDataRecordType[];
-  onCahnge: (newData: LocaleDataRecordType[]) => void;
+  onCahnge?: (newData: readonly LocaleDataRecordType[]) => void;
 }
 
-export const LocaleEditTable = () => {
+export const LocaleEditTable: React.FC<LocaleEditTableProps> = (props) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() => []);
-  const [dataSource, setDataSource] = useState<readonly LocaleDataRecordType[]>(
-    []
-  );
 
   const columns: ProColumns<LocaleDataRecordType>[] = [
     {
@@ -79,6 +77,8 @@ export const LocaleEditTable = () => {
     },
   ];
 
+  const setDataSource = props.onCahnge!
+
   return (
     <EditableProTable<LocaleDataRecordType>
       bordered
@@ -90,7 +90,7 @@ export const LocaleEditTable = () => {
         x: "100%",
         y: 400,
       }}
-      value={dataSource}
+      value={props.value}
       onChange={setDataSource}
       recordCreatorProps={{
         newRecordType: "dataSource",
