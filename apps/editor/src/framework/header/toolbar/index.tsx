@@ -13,7 +13,7 @@ import { QuestionCircleOutlined } from "@ant-design/icons";
 
 export const ToolBar = () => {
   const { token } = theme.useToken();
-  const { actions, selectedId, isRootNode } = useEditor(({ events }) => {
+  const { actions, selectedId, isRootNode, query } = useEditor(({ events }) => {
     const [id] = events.selected;
     return {
       selectedId: id,
@@ -21,6 +21,8 @@ export const ToolBar = () => {
     };
   });
 
+  const canUndo = query.history.canUndo()
+  const canRedo = query.history.canRedo()
 
   const classes = {
     toolbar: css({
@@ -57,12 +59,14 @@ export const ToolBar = () => {
     <div className={classes.toolbar}>
       <Tooltip placement="bottom" color="blue" title="撤销">
         <Button
+          disabled={canUndo}
           icon={<HuosRemixIcon type="icon-arrow-go-back-fill" />}
           onClick={actions.history.undo}
         />
       </Tooltip>
       <Tooltip placement="bottom" title="恢复" color="blue">
         <Button
+          disabled={canRedo}
           icon={<HuosRemixIcon type="icon-arrow-go-forward-fill" />}
           onClick={actions.history.redo}
         />
@@ -92,7 +96,6 @@ export const ToolBar = () => {
       </Tooltip>
       )} />
       <Tooltip
-        color={isRootNode ? "red" : "blue"}
         placement="bottom"
         title={isRootNode ? "当前选中为根节点，不允许删除" : "删除"}
       >
@@ -100,7 +103,7 @@ export const ToolBar = () => {
           danger
           icon={<HuosRemixIcon type="icon-delete-bin-4-line" />}
           onClick={handleDeleteSelectedNode}
-          disabled={isRootNode}
+          disabled={isRootNode || !selectedId}
         />
       </Tooltip>
     </div>
