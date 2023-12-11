@@ -3,7 +3,6 @@ import _ from "lodash";
 import { useEditor, Canvas } from "@craftjs/core";
 import { css } from "@emotion/css";
 import { Flex, theme } from "antd";
-import { SlackCircleFilled } from "@ant-design/icons";
 
 export interface MaterialProps {
   components: Record<string, any>;
