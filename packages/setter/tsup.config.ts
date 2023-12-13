@@ -1,12 +1,12 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig((options) => ({
-  minify: false,
+  minify: true,
   entry: ["src/index.ts"],
   splitting: false,
   sourcemap: false,
   format: ["esm"],
-  clean: false,
+  clean: true,
   external: [
     "react",
     "react-dom",
