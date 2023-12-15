@@ -1,10 +1,11 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ProLayout, PageHeader } from "@ant-design/pro-components";
+import { ProLayout } from "@ant-design/pro-components";
 import { customRenderHeaderContent } from "./header";
 import { proLayoutDefaultProps } from "./default-config";
 import { startTransition } from "react";
-import { Card, theme } from "antd";
+import { theme } from "antd";
 import { css } from "@emotion/css";
+import LogoSvg from '@/icons/logo.svg'
 
 export const OutletLayout = () => {
   const location = useLocation();
@@ -42,7 +43,7 @@ export const OutletLayout = () => {
       className={classes.root}
       title="HuoS"
       layout="mix"
-      logo={null}
+      logo={LogoSvg}
       token={{
       }}
       location={{

@@ -18,7 +18,8 @@ const classes = {
     display: "grid",
     gridTemplateColumns: "1fr 1fr 1fr",
     gap: 12,
-    overflow: 'auto'
+    overflow: 'auto',
+    height: '100%'
   }),
 };
 

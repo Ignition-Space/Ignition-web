@@ -1,6 +1,7 @@
 import { createReactMaterial } from '@huos/core'
 import { ButtonView } from './view'
-import {Panel} from './panel'
+// import {Panel} from './panel'
+import columns from './panel'
 import { HuosRemixIcon } from '@huos/icons'
 import { BetaSchemaForm } from '@ant-design/pro-components'
 
@@ -13,8 +14,8 @@ export const __AntButton__ = createReactMaterial(ButtonView, {
     children: '测试文案'
   },
   related: {
-    settingRender: Panel,
-    // settingRender: () => <BetaSchemaForm submitter={false} columns={columns} />,
+    // settingRender: Panel,
+    settingRender: () => <BetaSchemaForm submitter={false} columns={columns} />,
     icon: () => <HuosRemixIcon type='icon-link-m' />
   }
 })

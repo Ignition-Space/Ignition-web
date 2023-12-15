@@ -24,7 +24,8 @@ export const Right = () => {
       },
       ".ant-tabs-tabpane": {
         padding: token.paddingXS,
-        overflow: "auto",
+        overflowY: "auto",
+        overflowX: 'hidden',
         height: "calc(100% - 80px)",
         boxSizing: 'border-box'
       },

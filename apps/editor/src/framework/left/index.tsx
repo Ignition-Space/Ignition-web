@@ -8,7 +8,15 @@ export const Left = () => {
   const { token } = theme.useToken();
   const classes = {
     main: css({
+      height: '100%',
       width: 280,
+      '.ant-tabs-content': {
+        height: '100%',
+        overflow: "auto"
+      },
+      '.ant-tabs-content-holder': {
+        height: '10px'
+      }
     }),
   };
 
@@ -16,6 +24,9 @@ export const Left = () => {
     {
       key: "1",
       label: "组件",
+      style: {
+        height: '100%'
+      },
       children: (
         <MaterialList/>
       ),
@@ -35,6 +46,7 @@ export const Left = () => {
   return (
     <div className={classes.main}>
       <Tabs
+        size="small"
         tabBarStyle={{
           paddingInline: token.paddingSM,
           margin: ` 0 0 4px 0`

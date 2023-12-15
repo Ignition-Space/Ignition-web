@@ -1,12 +1,22 @@
 import React from "react";
 import type { MenuProps } from "antd";
-import { Button, Card, ConfigProvider, Flex, Input, Menu, Space, Typography } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  Flex,
+  Input,
+  Menu,
+  Space,
+  Typography,
+} from "antd";
 import { useSchema } from "@/framework/stores/useSchema";
 import { SerializedNodes } from "@craftjs/core";
 import { useDebounceEffect } from "ahooks";
 import { css } from "@emotion/css";
 import { SearchOutlined, ClearOutlined } from "@ant-design/icons";
 import { HuosRemixIcon } from "@huos/icons";
+import { TreeNode } from "./tree-node";
+import { ProCard } from "@ant-design/pro-components";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -20,16 +30,16 @@ function convertToTree(data: SerializedNodes): {
 
   function traverse(nodeId: string): MenuItem {
     const node = data[nodeId];
-    const { nodes, displayName } = node;
+    console.log(node, "node");
+    const { nodes } = node;
 
     const treeItem: MenuItem = {
-      label: displayName,
+      label: <TreeNode nodeId={nodeId} />,
       key: nodeId,
       children: nodes.length > 0 ? nodes.map(traverse) : undefined,
     };
 
     if (nodes.length > 0) {
-      console.log(nodes, 'nodes')
       openKeys.push(nodeId);
     }
 
@@ -49,12 +59,12 @@ function convertToTree(data: SerializedNodes): {
 const classes = {
   tree: css({
     paddingBlock: 12,
-    paddingInline: 4
+    paddingInline: 8,
   }),
   search: css({
-    paddingInline: 12
-  })
-}
+    paddingInline: 8
+  }),
+};
 
 export const Tree = () => {
   const { serializeNodes } = useSchema();
@@ -72,11 +82,11 @@ export const Tree = () => {
   }, [serializeNodes]);
 
   return (
-    <Flex className={classes.tree} vertical gap={12} >
-      <Flex className={classes.search} justify="space-around" gap={12} >
-        <Input placeholder="请输入组件名称" suffix={<SearchOutlined/>} />
+    <Flex className={classes.tree} vertical gap={12}  >
+      <Flex justify="space-around" gap={12}>
+        <Input placeholder="请输入组件名称" suffix={<SearchOutlined />} />
         <Space>
-          <Button ghost size="small" type="primary" icon={<ClearOutlined />} ></Button>
+          <Button ghost type="primary" icon={<ClearOutlined />} />
         </Space>
       </Flex>
       <ConfigProvider
@@ -93,17 +103,23 @@ export const Tree = () => {
           },
         }}
       >
-        <Menu
-          mode="inline"
-          items={menuItems}
-          inlineIndent={12}
-          openKeys={menuOpenKeys}
-          expandIcon={<HuosRemixIcon type="icon-arrow-down-s-line" />}
-          selectable={false}
-          onOpenChange={(keys) => {
-            setMenuOpenKeys(keys);
-          }}
-        />
+        {menuItems.length === 0 ? (
+          <ProCard size="small" bordered >
+            <Typography.Text type="secondary">当前暂无节点信息</Typography.Text>
+          </ProCard>
+        ) : (
+          <Menu
+            mode="inline"
+            items={menuItems}
+            inlineIndent={12}
+            openKeys={menuOpenKeys}
+            expandIcon={<HuosRemixIcon type="icon-arrow-down-s-line" />}
+            selectable={false}
+            onOpenChange={(keys) => {
+              setMenuOpenKeys(keys);
+            }}
+          />
+        )}
       </ConfigProvider>
     </Flex>
   );

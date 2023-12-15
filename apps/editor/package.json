@@ -24,5 +24,8 @@
     "re-resizable": "^6.9.11",
     "react-frame-component": "^5.2.6",
     "react-i18next": "^13.3.0"
+  },
+  "devDependencies": {
+    "vite-plugin-restart": "^0.4.0"
   }
 }

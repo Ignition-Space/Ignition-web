@@ -1,11 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>编辑器</title>
+    <style>
+      /* 设置滚动条的样式 */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      /* 滚动槽 */
+      ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+      }
+      /* 滚动条滑块 */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: #ccc;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25);
+      }
+      /* 非激活窗口 */
+      ::-webkit-scrollbar-thumb:window-inactive {
+        background: transparent;
+      }
+    </style>
   </head>
+
   <body>
     <div id="EditorApp"></div>
     <script type="module" src="/src/main.tsx"></script>
