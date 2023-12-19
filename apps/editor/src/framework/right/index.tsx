@@ -12,7 +12,7 @@ export const Right = () => {
 
   const classes = {
     main: css({
-      height: "calc(100% - 50px)",
+      height: '100%',
     }),
     tabIcon: css({
       marginRight: 2,

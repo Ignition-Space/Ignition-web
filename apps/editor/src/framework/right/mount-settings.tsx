@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Empty, Form, Typography } from "antd";
+import { Card, Form, Typography } from "antd";
 import { useEditor } from "@craftjs/core";
 import { css } from "@emotion/css";
 import { merge } from 'lodash'
@@ -27,7 +27,7 @@ export const MountSettings = () => {
 
 
 
-  const handleFormChange = async (changeValues: any, allValues: any) => {
+  const handleFormChange = async (changeValues: any) => {
 
     if (nodeId) {
       actions.setProp(nodeId, (setterProps) => {
@@ -56,6 +56,7 @@ export const MountSettings = () => {
     <div
       className={css({
         height: '100%',
+        overflow: 'hidden',
         ["& .ant-pro-form-group-title"]: {
           fontWeight: 600,
           marginBlockEnd: 0,
