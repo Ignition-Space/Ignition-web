@@ -4,12 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:main": "turbo run start --filter @huos/main",
-    "start:editor": "turbo run start --filter @huos/editor",
-    "start:build": "turbo run build --filter @huos/main",
-    "build:editor": "turbo run build --filter @huos/editor",
-    "lint": "eslint / --ext .js,.jsx,.ts,.tsx"
+    "build": "nx run-many -t build",
+    "start:main": "nx start @huos/main",
+    "start:editor": "nx start @huos/editor",
+    "graph": "nx graph"
   },
   "keywords": [],
   "author": "",
@@ -43,9 +41,9 @@
     "react-dom": "18.2.0",
     "react-monaco-editor": "^0.54.0",
     "react-router-dom": "^6.14.2",
+    "react-simple-code-editor": "^0.13.1",
     "styled-system": "^5.1.5",
     "umi-request": "^1.4.0",
-    "vite": "^4.4.5",
     "wujie": "^1.0.18",
     "wujie-react": "^1.0.18",
     "zustand": "^4.4.3"
@@ -63,9 +61,11 @@
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.46.0",
     "eslint-config-airbnb": "^19.0.4",
+    "nx": "17.2.8",
     "tsup": "^7.2.0",
     "turbo": "^1.10.12",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite": "^5.0.11"
   },
   "pnpm": {
     "overrides": {

@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { ConfigProvider, App } from "antd";
 import router from "./router";
 import "antd/dist/reset.css";
+import '@/assets/styles.css'
 
 const token = {
   borderRadius: 6,

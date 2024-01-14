@@ -32,3 +32,5 @@ pnpm-lock.yaml
 **/.turbo
 
 **/*.env
+
+.nx/cache
