@@ -1,78 +1,121 @@
-import { DownOutlined, FunctionOutlined } from "@ant-design/icons";
-import { ModalForm } from "@ant-design/pro-components";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { css } from "@emotion/css";
-import { Button, Tabs, Flex, Input, Space, Cascader } from "antd";
-import type { TabsProps } from 'antd';
+import { Button, Flex, Space, theme, Tag, Typography, message } from "antd";
+import CodeEditor from "@uiw/react-textarea-code-editor";
 import React from "react";
+import { useFocusWithin } from "ahooks";
+import { ProFormItem, ProFormItemProps } from "@ant-design/pro-components";
 
 export interface BindPrototypeManageProps {
-  value?: any
-  onChange?: any,
-  as: React.ComponentType
+  value?: any;
+  onChange?: any;
 }
 
-const items: TabsProps['items'] = [
-  {
-    key: 'expression',
-    label: '表达式1',
-    children: 'Content of Tab Pane 1',
-  },
-  {
-    key: 'locacle',
-    label: '国际化',
-    children: 'Content of Tab Pane 2',
-  },
-  {
-    key: 'function',
-    label: '工具函数',
-    children: 'Content of Tab Pane 3',
-  },
-];
+export const PrototypeManage: React.FC<BindPrototypeManageProps & ProFormItemProps["fieldProps"]> = ({
+  value,
+  onChange: onChangeValue,
+  ...props
+}) => {
+  const { token } = theme.useToken();
+  const ref = React.useRef(null);
+  const isFocusWithin = useFocusWithin(ref, {});
 
-const classes = {
-  line: css({
-    display: 'grid',
-    gap: 12,
-    gridTemplateColumns: '1fr auto',
-    boxSizing: 'border-box'
-  })
-}
-
-const options = [
-  {
-    value: 'exp',
-    label: '表达式',
-  },
-  {
-    value: 'locale',
-    label: '国际化',
-  },
-  {
-    vlaue: 'state',
-    label: '状态'
-  }
-];
-
-export const BindPrototypeManage: React.FC<BindPrototypeManageProps> = (
-  { value, onChange: onChangeValue, as, ...asProps }
-) => {
   return (
-    <div className={classes.line} >
-      <div>
-        {React.createElement<any>(as, {
-          ...asProps,
-          onChange: onChangeValue,
-          style: {
-            width: '100%'
-          }
+    <Flex
+      ref={ref}
+      vertical
+      className={css({
+        position: "relative",
+      })}
+    >
+      <CodeEditor
+        value={value?.$$jsx}
+        language="js"
+        placeholder={props?.placeholder}
+        padding={6}
+        onChange={(e) =>
+          onChangeValue({
+            $$jsx: e.target.value,
+          })
+        }
+        style={{
+          maxHeight: 30,
+          width: "100%",
+          background: "#FFF",
+          border: `1px solid ${token.colorBorderSecondary}`,
+          borderRadius: 6,
+          fontFamily:
+            "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+        }}
+      />
+      <Flex
+        vertical
+        className={css({
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "100%",
+          background: "#FFF",
+          zIndex: token.zIndexPopupBase,
+          display: isFocusWithin ? "inline-block" : "none",
         })}
-      </div>
-      <div>
-        <ModalForm modalProps={{
-        }} size="small" title="绑定变量111112"  trigger={<Button icon={<FunctionOutlined/>} />} >
-          <Cascader.Panel options={options}  />
-        </ModalForm>
-      </div>
-    </div>
+      >
+        <Flex
+          vertical
+          gap={6}
+          className={css({
+            background: "#FFF",
+            borderRadius: 6,
+            border: `1px solid ${token.colorBorderSecondary}`,
+          })}
+        >
+          <CodeEditor
+            value={value?.$$jsx}
+            language="js"
+            placeholder={props?.placeholder}
+            padding={6}
+            onChange={(e) =>
+              onChangeValue({
+                $$jsx: e.target.value,
+              })
+            }
+            style={{
+              width: "100%",
+              background: "transparent",
+              fontFamily:
+                "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+            }}
+          />
+          <Flex
+            className={css({
+              paddingInline: 10,
+              paddingBlockEnd: 10,
+            })}
+            gap={6}
+          >
+            <Tag style={{ margin: 0 }}>
+              <Space>
+                <ExclamationCircleOutlined />
+                <Typography.Text>表达式</Typography.Text>
+              </Space>
+            </Tag>
+            <Button
+              size="small"
+              onClick={() => message.success("尽情期待。。。")}
+            >
+              状态
+            </Button>
+            <Button size="small">国际化</Button>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 };
+
+export const BindPrototypeManage: React.FC<ProFormItemProps> = (props) => (
+  <ProFormItem {...props}>
+    <PrototypeManage placeholder={`请输入${props.label}`} {...props.fieldProps} />
+  </ProFormItem>
+);

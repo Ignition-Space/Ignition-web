@@ -21,10 +21,6 @@ export const MaterialList = () => {
     <Flex vertical gap={12} className={classes.list}>
       <MaterialGroup groupName="基础组件" groupList={__baseMaterias__} />
       <MaterialGroup groupName="蚂蚁体系" groupList={__antDesignMaterias} />
-      <MaterialGroup groupName="蚂蚁体系" groupList={__antDesignMaterias} />
-      <MaterialGroup groupName="蚂蚁体系" groupList={__antDesignMaterias} />
-      <MaterialGroup groupName="蚂蚁体系" groupList={__antDesignMaterias} />
-      <MaterialGroup groupName="蚂蚁体系" groupList={__antDesignMaterias} />
       <div style={{ paddingBottom: 12 }}>
         <Card size="small">
           <Flex justify="center">

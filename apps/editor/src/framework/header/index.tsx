@@ -1,13 +1,13 @@
 import React from "react";
 import { css } from "@emotion/css";
-import { Alert, Divider, Space, Typography, theme } from "antd";
+import { Alert, Divider, Typography, theme } from "antd";
 import { Publish } from "./toolbar/publish";
 import { Priview } from "./toolbar/preview";
 import { AppMenus } from "./menus";
 import { ToolBar } from "./toolbar";
 import { ConfigSettings } from "../common/settings";
 
-export const Header: React.FC = () => {
+export const Header: React.FC = (): React.ReactNode => {
   const { token } = theme.useToken();
 
   const classes = {
@@ -36,12 +36,14 @@ export const Header: React.FC = () => {
         showIcon={false}
         type="info"
         message={
-          <div className={classes.notice}>
-            <Typography.Link>
-              您当前所处在beta版本，部分功能可能不生效，出现问题请反馈.
-              点击公告可以跳转反馈地址 🎉
-            </Typography.Link>
-          </div>
+          (
+            <div className={classes.notice}>
+              <Typography.Link>
+                您当前所处在beta版本，部分功能可能不生效，出现问题请反馈.
+                点击公告可以跳转反馈地址 🎉
+              </Typography.Link>
+            </div>
+          )
         }
         closable
       />
@@ -57,9 +59,7 @@ export const Header: React.FC = () => {
             style={{ marginInline: 8, borderColor: "rgb(229,230,235)" }}
             type="vertical"
           />
-          <Space>
-            <Typography.Text>标准标题</Typography.Text>
-          </Space>
+          <Typography.Text>标准标题</Typography.Text>
         </div>
         <ToolBar />
         <div className={classes.flex} style={{ justifyContent: "flex-end" }}>

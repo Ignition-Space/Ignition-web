@@ -1,6 +1,5 @@
 import type { ProColumns } from "@ant-design/pro-components";
 import { EditableProTable } from "@ant-design/pro-components";
-import { useThrottleEffect } from "ahooks";
 import { Button, Typography } from "antd";
 import React, { useState } from "react";
 
@@ -100,7 +99,10 @@ export const LocaleEditTable: React.FC<LocaleEditTableProps> = (props) => {
       }}
       toolBarRender={() => {
         return [
+          // todo
           <Typography.Link key="download">下载语言模版</Typography.Link>,
+
+          // todo
           <Button key="import" type="primary" ghost>
             导入元数据
           </Button>,

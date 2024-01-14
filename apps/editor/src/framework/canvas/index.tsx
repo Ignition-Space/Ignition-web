@@ -49,8 +49,9 @@ export const Canvas = () => {
       {/* <ToolBar /> */}
       <div className={classes.canvas}>
         {/* 容器组件 */}
+        
         <RenderViewSanBox>
-          <DocumentNodes />
+            <DocumentNodes />
         </RenderViewSanBox>
       </div>
     </div>

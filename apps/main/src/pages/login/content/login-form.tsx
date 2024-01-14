@@ -47,7 +47,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <ConfigProvider
+      <ConfigProvider
       theme={{
         token: {},
         components: {

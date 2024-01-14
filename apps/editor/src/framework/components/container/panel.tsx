@@ -1,21 +1,13 @@
-import { MountSetter } from '@huos/setter'
-import { Input } from "antd"
+import { BindPrototypeManage } from "@huos/setter"
+
 
 export const Panel = () => {
   return (
-    <div>
-      <MountSetter fields={{
-        name: 'mount',
-        label: '测试'
-      }}>
-        <Input/>
-      </MountSetter>
-      <MountSetter fields={{
-        name: 'test2',
-        label: '111'
-      }}>
-        <Input/>
-      </MountSetter>
-    </div>
+   <>
+    <BindPrototypeManage name="background" label="背景配置" initialValue="#FFF" />
+    <BindPrototypeManage name="width" label="宽度" initialValue="100vw" />
+    <BindPrototypeManage name="height" label="高度" initialValue="100vh" />
+
+   </>
   )
 }

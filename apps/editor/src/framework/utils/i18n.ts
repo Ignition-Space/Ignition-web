@@ -22,7 +22,7 @@ i18n
   lng: 'zh',
   fallbackLng: 'zh',
   interpolation: {
-    escapeValue: false
+    escapeValue: false,
   }
 });
 

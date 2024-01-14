@@ -40,7 +40,10 @@ export default () => {
                 icon={<FormOutlined />}
                 label="应用图标"
                 name="icon"
-                action="upload.do"
+                params={{
+                  resolveType: 1
+                }}
+                action="/gateway/common/rpc/upload"
               />
               <ProFormText
                 name="name"
@@ -71,7 +74,12 @@ export default () => {
           {/* 依赖管理 */}
           <DepensManageCard />
 
+          {/* 多语言管理 */}
           <LocaleEditTable />
+
+          <AutomationTaskCard/>
+
+          <DeploymentOperationCard/>
 
           <ProCard
             bordered
@@ -79,7 +87,7 @@ export default () => {
             collapsible
             defaultCollapsed
             tooltip="自动化相关，如触发器、定时任务、通知队列等相关配置"
-          ></ProCard>
+           />
 
           <ProCard
             bordered
@@ -87,7 +95,7 @@ export default () => {
             collapsible
             defaultCollapsed
             tooltip="应用的运维与部署相关配置"
-          ></ProCard>
+          />
         </Flex>
       </ProForm>
     </div>

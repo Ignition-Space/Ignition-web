@@ -4,9 +4,9 @@ import { useNode, useEditor } from "@craftjs/core";
 import ReactDOM from "react-dom";
 import { useFrame } from "react-frame-component";
 import { DragOutlined, HolderOutlined } from "@ant-design/icons";
-import { Button, Flex, Popover, Space, Tooltip, Typography, theme } from "antd";
-import { PortalOperationNode } from "./portal";
+import { Flex, Typography, theme } from "antd";
 import { css } from "@emotion/react";
+import { HuosRemixIcon } from "@huos/icons";
 
 export interface RenderNodeWrapperProps {
   render: React.ReactElement;
@@ -16,8 +16,6 @@ export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
   render,
 }) => {
   const { id } = useNode();
-  const { token } = theme.useToken();
-  const currentRef = React.useRef<HTMLDivElement>(null);
   const { query, isActive, isHovered } = useEditor((state, queryEditor) => {
     const [selectId] = state.events.selected;
     const [hoverId] = state.events.hovered;
@@ -50,8 +48,6 @@ export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
     };
   });
 
-  const { document: canvasDocument } = useFrame();
-
   React.useEffect(() => {
     if (dom) {
       if (isActive) {
@@ -74,39 +70,58 @@ export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
 
   return (
     <>
-      {dom && isActive
+      {dom && isActive && !isRootNode
         ? ReactDOM.createPortal(
             <div
               css={css({
                 position: "absolute",
                 bottom: -29,
                 left: 0,
-                background: "#2178ea",
+                background: "#3170f9",
                 display: "flex",
-                height: 30,
-                width: "100%",
-                maxWidth: 100,
+                width: "max-content",
                 zIndex: 10000,
                 pointerEvents: "none",
-                paddingInline: 4,
+                borderRadius: 3,
+                fontSize: 12,
+                color: "#FFF",
+                padding: 4,
               })}
             >
               <Flex
                 align="center"
+                gap={6}
                 css={css({
                   pointerEvents: "auto",
                   color: "#FFF",
-                  height: 30,
+                  width: "max-content",
+                  paddingInline: 6,
                 })}
               >
                 {moveable ? (
                   <Flex
                     ref={drag as any}
                     align="center"
+                    justify="flex-start"
+                    css={css({
+                      fontWeight: 'bold',
+                      fontSize: 12, 
+                      color: "#FFF"
+                    })}
+                  >
+                    <DragOutlined />
+                  </Flex>
+                ) : null}
+                <Typography.Text style={{ fontSize: 12, color: "#FFF" }}>
+                  {name}
+                </Typography.Text>
+                {/* 
+                {moveable ? (
+                  <Flex
+                    ref={drag as any}
+                    align="center"
                     justify="center"
                     css={css({
-                      height: 30,
-                      width: 30,
                       fontWeight: 'bold'
                     })}
                   >
@@ -117,12 +132,11 @@ export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
                   <Flex
                     align="center"
                     css={css({
-                      height: 30,
                     })}
                   >
                     {name}
                   </Flex>
-                ) : null}
+                ) : null} */}
               </Flex>
             </div>,
             dom!

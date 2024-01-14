@@ -2,6 +2,7 @@ import { css } from "@emotion/css";
 import { Button, Divider, Space, Typography } from "antd";
 import { LoginForm } from './login-form'
 import { GithubFilled } from '@ant-design/icons'
+import { ProCard } from "@ant-design/pro-components";
 
 const classes = {
   layout: css({
@@ -11,14 +12,14 @@ const classes = {
     flexDirection: "column",
   }),
   content: css({
-    minWidth: 400
+    width: 450
   })
 };
 
 export const Content = () => {
   return (
     <div className={classes.layout}>
-      <div className={classes.content} >
+      <ProCard bordered className={classes.content} >
         {/* 标题 */}
         <Typography.Title level={3}>欢迎到来</Typography.Title>
         <Space>
@@ -28,7 +29,7 @@ export const Content = () => {
         <LoginForm/>
         <Divider plain>或者</Divider>
         <Button block size="large" icon={<GithubFilled/>} >使用Github登录</Button>
-      </div>
+      </ProCard>
     </div>
   );
 };

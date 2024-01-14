@@ -6,7 +6,7 @@ export default defineConfig((options) => ({
   splitting: false,
   sourcemap: false,
   format: ["esm"],
-  clean: true,
+  // clean: true,
   external: [
     "react",
     "react-dom",
