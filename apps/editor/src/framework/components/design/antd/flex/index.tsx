@@ -15,7 +15,7 @@ export const __AntFlex__ = createReactMaterial(View, {
   },
   related: {
     settingRender: Panel,
-    icon: () => <HuosRemixIcon type='icon-link-m' />
+    icon: () => <HuosRemixIcon type='icon-layout-left-line' />
   }
 }, {
   children: (

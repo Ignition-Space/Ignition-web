@@ -2,7 +2,7 @@ import { Element } from '@craftjs/core'
 import { createReactMaterial } from '@huos/core'
 import { BoxView } from './view'
 import { HuosRemixIcon } from '@huos/icons'
-import { EmptySetter } from '@huos/setter'
+import { EmptySetter } from '@/framework/canvas/empty-render';
 
 export const __Box__ = createReactMaterial(BoxView, {
   displayName: '容器',
