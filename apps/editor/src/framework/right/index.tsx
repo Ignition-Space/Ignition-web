@@ -13,22 +13,8 @@ export const Right = () => {
   const classes = {
     main: css({
       height: '100%',
-    }),
-    tabIcon: css({
-      marginRight: 2,
-    }),
-    tab: css({
-      height: "100%",
-      ".ant-tabs-content-top": {
-        height: "100%",
-      },
-      ".ant-tabs-tabpane": {
-        padding: token.paddingXS,
-        overflowY: "auto",
-        overflowX: 'hidden',
-        height: "calc(100% - 80px)",
-        boxSizing: 'border-box'
-      },
+      padding: token.paddingXS,
+      overflow: 'auto'
     }),
   };
 
@@ -52,7 +38,8 @@ export const Right = () => {
 
   return (
     <div className={classes.main}>
-      <ConfigProvider
+      <MountSettings />
+      {/* <ConfigProvider
         theme={{
           components: {
             Tabs: {
@@ -69,7 +56,7 @@ export const Right = () => {
           items={items}
           onChange={(tabKey) => setActiveKey(tabKey)}
         />
-      </ConfigProvider>
+      </ConfigProvider> */}
     </div>
   );
 };

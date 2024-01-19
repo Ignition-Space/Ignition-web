@@ -3,6 +3,7 @@ import { Card, Form, Typography } from "antd";
 import { useEditor } from "@craftjs/core";
 import { css } from "@emotion/css";
 import { merge } from 'lodash'
+import { useDebounceFn } from "ahooks";
 
 export const MountSettings = () => {
   const [form] = Form.useForm();
@@ -27,7 +28,7 @@ export const MountSettings = () => {
 
 
 
-  const handleFormChange = async (changeValues: any) => {
+  const { run: handleFormChange } = useDebounceFn(async (changeValues: any) => {
 
     if (nodeId) {
       actions.setProp(nodeId, (setterProps) => {
@@ -35,13 +36,11 @@ export const MountSettings = () => {
       })
     }
     return true
-  }
+  })
 
   // 当前编辑的组件发生改变，nodeId副作用更新了
   React.useEffect(() => {
     if (nodeId) {
-
-      console.log('switchNodeId', nodeId, currentNodeProps)
 
       /** 切换组件清除setter配置 */
       form.resetFields()
@@ -53,18 +52,10 @@ export const MountSettings = () => {
   }, [nodeId])
 
   return (
-    <div
-      className={css({
-        height: '100%',
-        overflow: 'hidden',
-        ["& .ant-pro-form-group-title"]: {
-          fontWeight: 600,
-          marginBlockEnd: 0,
-          cursor: "pointer",
-        },
-      })}
-    >
       <Form
+        style={{
+          height: 1
+        }}
         layout="vertical"
         form={form}
         labelCol={{
@@ -83,6 +74,5 @@ export const MountSettings = () => {
           </Card>
         )}
       </Form>
-    </div>
   );
 };
