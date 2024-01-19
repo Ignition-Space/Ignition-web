@@ -20,11 +20,13 @@
     "@tanstack/react-query-devtools": "^5.4.3",
     "dot": "2.0.0-beta.1",
     "i18next": "^23.5.1",
+    "localforage": "^1.10.0",
     "primereact": "^10.0.2",
     "re-resizable": "^6.9.11",
     "react-frame-component": "^5.2.6",
     "react-i18next": "^13.3.0",
-    "reactflow": "^11.10.1"
+    "reactflow": "^11.10.1",
+    "split-pane-react": "^0.1.3"
   },
   "devDependencies": {
     "vite-plugin-restart": "^0.4.0"

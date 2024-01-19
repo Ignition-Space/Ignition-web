@@ -1,19 +1,14 @@
 import React from "react";
 import { __Provider__, __Box__ } from "@/framework/components";
 import { __AntButton__ } from "@/framework/components/design/antd/button";
-import { __ArcoProTable__ } from "@/framework/components/design/arco/pro-table";
 import { Canvas, Frame as DocumentFrame } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
-import { CanvasRootId, compileModuleResolve, sucraseTransformCode, ScopeMoudleId } from "@huos/core";
-import { useSchema } from '@/framework/stores/useSchema'
-import { useAsyncEffect } from "ahooks";
-import dayjs from 'dayjs'
+import { CanvasRootId,} from "@huos/core";
 
 export const DocumentNodes = () => {
   const { document: canvasDocument } = useFrame();
   const elements = useDynamicHeadInsertion();
-  const jsMoudleCode = useSchema(select => select.jsMoudleCode)
 
   React.useEffect(() => {
     const canvasElement = document.getElementById(CanvasRootId);
@@ -24,24 +19,7 @@ export const DocumentNodes = () => {
     }
   }, [canvasDocument, elements]);
 
-  useAsyncEffect(async () => {
-    const cjsCode = await sucraseTransformCode(jsMoudleCode)
-    console.log(cjsCode, 'cjsCode')
-    const { exports  } = compileModuleResolve(cjsCode, {
-      dayjs,
-      "@huso/store": {
-        getState: () => {
-          console.log('我是get方法')
-        },
-        setState: () => {
-          console.log("我是set方法")
-        }
-      }
-    });
-    (window as any)[ScopeMoudleId] = {
-      jsMoudle: exports
-    }
-  }, [jsMoudleCode])
+  
 
   return (
     <div
@@ -49,7 +27,6 @@ export const DocumentNodes = () => {
       style={{
         width: "100vw",
         height: '100vh',
-        paddingInline: 12
       }}
     >
       <DocumentFrame >

@@ -4,6 +4,7 @@ import { ConfigProvider, App } from "antd";
 import router from "./router";
 import "antd/dist/reset.css";
 import '@/assets/styles.css'
+import 'split-pane-react/esm/themes/default.css';
 
 const token = {
   borderRadius: 6,

@@ -1,10 +1,22 @@
+import React from 'react'
 import { theme } from "antd";
 import { css } from "@emotion/css";
 import { IFrame as RenderViewSanBox } from "./iframe";
 import { DocumentNodes } from "./document";
+import { ProSkeleton } from "@ant-design/pro-components";
+import { useMount } from 'ahooks';
+import { useEditorKeyPress } from './keyword-panel'
 
 export const Canvas = () => {
   const { token } = theme.useToken();
+  const [loading, setLoading] = React.useState(true)
+  useEditorKeyPress()
+
+  useMount(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+  })
 
   const classes = {
     main: css({
@@ -15,32 +27,8 @@ export const Canvas = () => {
     canvas: css({
       height: "100%",
       width: "100%",
-      backgroundImage:
-        "linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px) linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)",
       backgroundSize: "20px 20px",
-      padding: 30,
-    }),
-    tabs: css({
-      height: "100%",
-      [".ant-tabs-content"]: {
-        height: "100%",
-        overflow: "hidden",
-      },
-      [".ant-tabs-tabpane"]: {
-        height: "100%",
-        overflow: "hidden",
-      },
-    }),
-    card: css({
-      height: "100%",
-      [".ant-card-body"]: {
-        height: "calc(100% - 0px)",
-        padding: 0,
-      },
-      [".ant-card-head"]: {
-        display: "flex",
-        justifyContent: "center",
-      },
+      padding: token.paddingXS,
     }),
   };
 
@@ -49,10 +37,13 @@ export const Canvas = () => {
       {/* <ToolBar /> */}
       <div className={classes.canvas}>
         {/* 容器组件 */}
-        
-        <RenderViewSanBox>
-            <DocumentNodes />
-        </RenderViewSanBox>
+        {
+          loading ? <ProSkeleton type="result" /> : (
+            <RenderViewSanBox>
+              <DocumentNodes />
+            </RenderViewSanBox>
+          )
+        }
       </div>
     </div>
   );
