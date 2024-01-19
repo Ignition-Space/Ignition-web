@@ -1,15 +1,19 @@
 import React from "react";
-import { theme, Flex, Button, Typography } from "antd";
+import _ from "lodash";
+import { theme, Flex, Button, Typography, Tooltip } from "antd";
 import { Tree } from "./tree";
 import { css } from "@emotion/css";
 import { MaterialList } from "./materials/list";
 import { DoubleLeftOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import _ from "lodash";
 import { HuosRemixIcon } from "@huos/icons";
+import { LocalHisotry } from './hisotry'
+import { Queries } from './queries'
 
 export enum MenuTab {
   COMPONENT = "COMPONENT",
   TREE ="TREE",
+  HISTORY = "HISTORY",
+  QUERIES = 'QUERIES'
 }
 
 export const Left = () => {
@@ -38,29 +42,45 @@ export const Left = () => {
     }),
   };
 
-  const items: Record<MenuTab, any> = {
+  const items: Record<MenuTab, {
+    label: string;
+    icon: React.ReactNode;
+    children: React.ReactNode;
+  }> = {
     [MenuTab.COMPONENT]: {
       label: "组件列表",
       icon: <PlusCircleOutlined />,
       children: <MaterialList />,
     },
     [MenuTab.TREE]: {
-      label: "组件树",
+      label: "面包树",
       icon: <HuosRemixIcon type='icon-node-tree' />,
       children: <Tree />,
     },
+    [MenuTab.HISTORY]: {
+      label: '历史记录',
+      icon: <HuosRemixIcon type="icon-history-fill" />,
+      children: <LocalHisotry/>
+    },
+    [MenuTab.QUERIES]: {
+      label: '数据源',
+      icon: <HuosRemixIcon type="icon-database-2-fill" />,
+      children: <Queries/>
+    }
   };
 
   return (
     <div className={classes.main}>
       <Flex className={classes.menu} vertical align="center" gap={8}>
-        {_.map(items, (value: any, key: MenuTab) => (
-          <Button
+        {_.map(items, (value: typeof items[MenuTab.COMPONENT], key: MenuTab) => (
+          <Tooltip color="blue" placement="rightTop" title={value.label} >
+            <Button
             key={key}
             type={key === activeKey ? "primary" : "text"}
             icon={value.icon}
             onClick={() => setActiveKey(key)}
           />
+          </Tooltip>
         ))}
       </Flex>
       {activeKey ? (

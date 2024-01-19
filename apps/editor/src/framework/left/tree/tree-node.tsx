@@ -1,8 +1,5 @@
-import { DragOutlined } from "@ant-design/icons";
 import { useEditor } from "@craftjs/core";
-import { HuosRemixIcon } from "@huos/icons";
-import { useHover } from "ahooks";
-import { Button, Flex, Space, Typography } from "antd";
+import { Flex } from "antd";
 import React from "react";
 
 export interface TreeNodeProps {
