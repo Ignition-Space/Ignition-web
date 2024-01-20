@@ -30,7 +30,6 @@ function convertToTree(data: SerializedNodes): {
 
   function traverse(nodeId: string): MenuItem {
     const node = data[nodeId];
-    console.log(node, "node");
     const { nodes } = node;
 
     const treeItem: MenuItem = {

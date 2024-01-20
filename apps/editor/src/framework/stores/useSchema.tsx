@@ -3,7 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import { SerializedNodes } from "@craftjs/core";
 import dayjs from "dayjs";
 
-export type LocaleDataRecordType = {
+export interface LocaleDataRecordType {
   key?: string;
   cn?: string;
   en?: string;
@@ -12,12 +12,18 @@ export type LocaleDataRecordType = {
   fe?: string;
 };
 
+export interface DependencieRowType {
+  url: string;
+  version: string;
+}
+
 export interface SchemaInfo {
   opertionDate: number;
   jsMoudleCode: string;
   schema: string;
   serializeNodes?: SerializedNodes;
   locales: LocaleDataRecordType[];
+  depsMap: Record<string, DependencieRowType>
 }
 
 export interface ISchemaState extends SchemaInfo {
@@ -31,17 +37,8 @@ export const useSchema = create<ISchemaState>()(
     opertionDate: dayjs().valueOf(),
     schema: "",
     locales: [
-      {
-        key: "hello",
-        cn: "hello",
-        en: "你好",
-      },
-      {
-        key: "welcome",
-        cn: "Welcome to my app!",
-        en: "欢迎来到我的应用！",
-      },
     ],
+    depsMap: {},
     setJsModuleCode: (code) => {
       set((state) => {
         state.jsMoudleCode = code;

@@ -15,8 +15,6 @@ export const TreeNode: React.FC<TreeNodeProps> = (props) => {
 
   const NodeIcon = NodeHelper.related?.icon;
 
-  console.log(NodeHelper, "NodeHelper");
-
   return (
     <Flex gap={4} >
       {NodeIcon ? React.cloneElement(<NodeIcon/>) : null}

@@ -6,14 +6,14 @@ import { css } from "@emotion/css";
 import { MaterialList } from "./materials/list";
 import { DoubleLeftOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { HuosRemixIcon } from "@huos/icons";
-import { LocalHisotry } from './hisotry'
-import { Queries } from './queries'
+import { LocalHisotry } from "./hisotry";
+import { Queries } from "./queries";
 
 export enum MenuTab {
   COMPONENT = "COMPONENT",
-  TREE ="TREE",
+  TREE = "TREE",
   HISTORY = "HISTORY",
-  QUERIES = 'QUERIES'
+  QUERIES = "QUERIES",
 }
 
 export const Left = () => {
@@ -29,7 +29,9 @@ export const Left = () => {
     }),
     menu: css({
       paddingBlock: 8,
-      borderRight: activeKey ? `1px solid ${token.colorBorderSecondary}` : undefined,
+      borderRight: activeKey
+        ? `1px solid ${token.colorBorderSecondary}`
+        : undefined,
     }),
     content: css({
       width: 255,
@@ -42,11 +44,14 @@ export const Left = () => {
     }),
   };
 
-  const items: Record<MenuTab, {
-    label: string;
-    icon: React.ReactNode;
-    children: React.ReactNode;
-  }> = {
+  const items: Record<
+    MenuTab,
+    {
+      label: string;
+      icon: React.ReactNode;
+      children: React.ReactNode;
+    }
+  > = {
     [MenuTab.COMPONENT]: {
       label: "组件列表",
       icon: <PlusCircleOutlined />,
@@ -54,34 +59,42 @@ export const Left = () => {
     },
     [MenuTab.TREE]: {
       label: "面包树",
-      icon: <HuosRemixIcon type='icon-node-tree' />,
+      icon: <HuosRemixIcon type="icon-node-tree" />,
       children: <Tree />,
     },
     [MenuTab.HISTORY]: {
-      label: '历史记录',
+      label: "历史记录",
       icon: <HuosRemixIcon type="icon-history-fill" />,
-      children: <LocalHisotry/>
+      children: <LocalHisotry />,
     },
     [MenuTab.QUERIES]: {
-      label: '数据源',
+      label: "数据源",
       icon: <HuosRemixIcon type="icon-database-2-fill" />,
-      children: <Queries/>
-    }
+      children: <Queries />,
+    },
   };
 
   return (
     <div className={classes.main}>
       <Flex className={classes.menu} vertical align="center" gap={8}>
-        {_.map(items, (value: typeof items[MenuTab.COMPONENT], key: MenuTab) => (
-          <Tooltip color="blue" placement="rightTop" title={value.label} >
-            <Button
-            key={key}
-            type={key === activeKey ? "primary" : "text"}
-            icon={value.icon}
-            onClick={() => setActiveKey(key)}
-          />
-          </Tooltip>
-        ))}
+        {_.map(
+          items,
+          (value: (typeof items)[MenuTab.COMPONENT], key: MenuTab) => (
+            <Tooltip
+              key={key}
+              color="blue"
+              placement="rightTop"
+              title={value.label}
+            >
+              <Button
+                key={key}
+                type={key === activeKey ? "primary" : "text"}
+                icon={value.icon}
+                onClick={() => setActiveKey(key)}
+              />
+            </Tooltip>
+          )
+        )}
       </Flex>
       {activeKey ? (
         <div className={classes.content}>
@@ -90,7 +103,7 @@ export const Left = () => {
             className={classes.title}
             align="center"
           >
-            <Typography.Text >{items?.[activeKey]?.label}</Typography.Text>
+            <Typography.Text>{items?.[activeKey]?.label}</Typography.Text>
             <Button
               size="small"
               type="text"

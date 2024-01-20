@@ -23,7 +23,6 @@ export const StepLine: React.FC<StepLineProps> = (props) => {
         <Dropdown
           open={open}
           onOpenChange={setOpen}
-          placement="bottomCenter"
           menu={{
             items: [
               {
