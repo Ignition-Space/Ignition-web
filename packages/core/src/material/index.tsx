@@ -2,9 +2,6 @@ import React from "react";
 import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
-import { forEach } from "lodash";
-import { getHuosScopeJsModule } from "..";
-import { useTranslation } from 'react-i18next';
 
 export type ReactMaterialComponent = UserComponent;
 
