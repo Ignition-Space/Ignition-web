@@ -1,22 +1,14 @@
-import React from 'react'
+import React from "react";
 import { theme } from "antd";
 import { css } from "@emotion/css";
 import { IFrame as RenderViewSanBox } from "./iframe";
 import { DocumentNodes } from "./document";
-import { ProSkeleton } from "@ant-design/pro-components";
-import { useMount } from 'ahooks';
-import { useEditorKeyPress } from './keyword-panel'
+import { useEditorKeyPress } from "../hooks/use-keyword-panel";
 
 export const Canvas = () => {
   const { token } = theme.useToken();
-  const [loading, setLoading] = React.useState(true)
-  useEditorKeyPress()
 
-  useMount(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000);
-  })
+  useEditorKeyPress();
 
   const classes = {
     main: css({
@@ -37,13 +29,9 @@ export const Canvas = () => {
       {/* <ToolBar /> */}
       <div className={classes.canvas}>
         {/* 容器组件 */}
-        {
-          loading ? <ProSkeleton type="result" /> : (
-            <RenderViewSanBox>
-              <DocumentNodes />
-            </RenderViewSanBox>
-          )
-        }
+        <RenderViewSanBox>
+          <DocumentNodes />
+        </RenderViewSanBox>
       </div>
     </div>
   );

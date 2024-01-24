@@ -6,7 +6,7 @@ import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
 import { CanvasRootId,} from "@huos/core";
 
-export const DocumentNodes = () => {
+export const DocumentNodes: React.FC<React.ComponentProps<typeof DocumentFrame>> = (props) => {
   const { document: canvasDocument } = useFrame();
   const elements = useDynamicHeadInsertion();
 
@@ -18,9 +18,6 @@ export const DocumentNodes = () => {
       insertElement.head.appendChild(elements);
     }
   }, [canvasDocument, elements]);
-
-  
-
   return (
     <div
       id="__CasterViewPort__"
@@ -29,7 +26,7 @@ export const DocumentNodes = () => {
         height: '100vh',
       }}
     >
-      <DocumentFrame >
+      <DocumentFrame {...props} >
         <Canvas
           canvas
           is={__Provider__}

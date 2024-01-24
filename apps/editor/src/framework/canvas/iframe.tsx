@@ -6,7 +6,10 @@ import ReactFrameComponent, {
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { css } from "@emotion/css";
-import { StyleProvider, createCache as createCacheByAntd } from "@ant-design/cssinjs";
+import {
+  StyleProvider,
+  createCache as createCacheByAntd,
+} from "@ant-design/cssinjs";
 import { ConfigProvider } from "antd";
 
 export interface IFrameProps {
@@ -78,7 +81,6 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
             
             `}
           </style>
-          <script src="https://www.unpkg.com/draggable-polyfill@1.2.4/index.js"></script>
         </>
       }
       className={classes.iframe}
@@ -89,16 +91,24 @@ export const IFrame: React.FC<IFrameProps> = (props) => {
             key: "iframe",
             container: _document?.head,
           });
-          const antdCache = createCacheByAntd()
+          const antdCache = createCacheByAntd();
           return (
-            <ConfigProvider getPopupContainer={() => _document ? _document.body : document.body} >
-              <StyleProvider defaultCache={false} container={_document?.body} cache={antdCache} >
-              <CacheProvider value={cache}>
-                <StyleProvider cache={antdCache} >
-                  {props.children}
-                </StyleProvider>
-              </CacheProvider>
-            </StyleProvider>
+            <ConfigProvider
+              getPopupContainer={() =>
+                _document ? _document.body : document.body
+              }
+            >
+              <StyleProvider
+                defaultCache={false}
+                container={_document?.body}
+                cache={antdCache}
+              >
+                <CacheProvider value={cache}>
+                  <StyleProvider cache={antdCache}>
+                    {props.children}
+                  </StyleProvider>
+                </CacheProvider>
+              </StyleProvider>
             </ConfigProvider>
           );
         }}
