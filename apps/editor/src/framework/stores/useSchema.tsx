@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { devtools } from 'zustand/middleware'
 import { SerializedNodes } from "@craftjs/core";
 import dayjs from "dayjs";
+import _ from "lodash";
 
 export interface LocaleDataRecordType {
   key?: string;
@@ -23,7 +25,8 @@ export interface SchemaInfo {
   schema: string;
   serializeNodes?: SerializedNodes;
   locales: LocaleDataRecordType[];
-  depsMap: Record<string, DependencieRowType>
+  depsMap: Record<string, DependencieRowType>;
+  storeMap: Record<string, any>
 }
 
 export interface ISchemaState extends SchemaInfo {
@@ -32,23 +35,28 @@ export interface ISchemaState extends SchemaInfo {
 }
 
 export const useSchema = create<ISchemaState>()(
-  immer((set) => ({
+  devtools((set) => ({
     jsMoudleCode: "",
     opertionDate: dayjs().valueOf(),
     schema: "",
     locales: [
     ],
     depsMap: {},
+    storeMap: {},
     setJsModuleCode: (code) => {
-      set((state) => {
-        state.jsMoudleCode = code;
+      set({
+        jsMoudleCode: code
       });
     },
     onChange: (key, value: any) => {
       set((state) => {
-        // @ts-ignore
-        state[key] = value;
-      });
+        const newData = _.merge(state, {
+          [key]: value
+        })
+        return newData
+      }, false, `onChange(${key})`);
     },
-  }))
+  }), {
+    name: 'useSchema'
+  })
 );

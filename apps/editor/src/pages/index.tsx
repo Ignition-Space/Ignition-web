@@ -5,7 +5,7 @@ export const Index = () => {
     <div style={{
       height: '100vh'
     }} >
-      <Framework/>
+      <Framework />
     </div>
   );
 };

@@ -1,7 +1,10 @@
-export const PreviewPage = (props: any) => {
+import { EditoRootWrapper } from '@/framework/provider'
+import { DocumentNodes } from '@/framework/canvas/document'
+
+export const PreviewPage = () => {
   return (
-    <div>
-      111
-    </div>
+    <EditoRootWrapper enabled={false} >
+        <DocumentNodes />
+      </EditoRootWrapper>
   )
 }

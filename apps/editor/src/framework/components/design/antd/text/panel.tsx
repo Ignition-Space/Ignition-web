@@ -1,4 +1,3 @@
-import { ProFormText } from "@ant-design/pro-components"
 import { BindPrototypeManage } from "@huos/setter"
 
 export const Panel = () => {

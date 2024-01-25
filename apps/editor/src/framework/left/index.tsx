@@ -68,7 +68,7 @@ export const Left = () => {
       children: <LocalHisotry />,
     },
     [MenuTab.QUERIES]: {
-      label: "数据源",
+      label: "状态管理",
       icon: <HuosRemixIcon type="icon-database-2-fill" />,
       children: <Queries />,
     },

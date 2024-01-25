@@ -28,6 +28,8 @@ export const DepTree = () => {
   const depsMap = useSchema((selector) => selector.depsMap);
   const onChangedepsMap = useSchema((selector) => selector.onChange);
 
+
+  // 安装CDN依赖
   const onInstallCDNDependPackage: SelectProps["onChange"] = (
     _,
     option: any
@@ -42,13 +44,21 @@ export const DepTree = () => {
     onChangedepsMap("depsMap", newDepsMap);
   };
 
+  // 移除CDN依赖
+  const onRemoveCDNDependPackage = (key: string) => {
+    const newDepsMap = {
+      ...depsMap,
+      [key]: undefined
+    }
+    onChangedepsMap("depsMap", newDepsMap);
+  }
+
   return (
     <Flex className={classes.dep} vertical gap={12}>
       {_.map(depsMap, (row, name) => (
         <Flex style={{ width: "100%" }} justify="space-between">
           <Typography.Text>
-            {name}@
-            {row.version}
+            {name}@{row.version}
           </Typography.Text>
           <Space size={4}>
             <Button
@@ -65,6 +75,7 @@ export const DepTree = () => {
               size="small"
               type="text"
               icon={<HuosRemixIcon type="icon-delete-bin-3-line" />}
+              onClick={() => onRemoveCDNDependPackage(name)}
             />
           </Space>
         </Flex>

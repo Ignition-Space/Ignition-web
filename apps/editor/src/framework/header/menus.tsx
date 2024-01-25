@@ -1,28 +1,21 @@
-import { css } from '@emotion/css'
-import { HuosRemixIcon } from '@huos/icons'
+import { css } from "@emotion/css";
+import { HuosRemixIcon } from "@huos/icons";
+import { Button, Flex } from "antd";
 
 const classes = {
   btn: css({
-    height: 50,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    cursor: 'pointer',
+    height: 45,
+    width: 44,
   }),
-  icon: css({
-    fontSize: 20,
-    transition: 'color 0.85s',
-    ["&:hover"]: {
-      // background: '#',
-      color: "#1677ff"
-    }
-  })
-}
+};
 
 export const AppMenus = () => {
   return (
-    <div className={classes.btn} >
-      <HuosRemixIcon className={classes.icon} type="icon-menu-fill" />
-    </div>
-  )
-}
+    <Flex className={classes.btn} justify="center" align="center" >
+      <Button
+        type="text"
+        icon={<HuosRemixIcon type="icon-menu-fill" />}
+      />
+    </Flex>
+  );
+};

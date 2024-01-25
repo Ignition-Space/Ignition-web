@@ -8,7 +8,7 @@ import { css } from "@emotion/css";
 const classes = {
   layout: css({
     height: "100%",
-    gridTemplateRows: "auto 1fr",
+    gridTemplateRows: "45px 1fr",
     display: "grid",
     overflow: "hidden"
   }),

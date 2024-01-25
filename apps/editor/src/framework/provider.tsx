@@ -1,8 +1,7 @@
 import React from "react";
-import { Editor as RootEditor, Options } from "@craftjs/core";
 import * as DefaultMaterials from "./components";
 import * as AntDMaterials from "./components/design/antd";
-// import { RenderNodeWrapper } from "./render-wrapper";
+import { Editor as RootEditor, Options } from "@craftjs/core";
 import { CustomNodeRender } from "@/framework/common/custom-node-render";
 import { EmptySetter } from "@/framework/canvas/empty-render";
 import { useSchema, LocaleDataRecordType } from "./stores/useSchema";
@@ -11,7 +10,7 @@ import { ReactQeuryProvider } from "./common/react-query";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./utils/i18n";
 
-export interface EditoRootWrapperProps {
+export interface EditoRootWrapperProps extends Partial<Options> {
   // 本地storageKey, 用户缓存当前
   children?: React.ReactNode;
 }
@@ -66,11 +65,23 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
       return outputData;
     };
 
-    const resources = convertLocaleData(locales, ["cn", "en"])
+    const resources = convertLocaleData(locales, ["cn", "en"]);
 
     // 监听资源更新并将其设置到i18n实例
-    i18n.addResourceBundle('en', 'translation', resources.en.translation, true, true);
-    i18n.addResourceBundle('cn', 'translation', resources.cn.translation, true, true);
+    i18n.addResourceBundle(
+      "en",
+      "translation",
+      resources.en.translation,
+      true,
+      true
+    );
+    i18n.addResourceBundle(
+      "cn",
+      "translation",
+      resources.cn.translation,
+      true,
+      true
+    );
 
     // 存在语言文案数据的时候
     if (locales.length > 0) {
@@ -80,6 +91,7 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
   return (
     <ReactQeuryProvider>
       <RootEditor
+        {...props}
         resolver={{ ...DefaultMaterials, EmptySetter, ...AntDMaterials }}
         onRender={CustomNodeRender}
         onNodesChange={handleEditorChange}

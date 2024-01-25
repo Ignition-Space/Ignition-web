@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { immer as imr } from 'zustand/middleware/immer'
 import { devtools } from 'zustand/middleware'
 import _ from 'lodash'
 
@@ -7,21 +8,17 @@ export interface EditorGlobalState {
 }
 
 export interface EditorGlobalMethods {
-  onChange: (value:  Record<string, any>) => void
+  onChange: (value: any) => void
 }
 
 
 export const useCreateStore = create<EditorGlobalState & EditorGlobalMethods>()(devtools(
-  (set) => ({
+  imr((set) => ({
     data: {
       app: {
         title: "Title1",
       }
     },
-    onChange: (v) => {
-      set(() => {
-        return _.cloneDeep(v)
-      })
-    }
-  })
+    onChange: set
+  }))
 ))
