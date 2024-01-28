@@ -14,11 +14,11 @@ export interface EditorGlobalMethods {
 
 export const useCreateStore = create<EditorGlobalState & EditorGlobalMethods>()(devtools(
   imr((set) => ({
-    data: {
-      app: {
-        title: "Title1",
-      }
-    },
-    onChange: set
+    data: {},
+    onChange: (newData) => {
+      set({
+        data: newData
+      })
+    }
   }))
 ))

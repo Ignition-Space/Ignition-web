@@ -1,6 +1,7 @@
 import React from "react";
 import SplitPane, { Pane, SashContent } from "split-pane-react";
 import { StoreViewer } from './store-viewer'
+import { QueryHttpViewer } from './query-http-viewer'
 
 export const Queries = () => {
   const [sizes, setSizes] = React.useState<Array<string | number>>([
@@ -22,7 +23,7 @@ export const Queries = () => {
           <StoreViewer />
         </Pane>
         <Pane minSize="50%" style={{ overflow: "auto" }}>
-          
+          <QueryHttpViewer/>
         </Pane>
       </SplitPane>
     </div>

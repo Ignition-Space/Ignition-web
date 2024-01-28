@@ -5,7 +5,7 @@ import { Editor as RootEditor, Options } from "@craftjs/core";
 import { CustomNodeRender } from "@/framework/common/custom-node-render";
 import { EmptySetter } from "@/framework/canvas/empty-render";
 import { useSchema, LocaleDataRecordType } from "./stores/useSchema";
-import { jsRuntime } from "@huos/core";
+import { jsRuntime, useCreateStore } from "@huos/core";
 import { ReactQeuryProvider } from "./common/react-query";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./utils/i18n";
@@ -16,12 +16,18 @@ export interface EditoRootWrapperProps extends Partial<Options> {
 }
 
 export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
-  const { jsMoudleCode, onChange, locales } = useSchema();
+  const { jsMoudleCode, onChange, locales, storeMap } = useSchema();
+  const onChangeStore = useCreateStore(selector => selector.onChange)
 
   // 初始化js模块
   React.useEffect(() => {
     jsRuntime.mountJsMoudle(jsMoudleCode);
   }, [jsMoudleCode]);
+
+  // 默认状态发生变化
+  React.useEffect(() => {
+    onChangeStore(storeMap)
+  }, [storeMap])
 
   /**
    * 处理编辑器画布修改

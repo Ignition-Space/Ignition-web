@@ -34,7 +34,7 @@ export const Left = () => {
         : undefined,
     }),
     content: css({
-      width: 255,
+      minWidth: 255,
       display: "grid",
       gridTemplateRows: "36px auto",
     }),
