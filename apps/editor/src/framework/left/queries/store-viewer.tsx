@@ -99,7 +99,9 @@ export const StoreViewer = () => {
                 showIcon
                 type="error"
                 message={
-                  <Typography.Text ellipsis type="danger">
+                  <Typography.Text ellipsis={{
+                    tooltip: errorStr
+                  }} type="danger">
                     {errorStr}
                   </Typography.Text>
                 }

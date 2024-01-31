@@ -19,10 +19,10 @@ export const Queries = () => {
           <SashContent active={active} type="vscode" />
         )}
       >
-        <Pane minSize="50%" style={{ overflow: "auto" }}>
+        <Pane minSize="10%" style={{ overflow: 'auto' }} >
           <StoreViewer />
         </Pane>
-        <Pane minSize="50%" style={{ overflow: "auto" }}>
+        <Pane minSize="10%">
           <QueryHttpViewer/>
         </Pane>
       </SplitPane>
