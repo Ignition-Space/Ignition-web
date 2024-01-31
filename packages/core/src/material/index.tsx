@@ -2,6 +2,7 @@ import React from "react";
 import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
+import { useCreateStore } from '../state'
 
 export type ReactMaterialComponent = UserComponent;
 
@@ -42,9 +43,14 @@ const withConnectNode = (
     } = useNode((evt) => ({
       custom: evt.data.custom,
     }));
+    const onMountRefs = useCreateStore(selecotr => selecotr.onMountRefs)
     const memoizdProps = useParseBinding(props, id);
 
     const renderChildRen = memoizdProps?.__child || children
+
+   React.useEffect(() => {
+    onMountRefs(id, memoizdProps)
+   }, [memoizdProps, id])
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender}>
@@ -55,6 +61,7 @@ const withConnectNode = (
             } else {
               connect(drag(dom));
             }
+            console.log(dom, id, 'WrappedComponent')
           }}
           {...memoizdProps}
         >

@@ -23,7 +23,7 @@ const classes = {
 };
 
 export const StoreViewer = () => {
-  const { data } = useCreateStore();
+  const { data, refs } = useCreateStore();
   const { onChange: onChangeSchema, storeMap } = useSchema();
   const [storeMapStr, setStoreMapStr] = React.useState<string>();
   const [open, { set: setOpen }] = useBoolean(false);
@@ -62,6 +62,13 @@ export const StoreViewer = () => {
       <JsonView
         editable={false}
         src={data}
+        theme="atom"
+        collapseStringMode="address"
+        collapseStringsAfterLength={12}
+      />
+      <JsonView
+        editable={false}
+        src={refs}
         theme="atom"
         collapseStringMode="address"
         collapseStringsAfterLength={12}
