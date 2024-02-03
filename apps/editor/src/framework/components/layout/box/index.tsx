@@ -1,7 +1,7 @@
-import { Element } from '@craftjs/core'
 import { createReactMaterial } from '@huos/core'
 import { BoxView } from './view'
 import { HuosRemixIcon } from '@huos/icons'
+import { Element } from '@craftjs/core'
 import { EmptySetter } from '@/framework/canvas/empty-render';
 
 export const __Box__ = createReactMaterial(BoxView, {
@@ -20,7 +20,7 @@ export const __Box__ = createReactMaterial(BoxView, {
     useResize: true,
   },
   related: {
-    icon: () => <HuosRemixIcon type="icon-layout-2-line" />
+    icon: () => <HuosRemixIcon type="icon-picture-in-picture-fill" />
   }
 }, {
   children: (

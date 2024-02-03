@@ -2,7 +2,6 @@ import { createReactMaterial } from '@huos/core'
 import View from './view'
 import { Panel } from './panel'
 import { HuosRemixIcon } from '@huos/icons'
-
 import { Element } from "@craftjs/core";
 import { EmptySetter } from '@/framework/canvas/empty-render';
 

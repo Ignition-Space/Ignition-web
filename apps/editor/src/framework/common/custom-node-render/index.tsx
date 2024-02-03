@@ -104,9 +104,9 @@ export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
                     align="center"
                     justify="flex-start"
                     css={css({
-                      fontWeight: 'bold',
-                      fontSize: 12, 
-                      color: "#FFF"
+                      fontWeight: "bold",
+                      fontSize: 12,
+                      color: "#FFF",
                     })}
                   >
                     <DragOutlined />
@@ -115,28 +115,6 @@ export const CustomNodeRender: React.FC<RenderNodeWrapperProps> = ({
                 <Typography.Text style={{ fontSize: 12, color: "#FFF" }}>
                   {name}
                 </Typography.Text>
-                {/* 
-                {moveable ? (
-                  <Flex
-                    ref={drag as any}
-                    align="center"
-                    justify="center"
-                    css={css({
-                      fontWeight: 'bold'
-                    })}
-                  >
-                    <HolderOutlined />
-                  </Flex>
-                ) : null}
-                {name ? (
-                  <Flex
-                    align="center"
-                    css={css({
-                    })}
-                  >
-                    {name}
-                  </Flex>
-                ) : null} */}
               </Flex>
             </div>,
             dom!

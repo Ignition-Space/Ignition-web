@@ -1,6 +1,8 @@
 import React from "react";
 import * as DefaultMaterials from "./components";
 import * as AntDMaterials from "./components/design/antd";
+import * as LayoutMaterials from './components/layout'
+import * as FormMaterials from './components/form'
 import { Editor as RootEditor, Options } from "@craftjs/core";
 import { CustomNodeRender } from "@/framework/common/custom-node-render";
 import { EmptySetter } from "@/framework/canvas/empty-render";
@@ -98,7 +100,7 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
     <ReactQeuryProvider>
       <RootEditor
         {...props}
-        resolver={{ ...DefaultMaterials, EmptySetter, ...AntDMaterials }}
+        resolver={{ ...DefaultMaterials, EmptySetter, ...AntDMaterials, ...LayoutMaterials, ...FormMaterials }}
         onRender={CustomNodeRender}
         onNodesChange={handleEditorChange}
       >
