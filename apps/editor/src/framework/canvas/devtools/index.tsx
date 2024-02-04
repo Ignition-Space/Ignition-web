@@ -3,6 +3,7 @@ import { css } from "@emotion/css";
 import { Button, Col, ConfigProvider, Row, Tabs, TabsProps, theme } from "antd";
 import { FetchPanel } from "./fetch-panel";
 import { ProCard } from "@ant-design/pro-components";
+import { Response } from './res'
 
 const classes = {
   devtool: css({
@@ -24,7 +25,9 @@ export const Devtools = () => {
               <FetchPanel />
             </ProCard>
           </Col>
-          <Col style={{ borderLeft: `1px solid ${theme.getDesignToken().colorBorderSecondary}` }} >111</Col>
+          <Col span={12} style={{ borderLeft: `1px solid ${theme.getDesignToken().colorBorderSecondary}` }} >
+            <Response/>
+          </Col>
         </Row>
       ),
     },

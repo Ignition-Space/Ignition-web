@@ -1,15 +1,15 @@
 import { createReactMaterial } from '@huos/core'
-import { InputView } from './view'
+import { MentionsView } from './view'
 import { Panel } from './panel'
 import { HuosRemixIcon } from '@huos/icons'
 
-export const __AntInput__ = createReactMaterial(InputView, {
-  displayName: '输入框',
+export const __AntMentions__ = createReactMaterial(MentionsView, {
+  displayName: '@提及',
   custom: {
     useResize: false,
   },
   related: {
     settingRender: Panel,
-    icon: () => <HuosRemixIcon type="icon-input-method-line" />
+    icon: () => <HuosRemixIcon type="icon-attachment-2" />
   }
 })
