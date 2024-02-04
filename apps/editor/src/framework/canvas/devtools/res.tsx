@@ -4,6 +4,8 @@ import { theme } from 'antd';
 import React from 'react'
 import SplitPane, { SashContent, Pane } from 'split-pane-react';
 
+const defaultValue = ["() => {", "  ", "}"].join('\n')
+
 export const Response = () => {
  
   const [sizes, setSizes] = React.useState<Array<string | number>>([
@@ -22,7 +24,7 @@ export const Response = () => {
       >
         <Pane minSize="25%" style={{ overflow: 'auto' }} >
           <ProForm.Item>
-            <CodeEditor height={300} language="typescript" />
+            <CodeEditor defaultValue={defaultValue} height={300} language="typescript" />
           </ProForm.Item>
         </Pane>
         <Pane minSize="25%" style={{ 
