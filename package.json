@@ -7,6 +7,7 @@
     "build": "nx run-many -t build",
     "start:main": "nx start @huos/main",
     "start:editor": "nx start @huos/editor",
+    "build:editor": "nx build @huos/editor",
     "graph": "nx graph"
   },
   "keywords": [],
@@ -37,7 +38,6 @@
     "immer": "^10.0.3",
     "lodash": "^4.17.21",
     "lzutf8": "^0.6.3",
-    "monaco-editor": "^0.43.0",
     "react": "18.2.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "18.2.0",
