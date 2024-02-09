@@ -17,6 +17,7 @@ import { SearchOutlined, ClearOutlined } from "@ant-design/icons";
 import { HuosRemixIcon } from "@huos/icons";
 import { TreeNode } from "./tree-node";
 import { ProCard } from "@ant-design/pro-components";
+import { useEditorState } from "@/framework/stores/useEditorState";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -66,7 +67,7 @@ const classes = {
 };
 
 export const CanvasTree = () => {
-  const { serializeNodes } = useSchema();
+  const serializeNodes = useEditorState(selector => selector.nodes);
   const [menuItems, setMenuItems] = React.useState<MenuItem[]>([]);
   const [menuOpenKeys, setMenuOpenKeys] = React.useState<string[]>([]);
 

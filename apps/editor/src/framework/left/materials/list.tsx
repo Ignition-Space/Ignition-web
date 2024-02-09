@@ -8,7 +8,7 @@ import { css } from "@emotion/css";
 
 const classes = {
   list: css({
-    height: "100%",
+    height: 10,
     paddingInline: 12,
     paddingBlock: 6,
     boxSizing: "border-box",

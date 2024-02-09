@@ -1,18 +1,18 @@
 import { css } from "@emotion/css";
-import JsonView from "react18-json-view";
 import { useCreateStore } from "@huos/core";
 import _ from "lodash";
-import "react18-json-view/src/style.css";
-import { Button, Flex, Popover, App, Alert, Typography, Divider } from "antd";
+import { Button, Flex, Popover, App, Alert, Typography, Divider, theme } from "antd";
 import { EditOutlined, KeyOutlined, RestOutlined } from "@ant-design/icons";
 import { CodeEditor } from "@/framework/common/code-editor";
 import { useSchema } from "@/framework/stores/useSchema";
 import React from "react";
 import { useBoolean } from "ahooks";
+import JsonView from 'react18-json-view'
+import "react18-json-view/src/style.css";
 
 const classes = {
   queries: css({
-    padding: 12,
+    padding: theme.getDesignToken().paddingXXS
   }),
   content: css({
     width: 300,
@@ -60,18 +60,26 @@ export const StoreViewer = () => {
   return (
     <div className={classes.queries}>
       <JsonView
+        enableClipboard={false}
         editable={false}
         src={data}
         theme="atom"
         collapseStringMode="address"
         collapseStringsAfterLength={12}
+        style={{
+          fontSize: '85%'
+        }}
       />
       <JsonView
         editable={false}
+        enableClipboard={false}
         src={refs}
         theme="atom"
         collapseStringMode="address"
         collapseStringsAfterLength={12}
+        style={{
+          fontSize: '85%'
+        }}
       />
       <Popover
         placement="rightTop"
@@ -145,7 +153,7 @@ export const StoreViewer = () => {
           </Flex>
         }
       >
-        <Button block ghost type="primary" icon={<EditOutlined />}>
+        <Button  size="small" type="text" icon={<EditOutlined />}>
           修改默认状态
         </Button>
       </Popover>

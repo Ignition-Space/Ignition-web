@@ -10,13 +10,12 @@ const router = createBrowserRouter([
     Component: Index,
   },
   {
-    path: '/preview',
+    path: '/preview/:id',
     Component: PreviewPage,
-    loader: () => {
-      return {
-        name: ''
-      }
-    }
+  },
+  {
+    path: '/editor/:id',
+    Component: Index
   }
 ]);
 

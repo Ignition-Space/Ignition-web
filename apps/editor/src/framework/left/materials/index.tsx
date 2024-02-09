@@ -18,6 +18,7 @@ export const Materials: React.FC<MaterialProps> = (props) => {
       display: "grid",
       gridTemplateColumns: "1fr 1fr",
       gap: token.paddingSM,
+      height: '10px'
     }),
     item: css({
       border: `1px solid #e4e4e7`,

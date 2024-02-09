@@ -1,7 +1,7 @@
-import { CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
+import { BugOutlined, CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
 import { css } from "@emotion/css";
-import { HuosRemixIcon } from "@huos/icons";
 import { Button, Flex, Table, TableProps, Tag, Typography, theme } from "antd";
+import { Devtools } from '../../canvas/devtools'
 
 const classes = {
   httpViewer: css({
@@ -20,7 +20,7 @@ export const QueryHttpViewer = () => {
   const columns: TableProps<any>["columns"] = [
     {
       dataIndex: "name",
-      width: '100%',
+      width: "100%",
       render: (v, record) => {
         return (
           <Flex justify="flex-start" align="center" gap={6}>
@@ -38,10 +38,7 @@ export const QueryHttpViewer = () => {
       render: () => {
         return (
           <Flex justify="flex-end">
-            <Button
-              size="small"
-              icon={<CaretRightOutlined />}
-            ></Button>
+            <Button size="small">调试</Button>
           </Flex>
         );
       },
@@ -54,13 +51,13 @@ export const QueryHttpViewer = () => {
       method: "GET",
     },
     {
-      name: 'getGithubUserInfo',
-      method: 'GET',
+      name: "getGithubUserInfo",
+      method: "GET",
     },
     {
-      name: 'getRedisCache',
-      method: 'GET'
-    }
+      name: "getRedisCache",
+      method: "GET",
+    },
   ];
 
   return (

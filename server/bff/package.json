@@ -1,0 +1,17 @@
+{
+  "name": "@huos/bff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "tsup --watch",
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "fastify-cli": "^6.1.0"
+  },
+  "dependencies": {
+    "fastify": "^4.26.0"
+  }
+}

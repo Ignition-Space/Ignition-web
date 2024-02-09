@@ -10,6 +10,7 @@ import { useSchema, LocaleDataRecordType } from "./stores/useSchema";
 import { jsRuntime, useCreateStore } from "@huos/core";
 import { ReactQeuryProvider } from "./common/react-query";
 import { I18nextProvider } from "react-i18next";
+import { useEditorState } from './stores/useEditorState'
 import i18n from "./utils/i18n";
 
 export interface EditoRootWrapperProps extends Partial<Options> {
@@ -18,8 +19,9 @@ export interface EditoRootWrapperProps extends Partial<Options> {
 }
 
 export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
-  const { jsMoudleCode, onChange, locales, storeMap } = useSchema();
+  const { jsMoudleCode, locales, storeMap } = useSchema();
   const onChangeStore = useCreateStore(selector => selector.onChange)
+  const onSetEditorState = useEditorState(selecor => selecor.onChange)
 
   // 初始化js模块
   React.useEffect(() => {
@@ -37,7 +39,7 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
    */
   const handleEditorChange: Options["onNodesChange"] = (query) => {
     const serNodes = query.getSerializedNodes();
-    onChange("serializeNodes", serNodes);
+    onSetEditorState(serNodes)
   };
 
   React.useEffect(() => {

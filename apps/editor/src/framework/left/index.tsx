@@ -36,7 +36,7 @@ export const Left = () => {
     content: css({
       minWidth: 255,
       display: "grid",
-      gridTemplateRows: "36px auto",
+      gridTemplateRows: "36px 1fr",
     }),
     title: css({
       paddingInline: 12,
@@ -111,7 +111,14 @@ export const Left = () => {
               onClick={() => setActiveKey(undefined)}
             />
           </Flex>
-          <div>{items?.[activeKey]?.children}</div>
+          <div
+            style={{
+              overflow: "auto",
+              height: "100%",
+            }}
+          >
+            {items?.[activeKey]?.children}
+          </div>
         </div>
       ) : null}
     </div>

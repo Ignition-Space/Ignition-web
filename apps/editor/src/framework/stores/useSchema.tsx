@@ -22,7 +22,6 @@ export interface SchemaInfo {
   opertionDate: number;
   jsMoudleCode: string;
   schema: string;
-  serializeNodes?: SerializedNodes;
   locales: LocaleDataRecordType[];
   depsMap: Record<string, DependencieRowType>;
   storeMap: Record<string, any>

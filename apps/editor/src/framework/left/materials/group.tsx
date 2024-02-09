@@ -1,6 +1,6 @@
 import React from "react";
 import { MaterialProps } from ".";
-import { Flex, Typography } from "antd";
+import { Badge, Flex, Tag, Typography } from "antd";
 import { MaterialRecord } from "./record";
 import { css } from "@emotion/css";
 import { Canvas, useEditor } from "@craftjs/core";
@@ -18,8 +18,8 @@ const classes = {
     display: "grid",
     gridTemplateColumns: "1fr 1fr 1fr",
     gap: 12,
-    overflow: 'auto',
-    height: '100%'
+    overflow: "auto",
+    height: "100%",
   }),
 };
 
@@ -28,7 +28,9 @@ export const MaterialGroup: React.FC<MaterialGroupProps> = (props) => {
 
   return (
     <Flex vertical gap={12}>
-      <Typography.Text type="secondary">{props.groupName}</Typography.Text>
+      <Flex gap={6}>
+        <Typography.Text type="secondary">{props.groupName}</Typography.Text>
+      </Flex>
       <div className={classes.group}>
         {_.map(props.groupList, (value, key: string) => {
           const displayName = value.craft?.displayName;

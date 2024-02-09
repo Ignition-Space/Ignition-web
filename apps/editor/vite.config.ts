@@ -10,7 +10,14 @@ export default defineConfig({
   server: {
     headers: {
       "Access-Control-Allow-Origin":  "*",
-    }
+    },
+    proxy: {
+      "/page-table": {
+        target: "http://127.0.0.1:10018/page-table",
+        changeOrigin: true,
+        rewrite: (path) => path.replace('/page-table', '/')
+      },
+    },
   },
   resolve: {
     alias: {

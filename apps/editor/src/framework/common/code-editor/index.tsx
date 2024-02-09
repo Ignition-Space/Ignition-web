@@ -107,8 +107,8 @@ const EditorThemeObject = {
 // 初始化一些样式
 const defaultOptions: EditorProps["options"] = {
   folding: false,
-  lineNumbersMinChars: 3,
-  lineNumbers: "on",
+  lineNumbersMinChars: 0,
+  lineNumbers: "off",
   automaticLayout: true,
   acceptSuggestionOnEnter: "smart",
   scrollbar: {
@@ -117,6 +117,7 @@ const defaultOptions: EditorProps["options"] = {
     horizontal: "hidden",
     useShadows: false,
   },
+  autoIndent: "full",
   smoothScrolling: true,
   minimap: {
     enabled: false,

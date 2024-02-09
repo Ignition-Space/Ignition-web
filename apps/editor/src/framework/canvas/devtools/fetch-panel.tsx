@@ -64,7 +64,7 @@ export const FetchPanel = () => {
               style={{
                 minWidth: 100,
               }}
-              placeholder="接口请求URL"
+              placeholder="接口请求的地址"
               addonBefore={
                 <Tooltip title="协议接口，跟随您当前的origin自动适应http与https">
                   <Flex gap={6} align="center">
@@ -75,15 +75,14 @@ export const FetchPanel = () => {
               }
             />
           </ProForm.Item>
-
-          <ProForm.Item noStyle name="url">
+          {/* <ProForm.Item noStyle name="url">
             <Input
               style={{
                 minWidth: 100,
               }}
               placeholder={`接口请求地址，以 "/" 开始`}
             />
-          </ProForm.Item>
+          </ProForm.Item> */}
           <Button type="primary" onClick={onSendFetchInstance}>
             发送
           </Button>

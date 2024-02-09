@@ -1,6 +1,5 @@
 import { useEditor } from '@craftjs/core';
 import { useKeyPress } from 'ahooks';
-import { stringifyLzUtfData } from '@/framework/utils/json'
 import lf from 'localforage'
 import { App } from 'antd';
 import { useSchema } from '../stores/useSchema';
@@ -12,7 +11,7 @@ export const useEditorKeyPress = () => {
   const onChangeSchema = useSchema(selector => selector.onChange)
 
   useKeyPress(['ctrl.s'], () => {
-    const lzData = stringifyLzUtfData(query.serialize())
+    const lzData = query.serialize()
     lf.setItem('history', [{
       [Date.now()]: lzData
     }])

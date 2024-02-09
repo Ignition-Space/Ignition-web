@@ -30,7 +30,7 @@
     "@uiw/react-textarea-code-editor": "^2.1.7",
     "ahooks": "^3.7.8",
     "antd": "^5.11.1",
-    "axios": "^1.6.5",
+    "axios": "^1.6.7",
     "bright": "^0.8.4",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
