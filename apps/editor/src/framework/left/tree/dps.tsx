@@ -1,13 +1,11 @@
-import { CloseOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
+import { CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import { css } from "@emotion/css";
 import { HuosRemixIcon } from "@huos/icons";
 import {
   Button,
   Flex,
-  Input,
   SelectProps,
   Space,
-  Tag,
   Typography,
   theme,
 } from "antd";

@@ -24,4 +24,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  build: {
+    outDir: 'lib',
+    lib: {
+      entry: path.resolve(__dirname, 'src/framework/index.tsx'),
+      name: 'HuoS',
+      fileName: format => `index.${format}.js`,
+      formats: ["cjs", "es", "umd"],
+    },
+  }
 })

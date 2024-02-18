@@ -7,7 +7,7 @@ const classes = {
     height: '100vh',
     width: '100vw',
     display: 'grid',
-    gridTemplateColumns: '520px 1fr',
+    gridTemplateColumns: '1fr 1fr',
   }),
 }
 

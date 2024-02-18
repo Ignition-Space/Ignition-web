@@ -19,7 +19,7 @@ const classes = {
 export const Content = () => {
   return (
     <div className={classes.layout}>
-      <ProCard bordered className={classes.content} >
+      <ProCard bordered={false} className={classes.content} >
         {/* 标题 */}
         <Typography.Title level={3}>欢迎到来</Typography.Title>
         <Space>

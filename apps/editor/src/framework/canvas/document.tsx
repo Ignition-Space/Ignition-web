@@ -1,5 +1,5 @@
 import React from "react";
-import { __Provider__, __Box__ } from "@/framework/components";
+import { __Provider__ } from "@/framework/components";
 import { __AntButton__ } from "@/framework/components/design/antd/button";
 import { Canvas, Frame as DocumentFrame } from "@craftjs/core";
 import { useFrame } from "react-frame-component";

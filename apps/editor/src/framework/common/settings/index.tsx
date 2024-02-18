@@ -1,14 +1,12 @@
-import { ModalForm } from "@ant-design/pro-components";
+import { DrawerForm, ModalForm } from "@ant-design/pro-components";
 import { HuosRemixIcon } from "@huos/icons";
 import { Button, Tabs } from "antd";
 import { css } from "@emotion/css";
-import { CssEditor } from './css-editor'
-import { AppConfig } from './config'
+import { CssEditor } from "./css-editor";
+import { AppConfig } from "./config";
 import type { TabsProps } from "antd";
 
-
-const onChange = (key: string) => {
-};
+const onChange = (key: string) => {};
 
 const TabContent = (el: React.ReactNode) => (
   <div
@@ -26,12 +24,21 @@ const items: TabsProps["items"] = [
 
 export const ConfigSettings = () => {
   return (
-    <ModalForm
+    <DrawerForm
+      drawerProps={{
+        placement: "left",
+        closeIcon: false,
+        styles: {
+          body: {
+            padding: 0,
+          }
+        }
+      }}
       title="应用配置"
       submitter={false}
       trigger={<Button icon={<HuosRemixIcon type="icon-settings-3-line" />} />}
     >
       <Tabs items={items} />
-    </ModalForm>
+    </DrawerForm>
   );
 };

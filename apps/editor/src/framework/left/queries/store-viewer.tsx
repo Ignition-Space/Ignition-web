@@ -153,7 +153,7 @@ export const StoreViewer = () => {
           </Flex>
         }
       >
-        <Button  size="small" type="text" icon={<EditOutlined />}>
+        <Button block ghost size="small" type="primary" icon={<EditOutlined />}>
           修改默认状态
         </Button>
       </Popover>

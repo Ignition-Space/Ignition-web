@@ -9,7 +9,6 @@ import {
   Space,
   Typography,
 } from "antd";
-import { useSchema } from "@/framework/stores/useSchema";
 import { SerializedNodes } from "@craftjs/core";
 import { useDebounceEffect } from "ahooks";
 import { css } from "@emotion/css";

@@ -35,7 +35,7 @@ const fallbackRender = (props: any) => {
 const withConnectNode = (
   WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
 ): ReactMaterialComponent => {
-  return function ({ children, __events = [], ...props }: Record<string, any>) {
+  return function ({ children, __events__ = [], ...props }: Record<string, any>) {
     const {
       connectors: { connect, drag },
       id,
@@ -44,7 +44,7 @@ const withConnectNode = (
       custom: evt.data.custom,
     }));
     const onMountRefs = useCreateStore(selecotr => selecotr.onMountRefs)
-    const memoizdProps = useParseBinding(props, id);
+    const memoizdProps = useParseBinding(props, __events__);
 
     const renderChildRen = memoizdProps?.__child || children
 

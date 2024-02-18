@@ -4,6 +4,7 @@ import { Right } from "./right";
 import { Canvas } from "./canvas";
 import { EditoRootWrapper } from "./provider";
 import { css } from "@emotion/css";
+export * from './provider'
 
 const classes = {
   layout: css({
@@ -17,6 +18,7 @@ const classes = {
     gridTemplateColumns: "auto 1fr 300px",
     height: "100%",
     position: 'relative',
+    overflow: 'auto'
   }),
 };
 

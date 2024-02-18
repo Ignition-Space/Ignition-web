@@ -3,6 +3,10 @@ import type { EditorProps, OnChange, OnMount } from "@monaco-editor/react";
 import { Editor as MonacoEditor } from  "@monaco-editor/react";
 import { useDebounceFn } from "ahooks";
 import { Spin } from "antd";
+import { css } from "@emotion/css";
+
+const classes = {
+}
 
 const EditorThemeObject = {
   base: "vs",
@@ -107,8 +111,8 @@ const EditorThemeObject = {
 // 初始化一些样式
 const defaultOptions: EditorProps["options"] = {
   folding: false,
-  lineNumbersMinChars: 0,
-  lineNumbers: "off",
+  lineNumbersMinChars: 3,
+  lineNumbers: "on",
   automaticLayout: true,
   acceptSuggestionOnEnter: "smart",
   scrollbar: {
@@ -122,6 +126,7 @@ const defaultOptions: EditorProps["options"] = {
   minimap: {
     enabled: false,
   },
+  tabSize: 2,
   autoClosingBrackets: "languageDefined",
   autoClosingQuotes: "languageDefined",
 };
@@ -140,7 +145,7 @@ export const CodeEditor: React.FC<EditorProps> = (props) => {
       }
     },
     {
-      wait: 400,
+      wait: 0,
     }
   );
 
@@ -164,6 +169,7 @@ export const CodeEditor: React.FC<EditorProps> = (props) => {
       loading={<Spin />}
       {...props}
       theme={theme}
+      
       onChange={handleChange}
       onMount={onEditorMount}
       options={{

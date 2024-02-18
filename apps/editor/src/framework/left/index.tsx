@@ -4,7 +4,7 @@ import { theme, Flex, Button, Typography, Tooltip } from "antd";
 import { Tree } from "./tree";
 import { css } from "@emotion/css";
 import { MaterialList } from "./materials/list";
-import { DoubleLeftOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import { DoubleLeftOutlined, FunctionOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { HuosRemixIcon } from "@huos/icons";
 import { LocalHisotry } from "./hisotry";
 import { Queries } from "./queries";

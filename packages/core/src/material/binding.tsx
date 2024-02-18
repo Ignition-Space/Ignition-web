@@ -4,7 +4,10 @@ import { jsRuntime } from '../runtime'
 import { useTranslation } from 'react-i18next'
 import { useCreateStore } from '../state'
 
-export const useParseBinding = (props: Record<string, any>, id?: string) => {
+export const useParseBinding = (props: Record<string, any>, events?: {
+  name: string;
+  fn: string
+}[]) => {
 
   const { t } = useTranslation()
 
@@ -23,5 +26,25 @@ export const useParseBinding = (props: Record<string, any>, id?: string) => {
     return data
   }, [props])
 
-  return memoizedProps
+  const memoizedEvents = React.useMemo(() => {
+    const storeData = useCreateStore.getState().data
+    const eventMap: Record<string, Function> = {}
+    if (Array.isArray(events)) {
+      return _.forEach(events, ({ name, fn }) => {
+        eventMap[name] = () => jsRuntime.execute(fn, {
+          $t: t,
+          $store: storeData
+        })?.value
+      })
+    }
+
+    return {}
+  }, [events])
+
+  console.log(memoizedEvents, 'memoizedEvents')
+
+  return {
+    ...memoizedProps,
+    ...memoizedEvents
+  }
 }

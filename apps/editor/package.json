@@ -1,13 +1,16 @@
 {
   "name": "@huos/editor",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "files": ["lib"],
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
   "scripts": {
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
-    "preview": "tsc && vite build && vite preview --port=5173"
+    "preview": "tsc && vite build && vite preview --port=5173",
+    "build:lib": "vite build"
   },
   "dependencies": {
     "@arco-design/web-react": "^2.51.2",

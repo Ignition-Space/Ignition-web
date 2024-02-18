@@ -2,11 +2,9 @@
 import * as React from "react";
 import { useNode, useEditor } from "@craftjs/core";
 import ReactDOM from "react-dom";
-import { useFrame } from "react-frame-component";
 import { DragOutlined, HolderOutlined } from "@ant-design/icons";
 import { Flex, Typography, theme } from "antd";
 import { css } from "@emotion/react";
-import { HuosRemixIcon } from "@huos/icons";
 
 export interface RenderNodeWrapperProps {
   render: React.ReactElement;

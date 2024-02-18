@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, Form, Typography } from "antd";
 import { useEditor } from "@craftjs/core";
-import { css } from "@emotion/css";
 import { merge } from 'lodash'
 import { useDebounceFn } from "ahooks";
 
@@ -47,6 +46,7 @@ export const MountSettings = () => {
 
 
       /** 设置新组件内容属性配置 */
+      console.log(currentNodeProps, 'currentNodeProps')
       form.setFieldsValue(currentNodeProps)
     }
   }, [nodeId])

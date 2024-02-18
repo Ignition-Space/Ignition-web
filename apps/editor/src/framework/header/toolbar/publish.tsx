@@ -22,8 +22,6 @@ export const Publish = () => {
     const serialize = query.serialize()
     onChangeSchema('schema', serialize)
 
-    
-
     const newSchema: typeof pageSchema = {
       ...pageSchema,
       schema: serialize
