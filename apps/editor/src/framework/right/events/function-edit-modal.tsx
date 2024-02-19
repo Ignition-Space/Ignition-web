@@ -1,12 +1,12 @@
 import React from "react";
-import { Alert, Badge, Button, Flex, Modal, Typography, theme } from "antd";
+import { Badge, Button, Flex, Modal, Typography, theme } from "antd";
 import { JsEditor } from "@/framework/common/code-editor/js";
 import { css } from "@emotion/css";
 import { ClearOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
 import { useDebounceFn } from "ahooks";
 
 const defaultCode = `function () {
-    
+  console.log(1)
 }`;
 
 const classes = {
@@ -23,7 +23,6 @@ export const FunctionEditModal: React.FC<{
   eventName?: string;
   eventMark?: string;
 }> = (props) => {
-  console.log(props, "props ");
 
   const [editing, setEditing] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -46,6 +45,7 @@ export const FunctionEditModal: React.FC<{
         onClick={() => setOpen(true)}
       ></Button>
       <Modal
+      width={750}
         closable={false}
         open={open}
         onCancel={handleClose}

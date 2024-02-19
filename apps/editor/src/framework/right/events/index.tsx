@@ -1,6 +1,6 @@
-import { Space, Input, Button, Flex, ConfigProvider, AutoComplete } from "antd";
+import { Button, Flex, ConfigProvider, AutoComplete } from "antd";
 import { FunctionEditModal } from './function-edit-modal'
-import { ProForm, ProFormDependency, ProFormItem, ProFormItemRender, ProFormList, ProFormText } from "@ant-design/pro-components";
+import { ProForm, ProFormDependency, ProFormItem, ProFormList } from "@ant-design/pro-components";
 import { useEditor } from "@craftjs/core";
 import { DeleteOutlined } from "@ant-design/icons";
 import _ from "lodash";
@@ -47,9 +47,10 @@ export const EventsPanel = () => {
         }
       }
     }} >
-      <ProForm submitter={false} onValuesChange={(values, allValues) => {
-        actions.setProp(nodeId, (setterProps) => {
-          return _.merge(setterProps, values)
+      <ProForm submitter={false} onValuesChange={(_, allValues) => {
+        console.log(allValues, 'allValues')
+        actions.setProp(nodeId, (oldProps) => {
+          oldProps.__events__ = allValues.__events__
         })
       }} >
         <ProFormList

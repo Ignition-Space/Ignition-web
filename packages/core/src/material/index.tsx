@@ -36,6 +36,7 @@ const withConnectNode = (
   WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
 ): ReactMaterialComponent => {
   return function ({ children, __events__ = [], ...props }: Record<string, any>) {
+    console.log(__events__, '__events__')
     const {
       connectors: { connect, drag },
       id,
@@ -45,6 +46,7 @@ const withConnectNode = (
     }));
     const onMountRefs = useCreateStore(selecotr => selecotr.onMountRefs)
     const memoizdProps = useParseBinding(props, __events__);
+    
 
     const renderChildRen = memoizdProps?.__child || children
 

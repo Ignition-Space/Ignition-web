@@ -30,15 +30,19 @@ export const useParseBinding = (props: Record<string, any>, events?: {
     const storeData = useCreateStore.getState().data
     const eventMap: Record<string, Function> = {}
     if (Array.isArray(events)) {
-      return _.forEach(events, ({ name, fn }) => {
-        eventMap[name] = () => jsRuntime.execute(fn, {
+      _.forEach(events, ({ name, fn }) => {
+        const runFun = jsRuntime.execute(fn, {
           $t: t,
           $store: storeData
         })?.value
+
+        console.log(runFun, 'fn')
+
+        eventMap[name] = runFun
       })
     }
 
-    return {}
+    return eventMap
   }, [events])
 
   console.log(memoizedEvents, 'memoizedEvents')
