@@ -5,7 +5,6 @@ import { proLayoutDefaultProps } from "./default-config";
 import { startTransition } from "react";
 import { theme } from "antd";
 import { css } from "@emotion/css";
-import LogoSvg from '@/icons/logo.svg'
 
 export const OutletLayout = () => {
   const location = useLocation();
@@ -43,7 +42,7 @@ export const OutletLayout = () => {
       className={classes.root}
       title="HuoS"
       layout="mix"
-      logo={LogoSvg}
+      // logo={LogoSvg}
       token={{
       }}
       location={{

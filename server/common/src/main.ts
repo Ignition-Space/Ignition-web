@@ -31,4 +31,5 @@ async function bootstrap() {
     console.log('服务启动 -> ', 'http://localhost:7274/');
   });
 }
+
 bootstrap();

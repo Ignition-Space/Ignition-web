@@ -1,22 +1,30 @@
-import { Section } from './left'
-import { Content } from './content'
 import { css } from '@emotion/css'
+import { RootContainer } from '@/components/root'
+import { Flex } from 'antd'
+import { LoginForm } from './login-form'
+import {Section } from './left'
 
 const classes = {
   layout: css({
     height: '100vh',
-    width: '100vw',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    width: '100%',
+    paddingBlock: 100,
+    paddingInline: 24
   }),
 }
 
 const LoginPage = () => {
   return (
-    <div className={classes.layout} >
-      <Section/>
-      <Content/>
-    </div>
+    <RootContainer>
+      <Flex className={classes.layout} >
+        <Flex flex={1} justify="flex-start" align="flex-start">
+          <Section/>
+        </Flex>
+        <Flex flex={1} justify="center" align="center">
+            <LoginForm/>
+        </Flex>
+      </Flex>
+    </RootContainer>
   )
 }
 
