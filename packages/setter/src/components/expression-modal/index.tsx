@@ -1,15 +1,11 @@
 import React from "react";
 import { Badge, Button, Flex, Modal, Typography, theme } from "antd";
 import { css } from "@emotion/css";
-import { ModalFormProps } from "@ant-design/pro-components";
 import { CodeEditor } from "../../common/code-editor";
 import { HintPanel } from "./hint-panel";
-import { useDebounceFn } from "ahooks";
 import { ClearOutlined } from "@ant-design/icons";
 
-const defaultCode = `function () {
-  console.log(1)
-}`;
+
 
 const classes = {
   action: css({
@@ -26,7 +22,8 @@ export interface ExpressionModalProps {
   trigger?: React.ReactNode;
   value?: string;
   onChange?: (value: string) => void;
-  namePath?: string[]
+  namePath?: string[];
+  defaultCode?: string;
 }
 
 export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
@@ -35,7 +32,6 @@ export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
   const [code, setCode] = React.useState<string>()
 
   const handleClose = () => {
-    console.log("handleClose");
     setOpen(false);
   };
 
@@ -56,7 +52,7 @@ export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
       <div
         onClick={() => {
           setOpen(true);
-          setCode(props.value)
+          setCode(props.value || props.defaultCode)
         }}
       >
         {props.trigger}
@@ -105,6 +101,7 @@ export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
           <Flex vertical className={classes.editor}>
             <HintPanel />
             <CodeEditor
+              defaultValue={props.defaultCode}
               lang="typescript"
               value={code}
               height="200px"
