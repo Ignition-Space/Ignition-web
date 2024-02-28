@@ -17,9 +17,9 @@ const classes = {
 export const RootContainer: React.FC<FlexProps> = ({ children, ...props }) => {
   return (
     <Flex className={classes.root} justify="center" {...props} >
-      <Flex className={classes.content} >
+      <div className={classes.content} >
         {children}
-      </Flex>
+      </div>
     </Flex>
   )
 }

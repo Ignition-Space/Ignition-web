@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, Form, Typography } from "antd";
+import { Card, Form, Typography, theme } from "antd";
 import { useEditor } from "@craftjs/core";
 import { merge } from 'lodash'
 import { useDebounceFn } from "ahooks";
 
 export const MountSettings = () => {
+  const { token } = theme.useToken()
   const [form] = Form.useForm();
   const {
     id: nodeId,
@@ -54,15 +55,16 @@ export const MountSettings = () => {
   return (
       <Form
         style={{
-          height: 1
+
+         padding: token.paddingXS,
         }}
-        layout="vertical"
         form={form}
+        layout="horizontal"
         labelCol={{
-          span: 24,
+          span: 6,
         }}
         wrapperCol={{
-          span: 24,
+          span: 18,
         }}
         onValuesChange={handleFormChange}
         onFinish={handleFormChange}

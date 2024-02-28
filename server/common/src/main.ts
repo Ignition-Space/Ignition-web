@@ -4,11 +4,14 @@ import { useSwaggerDocs } from './common/swagger';
 import { ResponseInterceptor } from './common/response.interceptor';
 import { HttpCacheFilter } from './common/http-catch.filter';
 import { RequestMethod, VersioningType } from '@nestjs/common';
+import { ProxyMiddleware } from './common/proxy-middleware';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: true,
   });
+
+  app.use('/proxy', ProxyMiddleware);
 
   // 拦截器与过滤器
   app.useGlobalInterceptors(new ResponseInterceptor());

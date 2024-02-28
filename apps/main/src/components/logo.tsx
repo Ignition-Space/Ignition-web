@@ -1,23 +1,27 @@
-import { css } from '@emotion/css'
-import { LogoSvg } from '@/icons/logo'
-import { Flex, Typography, theme } from 'antd'
+import { css } from "@emotion/css";
+import { LogoSvg } from "@/icons/logo";
+import { Badge, Flex, Typography, theme } from "antd";
+import { FlexProps } from "antd/lib";
 
 const classes = {
-
   logoName: css({
-    fontSize: theme.getDesignToken().fontSizeHeading3,
     lineHeight: 1,
-    color: "#333",
-    marginTop: 8,
-    fontFamily: `Outfit,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol`
-  })
-}
+    fontFamily: "'__Barlow_92d964','__Barlow_Fallback_92d964',Helvetica,Arial,sans-serif",
+    marginTop: 6,
+    fontSize: 16,
+    fontWeight: 600
+  }),
+};
 
-export const Logo = () => {
+export const Logo: React.FC<Omit<FlexProps, 'children'> & {
+  collapsed?: boolean;
+}> = (props) => {
   return (
-    <Flex justify="flex-start" align="center" gap={12} >
-        <LogoSvg height={34} width={34} />
-        <Typography.Text strong className={classes.logoName} >HuoS</Typography.Text>
+    <Flex {...props} >
+      <Flex justify="flex-start" align="center" gap={8}>
+        <LogoSvg height={28} width={28} />
+        {props.collapsed ? null :  <Typography.Text className={classes.logoName}>HuoS Cloud</Typography.Text>}
+      </Flex>
     </Flex>
-  )
-}
+  );
+};

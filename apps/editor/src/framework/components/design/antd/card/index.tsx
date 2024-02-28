@@ -22,7 +22,10 @@ export const __AntCard__ = createReactMaterial(View, {
   ),
   extra: (
     <Element canvas id="card-title-extra" is="div">
-      111
+      <EmptySetter/>
     </Element>
   ),
+  title: <Element canvas id="card-title-title" is="div" >
+    标题
+  </Element>
 })

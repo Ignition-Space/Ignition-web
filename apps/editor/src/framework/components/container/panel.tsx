@@ -1,13 +1,13 @@
-import { BindPrototypeManage } from "@huos/setter"
-
+import { RenderFieldSetter } from '@huos/setter'
+import { Input } from 'antd';
 
 export const Panel = () => {
   return (
-   <>
-    <BindPrototypeManage name="background" label="背景配置" initialValue="#FFF" />
-    <BindPrototypeManage name="width" label="宽度" initialValue="100vw" />
-    <BindPrototypeManage name="height" label="高度" initialValue="100vh" />
-
-   </>
-  )
-}
+    <>
+      <RenderFieldSetter name='name' label='背景' />
+      <RenderFieldSetter name='test' label='test'>
+      <Input placeholder='输入名称' />
+      </RenderFieldSetter>
+    </>
+  );
+};

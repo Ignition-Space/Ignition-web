@@ -5,10 +5,6 @@ import { css } from "@emotion/css";
 import { ClearOutlined, CloseOutlined, EditOutlined } from "@ant-design/icons";
 import { useDebounceFn } from "ahooks";
 
-const defaultCode = `function () {
-  console.log(1)
-}`;
-
 const classes = {
   action: css({
     paddingInline: theme.getDesignToken().paddingXS,
@@ -23,7 +19,6 @@ export const FunctionEditModal: React.FC<{
   eventName?: string;
   eventMark?: string;
 }> = (props) => {
-
   const [editing, setEditing] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -33,7 +28,6 @@ export const FunctionEditModal: React.FC<{
   });
 
   const handleClose = () => {
-    console.log("handleClose");
     setOpen(false);
   };
 
@@ -45,12 +39,12 @@ export const FunctionEditModal: React.FC<{
         onClick={() => setOpen(true)}
       ></Button>
       <Modal
-      width={750}
+        width={750}
         closable={false}
         open={open}
         onCancel={handleClose}
         styles={{
-          content: {
+          body: {
             paddingBlock: theme.getDesignToken().paddingXS,
             paddingInline: 0,
           },
@@ -88,7 +82,6 @@ export const FunctionEditModal: React.FC<{
           </Flex>
           <JsEditor
             value={props.value}
-            defaultValue={defaultCode}
             height={400}
             onChange={(v) => {
               setEditing(true);
