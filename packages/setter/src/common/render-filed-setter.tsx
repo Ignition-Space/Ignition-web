@@ -7,12 +7,16 @@ import { css } from "@emotion/css";
 import { ExpressionModal } from "../components/expression-modal";
 import _ from "lodash";
 
-interface RenderFieldSetterProps extends FormItemProps {
+export interface RenderFieldSetterProps extends FormItemProps {
   name?: string;
   label?: string;
   isExpression?: boolean;
   children?: React.ReactNode;
   
+}
+
+export interface SetterProps<T> extends RenderFieldSetterProps {
+  filedProps?: T
 }
 
 const classes = {

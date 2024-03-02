@@ -3,11 +3,15 @@ import _ from 'lodash'
 import { jsRuntime } from '../runtime'
 import { useTranslation } from 'react-i18next'
 import { useCreateStore } from '../state'
+import { App } from 'antd'
 
 export const useParseBinding = (props: Record<string, any>, events?: {
   name: string;
   fn: string
 }[]) => {
+
+
+  const app = App.useApp()
 
   const { t } = useTranslation()
 
@@ -15,8 +19,11 @@ export const useParseBinding = (props: Record<string, any>, events?: {
     if (_.isPlainObject(value) && _.has(value, '$$jsx')) {
       const storeData = useCreateStore.getState().data
       return jsRuntime.execute(value.$$jsx, {
-        $t: t,
-        $store: storeData
+        huos: {
+          t,
+          app,
+          getState: useCreateStore.getState,
+        }
       })?.value
     }
   }
@@ -27,16 +34,16 @@ export const useParseBinding = (props: Record<string, any>, events?: {
   }, [props])
 
   const memoizedEvents = React.useMemo(() => {
-    const storeData = useCreateStore.getState().data
     const eventMap: Record<string, Function> = {}
     if (Array.isArray(events)) {
       _.forEach(events, ({ name, fn }) => {
         const runFun = jsRuntime.execute(fn, {
-          $t: t,
-          $store: storeData
+          huos: {
+            t,
+            app,
+            getState: useCreateStore.getState,
+          }
         })?.value
-
-        console.log(runFun, 'fn')
 
         eventMap[name] = runFun
       })

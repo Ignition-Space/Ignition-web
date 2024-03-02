@@ -127,7 +127,7 @@ export const BackgroundSetter: Required<CollapseProps>["items"][0] = {
           return (
             <RenderFieldSetter
               isExpression={false}
-              name="_backgroundColor"
+              name="backgroundColor"
               label="背景颜色"
               getValueFromEvent={(_, color) => color}
             >

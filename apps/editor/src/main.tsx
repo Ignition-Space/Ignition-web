@@ -45,7 +45,7 @@ const components = {
     fontSizeIcon: 14,
   },
   Typography: {
-    fontWeightStrong: 500,
+    fontWeightStrong: 400,
   },
 };
 

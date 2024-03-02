@@ -7,6 +7,7 @@ import {
   Alert,
   Empty,
   Card,
+  App,
 } from "antd";
 import { ClearOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import _ from "lodash";
@@ -14,6 +15,7 @@ import { css } from "@emotion/css";
 import { ExpressionModal } from "@huos/setter";
 import { useEditor } from "@craftjs/core";
 import React from "react";
+import { useThrottleEffect } from "ahooks";
 
 export interface IEventType {
   name?: string;
@@ -40,32 +42,32 @@ const defaultCode = `function () {
 }`;
 
 export const EventsPanel = () => {
+  const { message } = App.useApp()
   const [eventList, setEventList] = React.useState<IEventType[]>([
     {
       uid: _.uniqueId("event"),
     },
   ]);
 
-  const errorMsg = React.useMemo(() => {
+  useThrottleEffect(() => {
     const hasDuplicates = _.some(
       _.groupBy(eventList, "name"),
       (group) => group.length > 1
     );
 
     if (hasDuplicates) {
-      return "当前事件列表中存在重复的事件声明，可能会造成事件逻辑冲突";
+      message.error("当前事件列表中存在重复的事件声明，可能会造成事件逻辑冲突")
     }
 
     const allFieldsPresent = _.every(
       eventList,
-      (obj) => !_.isEmpty(obj.name) && !_.isEmpty(obj.fn)
+      (obj) => !_.isEmpty(obj.name)
     );
 
     if (!allFieldsPresent) {
-      return "请完善红色边框的事件声明";
+      message.error("有事件名称确实，为空的事件声明将无法生效")
     }
 
-    return "";
   }, [eventList]);
 
   const {
@@ -127,14 +129,14 @@ export const EventsPanel = () => {
     if (nodeId) {
       // 初始化eventMap
 
-      const defaultEvent = _.map(eventMap, (__, key) => ({
-        name: key,
-      }));
+      // const defaultEvent = _.map(eventMap, (__, key) => ({
+      //   name: key,
+      // }));
 
-      const mergedArray = _.unionBy(defaultEvent, events, "name");
-      const filteredArray = _.values(_.keyBy(mergedArray, "name"));
+      // const mergedArray = _.unionBy(defaultEvent, events, "name");
+      // const filteredArray = _.values(_.keyBy(mergedArray, "name"));
 
-      const initialEvents = filteredArray.map((_item) => ({
+      const initialEvents = events.map((_item: any) => ({
         uid: _.uniqueId("event"),
         ..._item,
       }));
@@ -144,25 +146,24 @@ export const EventsPanel = () => {
   }, [nodeId]);
 
   return (
-    <div className={classes.list}>
+    <Flex vertical className={classes.list} gap={24} >
       <Flex vertical gap={12}>
-        <Flex justify="flex-start">
-          <Typography.Text strong>事件</Typography.Text>
+        <Flex>
+          <Typography.Text strong >组件事件</Typography.Text>
         </Flex>
         {eventList?.length > 0 ? null : (
-         <Empty
-         image={Empty.PRESENTED_IMAGE_SIMPLE}
-         description="暂无事件信息"
-       >
-         <Button type="primary" onClick={handleAddEvent} >新增事件</Button>
-       </Empty>
+         <Card type="inner" size="small" >
+          <Flex justify="center" gap={4} >
+            <Typography.Text>暂无事件，请</Typography.Text>
+            <Typography.Link onClick={handleAddEvent} >【添加事件】</Typography.Link>
+          </Flex>
+         </Card>
         )}
         <Flex vertical gap={12}>
           {eventList.map(({ name, fn, uid }) => {
             return (
               <Flex key={uid} gap={12}>
                 <AutoComplete
-                  status={name && fn ? undefined : "error"}
                   value={name}
                   placeholder="请输入事件名称"
                   style={{ width: "100%" }}
@@ -201,14 +202,6 @@ export const EventsPanel = () => {
             );
           })}
         </Flex>
-        {errorMsg ? (
-          <Alert
-            type="error"
-            message={
-              <Typography.Text type="danger">{errorMsg}</Typography.Text>
-            }
-          />
-        ) : null}
         {eventList?.length > 0 ? (
           <Button
             icon={<PlusOutlined />}
@@ -218,6 +211,50 @@ export const EventsPanel = () => {
           </Button>
         ) : null}
       </Flex>
-    </div>
+
+      <Flex vertical gap={12}>
+        <Flex>
+          <Typography.Text strong >生命周期</Typography.Text>
+        </Flex>
+        {eventList?.length > 0 ? null : (
+         <Card type="inner" size="small" >
+          <Flex justify="center" gap={4} >
+            <Typography.Text type="secondary" >暂无事件，请</Typography.Text>
+            <Typography.Link onClick={handleAddEvent} >【添加事件】</Typography.Link>
+          </Flex>
+         </Card>
+        )}
+        <Flex vertical gap={12}>
+        <Flex vertical gap={12}>
+          <Card type="inner" size="small" >
+          <Flex justify="center" gap={4} >            
+            <Typography.Text type="secondary" >暂无事件</Typography.Text>
+          </Flex>
+         </Card>
+        </Flex>
+        </Flex>
+      </Flex>
+
+      <Flex vertical gap={12}>
+        <Flex>
+          <Typography.Text strong >连接器</Typography.Text>
+        </Flex>
+        {eventList?.length > 0 ? null : (
+         <Card type="inner" size="small" >
+          <Flex justify="center" gap={4} >            
+            <Typography.Text type="secondary" >暂无事件</Typography.Text>
+            <Typography.Link onClick={handleAddEvent} >【添加事件】</Typography.Link>
+          </Flex>
+         </Card>
+        )}
+        <Flex vertical gap={12}>
+          <Card type="inner" size="small" >
+          <Flex justify="center" gap={4} >
+            <Typography.Text type="secondary" >暂无事件</Typography.Text>
+          </Flex>
+         </Card>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 };

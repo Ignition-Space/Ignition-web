@@ -20,9 +20,8 @@ function myCompletions(context: CompletionContext) {
     validFor: /^\w*$/,
     options: [
       {label: "huos.state", type: "keyword", detail: "当前huos的状态"},
-      {label: "huos.state.data", type: "keyword", detail: "1111",},
       {label: "huos.t", type: "variable", info: "huos多语言相关的备注", apply: "huos.t(['')"},
-      {label: "huos.app", type: "text", apply: "⠁⭒*.✩.*⭒⠁", detail: "当前huos的app信息"}
+      {label: "huos.app", type: "text",  detail: "当前huos的app信息"}
     ]
   }
 }

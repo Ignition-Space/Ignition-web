@@ -43,8 +43,9 @@ export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
   const onComplete = () => {
     if (props.onChange && code ) {
       props.onChange(code)
-      handleClose()
+     
     }
+    handleClose()
   }
 
   return (
