@@ -2,23 +2,18 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ProLayout } from "@ant-design/pro-components";
 import { proLayoutDefaultProps } from "./default-config";
 import { startTransition } from "react";
-import {
-  ConfigProvider,
-  Flex,
-  Input,
-  Typography,
-  theme,
-} from "antd";
+import { ConfigProvider, Flex, Input, Typography, theme } from "antd";
 import { css } from "@emotion/css";
 import { Logo } from "@/components/logo";
 import { SearchOutlined } from "@ant-design/icons";
 import { Profile } from "./profile";
-import { ChatgptFloatBtn } from '@/components/chatgpt-float-btn'
+import { ChatgptFloatBtn } from "@/components/chatgpt-float-btn";
+import { SpotlightModal } from "@/components/spotlight-modal";
 
 export const OutletLayout = () => {
   const location = useLocation();
   const { token } = theme.useToken();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const classes = {
     root: css({
@@ -44,7 +39,7 @@ export const OutletLayout = () => {
     content: css({
       width: "100%",
       height: "100%",
-      maxWidth: 1200
+      maxWidth: 1200,
     }),
   };
 
@@ -66,7 +61,7 @@ export const OutletLayout = () => {
         pageContainer: {
           paddingBlockPageContainerContent: 0,
           paddingInlinePageContainerContent: 0,
-          colorBgPageContainer: '#FFF'
+          colorBgPageContainer: "#FFF",
         },
       }}
       location={{
@@ -77,56 +72,62 @@ export const OutletLayout = () => {
       }}
       menuExtraRender={({ collapsed }) => {
         return (
-          <Flex
-            vertical
-            style={{
-              paddingBlockEnd: 16,
-              paddingBlockStart: 8,
-            }}
-          >
-            <Flex
-              style={{
-                position: "relative",
-              }}
-            >
-              <div
+          <SpotlightModal
+            trigger={
+              <Flex
+                vertical
                 style={{
-                  width: "100%",
-                  height: 42,
-                  position: "absolute",
-                  top: 12,
-                  left: 0,
-                  zIndex: 2,
-                  cursor: "pointer",
-                }}
-              />
-              <ConfigProvider
-                theme={{
-                  components: {
-                    Input: {
-                      controlHeight: 42,
-                    },
-                  },
+                  paddingBlockEnd: 16,
+                  paddingBlockStart: 8,
                 }}
               >
-                <Input
-                  readOnly
-                  prefix={
-                    <Typography.Text strong type="secondary">
-                      <SearchOutlined />
-                    </Typography.Text>
-                  }
-                  suffix={
-                    collapsed ? null : (
-                      <Typography.Text type="secondary">⌘ K</Typography.Text>
-                    )
-                  }
-                  variant="filled"
-                  placeholder="开始探索新世界吧？"
-                />
-              </ConfigProvider>
-            </Flex>
-          </Flex>
+                <Flex
+                  style={{
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      height: 42,
+                      position: "absolute",
+                      top: 12,
+                      left: 0,
+                      zIndex: 2,
+                      cursor: "pointer",
+                    }}
+                  />
+                  <ConfigProvider
+                    theme={{
+                      components: {
+                        Input: {
+                          controlHeight: 42,
+                        },
+                      },
+                    }}
+                  >
+                    <Input
+                      readOnly
+                      prefix={
+                        <Typography.Text strong type="secondary">
+                          <SearchOutlined />
+                        </Typography.Text>
+                      }
+                      suffix={
+                        collapsed ? null : (
+                          <Typography.Text type="secondary">
+                            ⌘ K
+                          </Typography.Text>
+                        )
+                      }
+                      variant="filled"
+                      placeholder="开始探索新世界吧？"
+                    />
+                  </ConfigProvider>
+                </Flex>
+              </Flex>
+            }
+          ></SpotlightModal>
         );
       }}
       menuFooterRender={(menuProps) => {
@@ -148,20 +149,22 @@ export const OutletLayout = () => {
       {...proLayoutDefaultProps}
       fixSiderbar={true}
       contentStyle={{
-        height: '100vh',
-        overflow: 'auto',
+        height: "100vh",
+        overflow: "auto",
       }}
     >
-      <div style={{
-        maxWidth: 1200,
-        margin: '0 auto',
-        width: '100%',
-        height: '100%',
-        padding: 24
-      }} >
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          width: "100%",
+          height: "100%",
+          padding: 24,
+        }}
+      >
         <Outlet />
       </div>
-      <ChatgptFloatBtn/>
+      <ChatgptFloatBtn />
     </ProLayout>
   );
 };

@@ -5,7 +5,7 @@ export const QRCodeView: ReactMaterialViewType<
 QRCodeProps
 > = ({ ...props }, ref: any) => {
   return (
-    <div style={{ display: 'inline-block', width: '100%' }} ref={ref} >
+    <div style={{ display: 'inline-block', width: 'auto' }} ref={ref} >
       <QRCode {...props} />
     </div>
   );
