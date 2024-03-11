@@ -1,7 +1,7 @@
-import { BugOutlined, CaretRightOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { css } from "@emotion/css";
 import { Button, Flex, Table, TableProps, Tag, Typography, theme } from "antd";
-import { Devtools } from '../../canvas/devtools'
+import { HttpSendModal } from './http-send-modal'
 
 const classes = {
   httpViewer: css({
@@ -38,7 +38,7 @@ export const QueryHttpViewer = () => {
       render: () => {
         return (
           <Flex justify="flex-end">
-            <Button size="small">调试</Button>
+            <HttpSendModal/>
           </Flex>
         );
       },

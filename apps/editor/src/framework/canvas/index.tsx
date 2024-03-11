@@ -1,4 +1,4 @@
-import { theme, Drawer, Button } from "antd";
+import { theme } from "antd";
 import { css } from "@emotion/css";
 import { IFrame as RenderViewSanBox } from "./iframe";
 import { DocumentNodes } from "./document";
@@ -6,12 +6,10 @@ import { useEditorKeyPress } from "../hooks/use-keyword-panel";
 import { Devtools } from "./devtools";
 import React from "react";
 import { useBoolean } from "ahooks";
-import { CloseOutlined } from "@ant-design/icons";
 
 export const Canvas = () => {
   const ref = React.useRef<HTMLDivElement>(null)
   const { token } = theme.useToken();
-  const [open, { toggle }] = useBoolean(true)
 
   useEditorKeyPress();
 
@@ -33,8 +31,6 @@ export const Canvas = () => {
 
   return (
     <div ref={ref} className={classes.main}>
-      <Devtools/>
-      {/* <ToolBar /> */}
       <RenderViewSanBox>
         <DocumentNodes />
       </RenderViewSanBox>

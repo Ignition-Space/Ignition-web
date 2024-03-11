@@ -4,6 +4,7 @@ import { css } from "@emotion/css";
 import { CodeEditor } from "../../common/code-editor";
 import { HintPanel } from "./hint-panel";
 import { ClearOutlined } from "@ant-design/icons";
+import { ReactCodeMirrorProps } from "@uiw/react-codemirror";
 
 
 
@@ -24,6 +25,7 @@ export interface ExpressionModalProps {
   onChange?: (value: string) => void;
   namePath?: string[];
   defaultCode?: string;
+  codeProps?: ReactCodeMirrorProps
 }
 
 export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
@@ -109,6 +111,7 @@ export const ExpressionModal: React.FC<ExpressionModalProps> = (props) => {
               minHeight="200px"
               maxHeight="300px"
               onChange={handleOnChange}
+              {...props.codeProps}
             />
           </Flex>
         </Flex>

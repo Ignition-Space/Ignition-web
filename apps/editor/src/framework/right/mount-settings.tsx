@@ -29,6 +29,7 @@ export const MountSettings = () => {
 
 
   const { run: handleFormChange } = useDebounceFn(async (changeValues: any) => {
+    console.log(changeValues, 'changeValues')
 
     if (nodeId) {
       actions.setProp(nodeId, (setterProps) => {

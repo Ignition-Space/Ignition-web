@@ -9,6 +9,5 @@ export const __Provider__ = createReactMaterial(ProviderView, {
     useResize: false
   },
   related: {
-    settingRender: Panel
   }
 })
