@@ -1,0 +1,23 @@
+{
+  "name": "@huos/mui",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "scripts": {
+    "start": "tsup --watch",
+    "build": "tsup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@huos/core": "workspace:^",
+    "@huos/icons": "workspace:^",
+    "@huos/setter": "workspace:^",
+    "@mui/material": "^5.15.13"
+  }
+}

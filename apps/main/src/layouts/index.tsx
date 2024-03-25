@@ -160,8 +160,13 @@ export const OutletLayout = () => {
           width: "100%",
           height: "100%",
           padding: 24,
+          display: "grid",
+          gridTemplateRows: "50px 1fr",
         }}
       >
+        <Flex justify="space-between">
+          <Typography.Title level={5} >首页</Typography.Title>
+        </Flex>
         <Outlet />
       </div>
       <ChatgptFloatBtn />

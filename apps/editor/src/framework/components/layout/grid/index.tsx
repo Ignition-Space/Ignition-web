@@ -20,7 +20,7 @@ export const __AntdCol = createReactMaterial(ColView, {
   }
 },  {
   children: (
-    <Element canvas id="col-children" is={EmptySetter} />,
+    <Element canvas id="col-children" is={EmptySetter} />
   )
 })
 

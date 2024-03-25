@@ -1,5 +1,4 @@
 import { FloatButton } from "antd"
-import ChatGPT from '@/icons/chatgpt.svg?react'
 import { LogoSvg } from '@/icons/logo'
 
 export const ChatgptFloatBtn = () => {

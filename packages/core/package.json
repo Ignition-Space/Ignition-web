@@ -17,6 +17,7 @@
   "dependencies": {
     "i18next": "^23.5.1",
     "immer": "^10.0.3",
+    "ky": "^1.2.2",
     "re-resizable": "^6.9.11",
     "react-error-boundary": "^4.0.11",
     "react-i18next": "^13.3.0",

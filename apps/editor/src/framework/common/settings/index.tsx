@@ -3,7 +3,8 @@ import { HuosRemixIcon } from "@huos/icons";
 import { Button, Tabs } from "antd";
 import { css } from "@emotion/css";
 import type { TabsProps } from "antd";
-import { CodeEditor } from '@huos/setter'
+import { CodeEditor } from "@huos/setter";
+import { useSettingState } from "@/framework/stores/useSettings";
 
 const tpl = `<!DOCTYPE html>
 <html lang="en">
@@ -17,24 +18,15 @@ const tpl = `<!DOCTYPE html>
     <!-- 当前内容的结构体 -->
   </div>
 </body>
-</html>`
+</html>`;
 
 export const ConfigSettings = () => {
+  const onChange = useSettingState((seletor) => seletor.onChange);
+
   return (
-    <DrawerForm
-      drawerProps={{
-        placement: "left",
-        closeIcon: false,
-        styles: {
-          body: {
-            padding: 0,
-          }
-        }
-      }}
-      submitter={false}
-      trigger={<Button icon={<HuosRemixIcon type="icon-settings-3-line" />} />}
-    >
-      <CodeEditor lang="html" value={tpl} />
-    </DrawerForm>
+    <Button
+      icon={<HuosRemixIcon type="icon-settings-3-line" />}
+      onClick={() => onChange("showSetting", true)}
+    />
   );
 };

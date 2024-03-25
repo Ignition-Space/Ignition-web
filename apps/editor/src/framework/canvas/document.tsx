@@ -1,6 +1,5 @@
 import React from "react";
 import { __Provider__ } from "@/framework/components";
-import { __AntButton__ } from "@/framework/components/design/antd/button";
 import { Canvas, Frame as DocumentFrame } from "@craftjs/core";
 import { useFrame } from "react-frame-component";
 import { useDynamicHeadInsertion } from "../hooks/useDynamicHeadInsertion";
@@ -34,7 +33,6 @@ export const DocumentNodes: React.FC<React.ComponentProps<typeof DocumentFrame>>
           height="100%"
           width="100%"
         >
-          <__AntButton__/>
         </Canvas>
       </DocumentFrame>
     </div>

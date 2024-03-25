@@ -68,12 +68,8 @@ export const Right = () => {
                 key: RightTabsType.STYLE,
               },
               {
-                label: "事件",
+                label: "event",
                 key: RightTabsType.EVENTS,
-              },
-              {
-                label: "代码",
-                key: RightTabsType.CODE,
               },
             ]}
             onChange={(v) => setActiveKey(v as RightTabsType)}
@@ -87,7 +83,6 @@ export const Right = () => {
         </Flex>
         <div className={classes.content}>
           {activeKey === RightTabsType.PROPS ? <MountSettings /> : null}
-          {activeKey === RightTabsType.CODE ? <ComponentDoTCode /> : null}
           {activeKey === RightTabsType.EVENTS ? <EventsPanel /> : null}
           {activeKey === RightTabsType.STYLE ? <StylePropsPanel /> : null}
         </div>

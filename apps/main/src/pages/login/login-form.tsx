@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   ProForm,
   ProFormCheckbox,
@@ -8,12 +9,18 @@ import {
   Flex,
   Typography,
   Alert,
-  Badge,
+  App,
 } from "antd";
 import { css } from "@emotion/css";
 import { NotificationOutlined } from "@ant-design/icons";
 import { TermsModal } from "./terms-modal";
 import { LogoSvg } from "@/icons/logo";
+import { request } from '@huos/core'
+
+interface LoginFormType {
+  username: string;
+  password: string;
+}
 
 const classes = {
   header: css({
@@ -21,7 +28,6 @@ const classes = {
   }),
   name: css({
     fontSize: 28,
-    fontFamily: "'__Barlow_92d964','__Barlow_Fallback_92d964',Helvetica,Arial,sans-serif",
     backgroundImage:
       "linear-gradient(74.85deg,#336df4 10.65%,#8c55ed 89.35%),linear-gradient(74.92deg,#5194ff 12.49%,#876eed 89.39%)",
     WebkitBackgroundClip: "text",
@@ -35,12 +41,33 @@ const classes = {
 };
 
 export const LoginForm = () => {
+  const { message } = App.useApp()
+  const [errorMessage, setErrorMessage] = React.useState<string>('');
+
+  const handleFormFinishLogin = async (formData: LoginFormType) => {
+
+    const data = await request.post('/api/auth/login', {
+      json: {
+        formData
+      }
+    })
+
+    message.success("登录成功~")
+
+
+
+    console.log(data, 'data')
+
+    
+  }
+
   return (
-    <ProForm
+    <ProForm<LoginFormType>
       submitter={false}
       style={{
         width: 400,
       }}
+      onFinish={handleFormFinishLogin}
     >
       <Flex vertical className={classes.header} align='center' gap={8} >
         <Flex vertical  align="center" gap={12}>
@@ -56,6 +83,7 @@ export const LoginForm = () => {
 
       <Flex vertical gap={20}>
         <ProFormText
+          name="username"
           formItemProps={{ noStyle: true }}
           fieldProps={{
             size: "large",
@@ -64,6 +92,7 @@ export const LoginForm = () => {
           }}
         />
         <ProFormText.Password
+          name="passowrd"
           formItemProps={{ noStyle: true }}
           fieldProps={{
             size: "large",
@@ -71,13 +100,15 @@ export const LoginForm = () => {
             variant: "filled",
           }}
         />
-
-        <Alert
+        {
+          errorMessage ? <Alert
           type="error"
           showIcon
           icon={<NotificationOutlined />}
-          message={<Typography.Text type="danger">系统发生错误，您登录的账号暂未注册。</Typography.Text>}
-        />
+          message={<Typography.Text type="danger">{errorMessage}</Typography.Text>}
+        /> : null
+        }
+        
         <Flex align="baseline" gap={8}>
           <ProFormCheckbox formItemProps={{ noStyle: true }} />
           <Typography.Text type="secondary">
@@ -106,6 +137,7 @@ export const LoginForm = () => {
           style={{
             marginTop: 20,
           }}
+          htmlType="submit"
         >
           立即登录
         </Button>
@@ -113,23 +145,6 @@ export const LoginForm = () => {
           <Typography.Text>我还没有账户?</Typography.Text>
           <Typography.Link>获取访问权限</Typography.Link>
         </Flex>
-        {/* <Divider plain>
-          <Typography.Text type="secondary">快捷登录方式</Typography.Text>
-        </Divider>
-        <Flex gap={24}>
-          <Button  block size="large">
-            <Flex justify="center" align="center" gap={8}>
-              <GoogleIcon width={26} height={26} />
-              <Typography.Text className={classes.btn}>Google</Typography.Text>
-            </Flex>
-          </Button>
-          <Button  block size="large">
-            <Flex justify="center" align="center" gap={8}>
-              <TwitterIcon width={26} height={26} />
-              <Typography.Text className={classes.btn}>Twitter</Typography.Text>
-            </Flex>
-          </Button>
-        </Flex> */}
       </Flex>
     </ProForm>
   );

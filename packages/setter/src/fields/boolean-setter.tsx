@@ -4,7 +4,7 @@ import { RenderFieldSetter, SetterProps } from "..";
 
 export const BooleanSetter: React.FC<SetterProps<SwitchProps>> = ({ filedProps, ...props }) => {
   return (
-    <RenderFieldSetter {...props} >
+    <RenderFieldSetter {...props} valuePropName="checked" >
       <Switch  {...filedProps} />
     </RenderFieldSetter>
   )

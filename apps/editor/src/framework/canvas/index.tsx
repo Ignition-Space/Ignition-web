@@ -1,11 +1,10 @@
+import React from "react";
 import { theme } from "antd";
 import { css } from "@emotion/css";
 import { IFrame as RenderViewSanBox } from "./iframe";
 import { DocumentNodes } from "./document";
 import { useEditorKeyPress } from "../hooks/use-keyword-panel";
-import { Devtools } from "./devtools";
-import React from "react";
-import { useBoolean } from "ahooks";
+import { Settings } from '../settings'
 
 export const Canvas = () => {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -31,6 +30,7 @@ export const Canvas = () => {
 
   return (
     <div ref={ref} className={classes.main}>
+      <Settings/>
       <RenderViewSanBox>
         <DocumentNodes />
       </RenderViewSanBox>

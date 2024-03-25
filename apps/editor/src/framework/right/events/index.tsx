@@ -1,31 +1,31 @@
+import React from "react";
 import {
   Button,
   Flex,
-  AutoComplete,
-  Space,
-  Typography,
-  Alert,
-  Empty,
-  Card,
-  App,
+  Collapse,
+  ConfigProvider,
+  Form,
+  Input,
 } from "antd";
-import { ClearOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
-import _ from "lodash";
+import {
+  CaretDownOutlined,
+  CaretUpOutlined,
+  CloseOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
+import _, { merge } from "lodash";
 import { css } from "@emotion/css";
 import { ExpressionModal } from "@huos/setter";
 import { useEditor } from "@craftjs/core";
-import React from "react";
-import { useThrottleEffect } from "ahooks";
+import { useDebounceFn } from "ahooks";
 
 export interface IEventType {
   name?: string;
   fn?: string;
-  uid: React.Key;
 }
 
 const classes = {
   list: css({
-    padding: 12,
     width: "100%",
 
     "& .ant-pro-form-list-container": {
@@ -42,39 +42,13 @@ const defaultCode = `function () {
 }`;
 
 export const EventsPanel = () => {
-  const { message } = App.useApp()
-  const [eventList, setEventList] = React.useState<IEventType[]>([
-    {
-      uid: _.uniqueId("event"),
-    },
-  ]);
-
-  useThrottleEffect(() => {
-    const hasDuplicates = _.some(
-      _.groupBy(eventList, "name"),
-      (group) => group.length > 1
-    );
-
-    if (hasDuplicates) {
-      message.error("当前事件列表中存在重复的事件声明，可能会造成事件逻辑冲突")
-    }
-
-    const allFieldsPresent = _.every(
-      eventList,
-      (obj) => !_.isEmpty(obj.name)
-    );
-
-    if (!allFieldsPresent) {
-      message.error("有事件名称确实，为空的事件声明将无法生效")
-    }
-
-  }, [eventList]);
+  const [form] = Form.useForm()
 
   const {
     id: nodeId,
-    eventMap,
-    events,
     actions,
+    events,
+    currentNodeProps
   } = useEditor((state) => {
     const [currentNodeId] = state.events.selected;
 
@@ -83,178 +57,152 @@ export const EventsPanel = () => {
 
       return {
         id: currentNodeId,
-        eventMap: (data?.custom?.evetns as Record<string, string>) || {},
+        currentNodeProps: data.props,
         events: data.props?.__events__ || [],
       };
     }
   });
 
-  const handleEventChange = (uid: React.Key, value: Partial<IEventType>) => {
-    const newEventList = eventList.map((item) => {
-      if (uid === item.uid) {
-        return {
-          ...item,
-          ...value,
-        };
-      }
+  const { run: handleFormChange } = useDebounceFn((_, formData) => {
+    const { events } = formData
 
-      return item;
-    });
+    if (nodeId) {
+      actions.setProp(nodeId, (setterProps) => {
+        return merge(setterProps, {
+          __events__: events
+        })
+      })
+    }
+  })
 
-    setEventList(newEventList);
+  console.log(currentNodeProps, 'currentNodeProps')
 
-    actions.setProp(nodeId, (oldState) => {
-      oldState.__events__ = newEventList;
-    });
-  };
-
-  const handleRemoveChange = (uid: React.Key) => {
-    const newEventList = eventList.filter((item) => item.uid !== uid);
-    setEventList(newEventList);
-    actions.setProp(nodeId, (oldState) => {
-      oldState.__events__ = newEventList;
-    });
-  };
-
-  const handleAddEvent = () => {
-    setEventList([
-      ...eventList,
-      {
-        uid: _.uniqueId(),
-      },
-    ]);
-  }
-
+  // 当前编辑的组件发生改变，nodeId副作用更新了
   React.useEffect(() => {
     if (nodeId) {
-      // 初始化eventMap
 
-      // const defaultEvent = _.map(eventMap, (__, key) => ({
-      //   name: key,
-      // }));
+      /** 切换组件清除setter配置 */
+      form.resetFields()
 
-      // const mergedArray = _.unionBy(defaultEvent, events, "name");
-      // const filteredArray = _.values(_.keyBy(mergedArray, "name"));
 
-      const initialEvents = events.map((_item: any) => ({
-        uid: _.uniqueId("event"),
-        ..._item,
-      }));
-
-      setEventList(initialEvents);
+      /** 设置新组件内容属性配置 */
+      form.setFieldsValue({
+        events,
+      })
     }
-  }, [nodeId]);
+  }, [nodeId])
 
   return (
-    <Flex vertical className={classes.list} gap={24} >
-      <Flex vertical gap={12}>
-        <Flex>
-          <Typography.Text strong >组件事件</Typography.Text>
-        </Flex>
-        {eventList?.length > 0 ? null : (
-         <Card type="inner" size="small" >
-          <Flex justify="center" gap={4} >
-            <Typography.Text>暂无事件，请</Typography.Text>
-            <Typography.Link onClick={handleAddEvent} >【添加事件】</Typography.Link>
-          </Flex>
-         </Card>
-        )}
-        <Flex vertical gap={12}>
-          {eventList.map(({ name, fn, uid }) => {
-            return (
-              <Flex key={uid} gap={12}>
-                <AutoComplete
-                  value={name}
-                  placeholder="请输入事件名称"
-                  style={{ width: "100%" }}
-                  options={_.map(eventMap, (value, key) => ({
-                    label: value + key,
-                    value: key,
-                  }))}
-                  allowClear
-                  onChange={(v) => {
-                    handleEventChange(uid, {
-                      name: v,
-                    });
-                  }}
+    <ConfigProvider
+      theme={{
+        components: {
+          Form: {
+            itemMarginBottom: 8
+          },
+        },
+      }}
+    >
+      <Flex vertical className={classes.list}>
+        <Form
+          form={form}
+          onValuesChange={handleFormChange}
+        >
+          <Collapse
+            size="small"
+            ghost
+            defaultActiveKey={['evnets']}
+            expandIconPosition="end"
+            expandIcon={(panelProps) => (
+              <Flex>
+                <Button
+                  size="small"
+                  type="text"
+                  icon={
+                    panelProps.isActive ? (
+                      <CaretUpOutlined />
+                    ) : (
+                      <CaretDownOutlined />
+                    )
+                  }
                 />
-                <Space>
-                  <ExpressionModal
-                    value={fn}
-                    namePath={name ? [name] : undefined}
-                    defaultCode={defaultCode}
-                    trigger={
-                      <Button disabled={!name} icon={<EditOutlined />} />
-                    }
-                    onChange={(v) => {
-                      handleEventChange(uid, {
-                        fn: v,
-                      });
-                    }}
-                  />
-                  <Button
-                    danger
-                    icon={<ClearOutlined />}
-                    onClick={() => handleRemoveChange(uid)}
-                  />
-                </Space>
               </Flex>
-            );
-          })}
-        </Flex>
-        {eventList?.length > 0 ? (
-          <Button
-            icon={<PlusOutlined />}
-            onClick={handleAddEvent}
-          >
-            新增事件
-          </Button>
-        ) : null}
+            )}
+            items={[
+              {
+                label: "基础事件",
+                key: 'evnets',
+                children: (
+                  <Form.List name="events">
+                    {(fileds, actions) => {
+                      return (
+                        <Flex vertical>
+                          {fileds.map((field, index) => (
+                            <Flex
+                              key={field.key}
+                              gap={12}
+                              justify="space-between"
+                            >
+                              <Flex flex={1}>
+                                <Form.Item
+                                  name={[field.name, "name"]}
+                                  rules={[
+                                    { required: true, message: "事件名称不能为空" },
+                                    ({ getFieldValue }) => ({
+                                      validator(_, value) {
+                                        let error = false;
+                                        if (getFieldValue("events")) {
+                                          getFieldValue("events").forEach(
+                                            (item: IEventType, i: number) => {
+                                              if (
+                                                item.name === value &&
+                                                index !== i
+                                              )
+                                                error = true;
+                                            }
+                                          );
+                                        }
+                                        return error
+                                          ? Promise.reject(
+                                              new Error("当前事件已注册")
+                                            )
+                                          : Promise.resolve();
+                                      },
+                                    }),
+                                  ]}
+                                >
+                                  <Input
+                                    style={{ width: "100%" }}
+                                    placeholder="onClick"
+                                  />
+                                </Form.Item>
+                              </Flex>
+                              <Flex gap={8} flex="0 0 auto">
+                                <Form.Item noStyle name={[field.name, "fn"]}>
+                                  <ExpressionModal
+                                    defaultCode={defaultCode}
+                                    trigger={<Button icon={<EditOutlined />} />}
+                                  />
+                                </Form.Item>
+                                <Button icon={<CloseOutlined />}></Button>
+                              </Flex>
+                            </Flex>
+                          ))}
+                          <Button block type="primary" onClick={() => actions.add({
+                            name: '',
+                            fn: ''
+                          })}>
+                            新增
+                          </Button>
+                        </Flex>
+                      );
+                    }}
+                  </Form.List>
+                ),
+              },
+            ]}
+          />
+        </Form>
       </Flex>
-
-      <Flex vertical gap={12}>
-        <Flex>
-          <Typography.Text strong >生命周期</Typography.Text>
-        </Flex>
-        {eventList?.length > 0 ? null : (
-         <Card type="inner" size="small" >
-          <Flex justify="center" gap={4} >
-            <Typography.Text type="secondary" >暂无事件，请</Typography.Text>
-            <Typography.Link onClick={handleAddEvent} >【添加事件】</Typography.Link>
-          </Flex>
-         </Card>
-        )}
-        <Flex vertical gap={12}>
-        <Flex vertical gap={12}>
-          <Card type="inner" size="small" >
-          <Flex justify="center" gap={4} >            
-            <Typography.Text type="secondary" >暂无事件</Typography.Text>
-          </Flex>
-         </Card>
-        </Flex>
-        </Flex>
-      </Flex>
-
-      <Flex vertical gap={12}>
-        <Flex>
-          <Typography.Text strong >连接器</Typography.Text>
-        </Flex>
-        {eventList?.length > 0 ? null : (
-         <Card type="inner" size="small" >
-          <Flex justify="center" gap={4} >            
-            <Typography.Text type="secondary" >暂无事件</Typography.Text>
-            <Typography.Link onClick={handleAddEvent} >【添加事件】</Typography.Link>
-          </Flex>
-         </Card>
-        )}
-        <Flex vertical gap={12}>
-          <Card type="inner" size="small" >
-          <Flex justify="center" gap={4} >
-            <Typography.Text type="secondary" >暂无事件</Typography.Text>
-          </Flex>
-         </Card>
-        </Flex>
-      </Flex>
-    </Flex>
+    </ConfigProvider>
   );
 };

@@ -1,18 +1,19 @@
 import React from "react";
-import * as DefaultMaterials from "./components";
-import * as AntDMaterials from "./components/design/antd";
-import * as LayoutMaterials from './components/layout'
-import * as FormMaterials from './components/form'
-import * as DataViewMaterials from './components/data-view'
 import { Editor as RootEditor, Options } from "@craftjs/core";
 import { CustomNodeRender } from "@/framework/common/custom-node-render";
-import { EmptySetter } from "@/framework/canvas/empty-render";
 import { useSchema, LocaleDataRecordType } from "./stores/useSchema";
 import { jsRuntime, useCreateStore } from "@huos/core";
 import { ReactQeuryProvider } from "./common/react-query";
 import { I18nextProvider } from "react-i18next";
 import { useEditorState } from './stores/useEditorState'
 import i18n from "./utils/i18n";
+import { __Provider__ } from "@/framework/components";
+
+
+import { LayoutMaterials, BaseMaterials,  DataDisplayMaterials, DataEntryMaterials, OtherMaterials, FeedbackMaterials, NavMaterials} from '@huos/mui'
+import _ from "lodash";
+
+const resolver = _.assign({__Provider__}, LayoutMaterials, BaseMaterials,  DataDisplayMaterials, DataEntryMaterials, OtherMaterials, FeedbackMaterials, NavMaterials)
 
 export interface EditoRootWrapperProps extends Partial<Options> {
   // 本地storageKey, 用户缓存当前
@@ -103,7 +104,7 @@ export const EditoRootWrapper: React.FC<EditoRootWrapperProps> = (props) => {
     <ReactQeuryProvider>
       <RootEditor
         {...props}
-        resolver={{ ...DefaultMaterials, EmptySetter, ...AntDMaterials, ...LayoutMaterials, ...FormMaterials, ...DataViewMaterials }}
+        resolver={resolver}
         onRender={CustomNodeRender}
         onNodesChange={handleEditorChange}
       >

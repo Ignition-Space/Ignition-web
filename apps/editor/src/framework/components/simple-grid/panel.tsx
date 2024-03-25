@@ -97,7 +97,7 @@ export const Panel = () => {
         <Select options={toOptions(['default', 'primary', 'secondary', 'dashed', 'text', 'outline'])} />
       </MountSetter>
 
-      <ProFormTextArea name="children" label="文本内容" tooltip="文本内容渲染" />
+      <ProFormTextArea name="$$children" label="文本内容" tooltip="文本内容渲染" />
     </div>
   )
 }

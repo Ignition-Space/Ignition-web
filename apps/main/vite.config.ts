@@ -10,11 +10,17 @@ export default defineConfig({
     port: 10010,
     headers: {
       'Access-Control-Allow-Origin': '*',
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:7274/',
+        changeOrigin: true,
+      }
     }
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-  }
+  },
 })

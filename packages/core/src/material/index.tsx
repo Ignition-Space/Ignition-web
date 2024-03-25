@@ -1,14 +1,15 @@
 import React from "react";
-import { UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
+import { Node, UserComponent, UserComponentConfig, useNode } from "@craftjs/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { useParseBinding } from "./binding";
-import { useCreateStore } from '../state'
+import { EmptySetter } from "./empty";
+import { omit } from "lodash";
 
 export type ReactMaterialComponent = UserComponent;
 
 export type ReactMaterialViewType<
   P = any,
-  T = (dom: Element) => void
+  T = (dom: Element) => void,
 > = React.ForwardRefRenderFunction<T, P>;
 
 /** HOC类型 */
@@ -35,24 +36,24 @@ const fallbackRender = (props: any) => {
 const withConnectNode = (
   WrappedComponent: React.ForwardRefExoticComponent<React.RefAttributes<any>>
 ): ReactMaterialComponent => {
-  return function ({ children, __events__ = [], ...props }: Record<string, any>) {
-
+  return function ({
+    children,
+    __events__ = [],
+    ...props
+  }: Record<string, any>) {
     const {
       connectors: { connect, drag },
-      id,
+      name,
       custom,
-    } = useNode((evt) => ({
-      custom: evt.data.custom,
-    }));
-    const onMountRefs = useCreateStore(selecotr => selecotr.onMountRefs)
+    } = useNode((node) => {
+      return ({
+        custom: node.data.custom,
+        name: node.data.name.replaceAll('__', '')
+      })
+    });
     const memoizdProps = useParseBinding(props, __events__);
-    
 
-    const renderChildRen = memoizdProps?.__child || children
-
-   React.useEffect(() => {
-    onMountRefs(id, memoizdProps)
-   }, [memoizdProps, id])
+    const renderChildRen = memoizdProps?.$$children || children
 
     return (
       <ErrorBoundary fallbackRender={fallbackRender}>
@@ -63,11 +64,14 @@ const withConnectNode = (
             } else {
               connect(drag(dom));
             }
-            console.log(dom, id, 'WrappedComponent')
           }}
-          {...memoizdProps}
+          {...omit(memoizdProps, ['$$children']) as any}
         >
-          {renderChildRen}
+          {custom?.useCanvas? (
+            <EmptySetter name={name} >{renderChildRen}</EmptySetter>
+          ) : (
+            renderChildRen
+          )}
         </WrappedComponent>
       </ErrorBoundary>
     );

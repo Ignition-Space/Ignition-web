@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@huos/core": "workspace:^",
     "@huos/icons": "workspace:^",
     "vite-plugin-svgr": "^4.2.0"
   }
